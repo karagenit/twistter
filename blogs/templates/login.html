@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	  <link rel="stylesheet" href="css/bootstrap-grid.css">
-	  <link rel="stylesheet" href="css/bootstrap.css">
-	  <link rel="stylesheet" href="login.css">
+	{% load staticfiles %}
+	  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+	  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	  <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
 	<div class="container">
 	  <div class="row">
 	    <div class="col">
-	      
+
 	    </div>
 	    <div class="col">
 	      Variable width content
@@ -46,7 +47,7 @@
 	    </div>
 	  </div>
 	</div>
-	
+
 
 </body>
 </html>
