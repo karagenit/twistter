@@ -13,13 +13,19 @@ background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(10,0,175,1));}
 
 	border-radius: 15px;
     border: 2px solid #blue;
-    
 }
-
-.col{
-	border: 10px solid black;
+#checkbox1{
+	display: none;
 }
-
-.row{
-	border: 10px solid red;
+#checkbox2{
+	display: none;
+}
+#checkbox4{
+	display: none;
+}
+.invalid {
+	color: red;
+}
+.valid {
+	color: green;
 }
