@@ -1,5 +1,6 @@
-body{
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(10,0,175,1));}
+    body{
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(10,0,175,1));
+    }
     .regcontain{
         /*background-color: red;*/
         margin-top:10%;
@@ -14,7 +15,7 @@ body{
         padding:5% 5%;
     
         border-radius: 15px;
-        border: 2px solid #blue;
+        border: 2px solid white;
         
     }
     
@@ -22,17 +23,4 @@ body{
         height: 80%;
         width: 80%;
     }
-    
-    
-    
-    .col{
-        /*border: 10px solid black;*/
-    }
-    
-    #appinfo{
-        margin: auto 1%;
-        /*background-color: yellow;*/
-    }
-    .row{ 
-        /*border: 10px solid red;*/
-    }
+
