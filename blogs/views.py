@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 
-class LoginRealPageView(TemplateView):
-    template_name = "loginReal.html"
+class LoginDash(TemplateView):
+    template_name = "log-in.html"
 
 class LoginPageView(TemplateView):
     template_name = "login.html"
