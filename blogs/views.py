@@ -7,7 +7,7 @@ from .models import User
 import hashlib
 
 class LoginView(TemplateView):
-    template_name = "log-in.html"
+    template_name = "login/login.html"
 
 class RegisterView(TemplateView):
     template_name = "login/register.html"
