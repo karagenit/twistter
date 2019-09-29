@@ -5,3 +5,6 @@ class LoginDash(TemplateView):
 
 class LoginPageView(TemplateView):
     template_name = "login.html"
+
+class MainPageView(TemplateView):
+    template_name = "mainpage.html"
