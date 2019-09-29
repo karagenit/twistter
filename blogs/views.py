@@ -10,7 +10,7 @@ class LoginDash(TemplateView):
     template_name = "log-in.html"
 
 class LoginPageView(TemplateView):
-    template_name = "login.html"
+    template_name = "login/register.html"
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
