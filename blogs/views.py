@@ -1,5 +1,7 @@
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
+from django.shortcuts import redirect
+
 from .models import User
 
 import hashlib
@@ -41,5 +43,4 @@ def register_user(request):
 
     # TODO validate all fields exist & are valid
 
-    # TODO redirect to user's homepage
-    return HttpResponse("User Registered! Name: " + name)
+    return redirect('mainpage')
