@@ -7,8 +7,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # ... the rest of your URLconf goes here ...
-    path('', LoginPageView.as_view(), name='login'),
-    path('loginDash', LoginDash.as_view(), name='log-in'),
+    path('register', LoginPageView.as_view(), name='login'),
+    path('', LoginDash.as_view(), name='log-in'),
     path('mainPage', MainPageView.as_view(), name='mainpage'),
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('userProfilePage', ProfilePageView.as_view(), name='userprofilepage'),
