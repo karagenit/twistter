@@ -4,6 +4,7 @@ from .views import LoginPageView
 from .views import LoginDash
 from .views import MainPageView
 from .views import SettingsPageView
+from .views import ProfilePageView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path('loginDash', LoginDash.as_view(), name='log-in'),
     path('mainPage', MainPageView.as_view(), name='mainpage'),
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
+    path('userProfilePage', ProfilePageView.as_view(), name='userprofilepage'),
 ]

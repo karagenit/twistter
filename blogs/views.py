@@ -11,3 +11,6 @@ class MainPageView(TemplateView):
 
 class SettingsPageView(TemplateView):
     template_name = "settingspage.html"
+
+class ProfilePageView(TemplateView):
+    template_name = "userprofilepage.html"
