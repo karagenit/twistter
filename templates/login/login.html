@@ -17,6 +17,7 @@
 
 	      <div class = "register">
           <form name="myForm" onsubmit="return formValidate()" method="POST" action="/register">
+            {% csrf_token %}
 				<h2>Register</h2>
 				<hr>
 				<div class="form-group">
