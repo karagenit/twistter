@@ -1,4 +1,5 @@
 from django.views.generic.base import TemplateView
+from django.http import HttpResponse
 
 class LoginDash(TemplateView):
     template_name = "log-in.html"
@@ -14,3 +15,9 @@ class SettingsPageView(TemplateView):
 
 class ProfilePageView(TemplateView):
     template_name = "userprofilepage.html"
+
+def register_user(request):
+    # TODO register user
+
+    # TODO redirect to user's homepage
+    return HttpResponse("User Registered!")
