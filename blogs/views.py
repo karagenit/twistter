@@ -8,3 +8,6 @@ class LoginPageView(TemplateView):
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
+
+class SettingsPageView(TemplateView):
+    template_name = "settingspage.html"
