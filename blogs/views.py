@@ -6,10 +6,10 @@ from .models import User
 
 import hashlib
 
-class LoginDash(TemplateView):
+class LoginView(TemplateView):
     template_name = "log-in.html"
 
-class LoginPageView(TemplateView):
+class RegisterView(TemplateView):
     template_name = "login/register.html"
 
 class MainPageView(TemplateView):
