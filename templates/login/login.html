@@ -16,10 +16,7 @@
 	    <div class="col">
 
 	      <div class = "register">
-			<form name="myForm" onsubmit="return formValidate()"> <!-- add method="post"-->
-                <form>
-                    <input type="button" onclick="window.location.href = 'loginDash';" value="Already have an account? Click here to log in!">
-                </form>
+          <form name="myForm" onsubmit="return formValidate()" method="POST" action="/register">
 				<h2>Register</h2>
 				<hr>
 				<div class="form-group">
@@ -200,6 +197,7 @@
 					}
 					//formValidate()
 					function formValidate(){
+            console.log("validating form...");
 						//Name Validation
 						if(!(onlyAlphaTest && nameLengthTest && firstLastTest)){
 							alert("Please Complete The Name Field Correctly.");
