@@ -1,3 +1,4 @@
+from django.views.generic import UpdateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -32,8 +33,13 @@ class RegisterView(TemplateView):
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
 
-class SettingsPageView(TemplateView):
-    template_name = "settingspage.html"
+class SettingsPageView(UpdateView):
+    template_name_suffix = '_update_form'
+    model = User
+    fields = ['firstname', 'lastname', 'username', 'email', 'password']
+
+    def get_object(self, queryset=None):
+        return User.objects.get(pk=self.request.session['userid'])
 
 class ProfilePageView(TemplateView):
     template_name = "userprofilepage.html"

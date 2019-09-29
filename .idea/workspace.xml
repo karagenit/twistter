@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83f5e463-2512-4668-b880-2c5e2bd7b859" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login/settingspage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login/settingspage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogs/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login/settingspage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blogs/user_update_form.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +32,9 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ghostface\Desktop\twistter\templates\blogs" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ghostface\Desktop\twistter\templates\login" />
     </key>
@@ -85,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569771175443</updated>
       <workItem from="1569771197480" duration="1501000" />
-      <workItem from="1569778175157" duration="8815000" />
+      <workItem from="1569778175157" duration="10193000" />
     </task>
     <servers />
   </component>
