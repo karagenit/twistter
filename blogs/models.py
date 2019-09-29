@@ -6,7 +6,7 @@ class User(models.Model):
     username    = models.CharField(max_length=50, unique=True)
     email       = models.EmailField()
     password    = models.CharField(max_length=50)
-    birthday    = models.DateField(blank=True)
+    birthday    = models.DateField(null=True)
     biography   = models.TextField(blank=True)
     profile_pic = models.ImageField(blank=True, upload_to="uploads/")
 
