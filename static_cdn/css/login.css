@@ -1,0 +1,31 @@
+body{
+background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(10,0,175,1));}
+
+.register{
+	color: black;
+	width: 500px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15%;
+	background-color: white;
+	padding:5% 5%;
+
+	border-radius: 15px;
+    border: 2px solid #blue;
+}
+#checkbox1{
+	display: none;
+}
+#checkbox2{
+	display: none;
+}
+#checkbox4{
+	display: none;
+}
+.invalid {
+	color: red;
+}
+.valid {
+	color: green;
+}
