@@ -10,11 +10,7 @@ urlpatterns = [
     path('', LoginPageView.as_view(), name='login'),
     path('loginDash', LoginDash.as_view(), name='log-in'),
     path('mainPage', MainPageView.as_view(), name='mainpage'),
-<<<<<<< HEAD
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('userProfilePage', ProfilePageView.as_view(), name='userprofilepage'),
-]
-=======
     path('register', register_user),
 ]
->>>>>>> Add Basic User Registration Handling
