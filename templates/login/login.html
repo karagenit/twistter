@@ -17,11 +17,12 @@
 
 	      <div class = "register">
           <form name="myForm" onsubmit="return formValidate()" method="POST" action="/register">
+            {% csrf_token %}
 				<h2>Register</h2>
 				<hr>
 				<div class="form-group">
 			    <label for="nameinput">Name</label>
-			    <input type="text" class="form-control" id="nameinput" placeholder="Enter name">
+			    <input type="text" class="form-control" name="nameinput" id="nameinput" placeholder="Enter name">
 			  </div>
 				<div id="checkbox1">
 					<h6>Name must contain the following:</h6>
@@ -31,7 +32,7 @@
 				</div>
 				<div class="form-group">
 			    <label for="usernameinput">Username</label>
-			    <input type="text" class="form-control" id="usernameinput" placeholder="Enter username">
+			    <input type="text" class="form-control" name="usernameinput" id="usernameinput" placeholder="Enter username">
 			  </div>
 				<div id="checkbox2">
 					<h6>Username must contain the following:</h6>
@@ -40,11 +41,11 @@
 				</div>
 			  <div class="form-group">
 			    <label for="emailinput">Email address</label>
-			    <input type="email" class="form-control" id="emailinput" placeholder="name@example.com" required>
+			    <input type="email" class="form-control" name="emailinput" id="emailinput" placeholder="name@example.com" required>
 			  </div>
 			  <div class="form-group">
 			    <label for="passwordinput">Password</label>
-			    <input type="password" class="form-control" id="passwordinput" placeholder="Enter Password">
+			    <input type="password" class="form-control" name="passwordinput" id="passwordinput" placeholder="Enter Password">
 			  </div>
 				<div id="checkbox4">
 					<h6>Password must contain the following:</h6>
@@ -54,7 +55,7 @@
 				</div>
 			  <div class="form-group">
 			    <label for="confirmpasswordinput">Confirm Password</label>
-			    <input type="password" class="form-control" id="confirmpasswordinput" placeholder="Re-enter Password">
+			    <input type="password" class="form-control" name="confirmpasswordinput" id="confirmpasswordinput" placeholder="Re-enter Password">
 			  </div>
 				<button type="submit" class="btn btn-primary" value="Submit">Sign up</button>
 				<script>
