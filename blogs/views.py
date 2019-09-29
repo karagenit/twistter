@@ -25,9 +25,9 @@ def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
 
 def register_user(request):
-    # TODO: reject GET requests
+    if request.method != "POST":
+        return redirect('mainpage')
 
-    # TODO register user
     name = request.POST.get('nameinput', None)
     firstname, lastname = name.split()
     username = request.POST.get('usernameinput', None)
