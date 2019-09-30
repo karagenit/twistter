@@ -60,6 +60,7 @@ class MakePostView(TemplateView):
         user = User.objects.get(id=self.request.session.get('userid'))
         post = Post(content=content, creator=user)
         post.save()
+        return redirect('mainpage')
 
 
 def encrypt_string(string):
