@@ -29,10 +29,17 @@ class RegisterView(TemplateView):
 
         # TODO validate all fields exist & are valid
 
+        request.session['userid'] = user.pk
+
         return redirect('mainpage')
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super(MainPageView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
 
 class SettingsPageView(UpdateView):
     template_name_suffix = '_update_form'

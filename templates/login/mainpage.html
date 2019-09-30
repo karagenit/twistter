@@ -15,10 +15,17 @@
 	    <div class="logo">Logo</div>
 	    <ul class="menu-area">
 	      <li><a href="#">Home</a></li>
-	      <li><a href="userProfilePage">My Profile</a></li>
+        {% if userid %}
+        <li><a href="users/{{ userid }}">My Profile</a></li>
+        {% endif %}
 	      <li><a href="#">Friends</a></li>
 	      <li><a href="#">Search</a></li>
 	      <li><a href="settingsPage">Settings</a></li>
+        {% if userid %}
+        <li><a href="logout">Log Out</a></li>
+        {% else %}
+        <li><a href="/">Log In</a></li>
+        {% endif %}
 	    </ul>
 	  </nav>
 	</div>
