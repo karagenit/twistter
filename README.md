@@ -12,3 +12,7 @@ Finally, in the root directory of this repo, run `python3 manage.py runserver` a
 #### Updating the DB
 
 Run: `python3 manage.py migrate`
+
+#### Running Tests
+
+`python3 manage.py test test/`
