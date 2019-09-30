@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user
+from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('userProfilePage', ProfilePageView.as_view(), name='userprofilepage'),
     path('login', login_user),
+    path('post', MakePostView.as_view(), name='makepostpage')
 ]

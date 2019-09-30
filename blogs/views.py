@@ -44,6 +44,12 @@ class SettingsPageView(UpdateView):
 class ProfilePageView(TemplateView):
     template_name = "userprofilepage.html"
 
+class MakePostView(TemplateView):
+    template_name = "makepostpage.html"
+    def post(self,request):
+        post = request.POST.get('postinput', None)
+        return HttpResponse(post)
+
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
 
