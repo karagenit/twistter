@@ -1,7 +1,7 @@
+from django.views.generic import UpdateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
-
 from .models import User
 
 import hashlib
@@ -33,8 +33,13 @@ class RegisterView(TemplateView):
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
 
-class SettingsPageView(TemplateView):
-    template_name = "settingspage.html"
+class SettingsPageView(UpdateView):
+    template_name_suffix = '_update_form'
+    model = User
+    fields = ['firstname', 'lastname', 'username', 'email', 'password']
+
+    def get_object(self, queryset=None):
+        return User.objects.get(pk=self.request.session['userid'])
 
 class ProfilePageView(TemplateView):
     template_name = "userprofilepage.html"
@@ -47,3 +52,24 @@ class MakePostView(TemplateView):
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
+
+def my_authenticate(username, password):
+    password = encrypt_string(password)
+    user = User.objects.get(username=username)
+    if user.password == password:
+        return user
+    else:
+        return None
+
+def login_user(request):
+    print("Logging in...")
+    username = request.POST.get('usernameinput', None)
+    password = request.POST.get('passwordinput', None)
+    user = my_authenticate(username, password)
+    if user is not None:
+        print("Success")
+        request.session['userid'] = user.pk
+        return redirect('mainpage')
+    else:
+        print("Failure")
+        return redirect('login')

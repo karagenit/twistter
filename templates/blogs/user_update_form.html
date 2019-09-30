@@ -19,10 +19,6 @@
                 <form name="myForm" onsubmit="return formValidate()" method="POST" action="/register">
                     <h2>Settings</h2>
                     <hr>
-                    <div class="form-group">
-                        <label for="nameinput">Change name</label>
-                        <input type="text" class="form-control" id="nameinput" placeholder="CurrentFirstName CurrentLastName">
-                    </div>
                     <div id="checkbox1">
                         <h6>Name must contain the following:</h6>
                         <p id="onlyAlpha" class="invalid">Only <b>alphabetical</b> characters</p>
@@ -49,7 +45,7 @@
                     <div id="checkbox4">
                         <h6>Password must contain the following:</h6>
                         <p id="case" class="invalid">A <b>lowercase and uppercase</b> character</p>
-                        <p id="number" class="invalid">A <b>numberical</b> character</p>
+                        <p id="number" class="invalid">A <b>numerical</b> character</p>
                         <p id="passLength" class="invalid">Length of <b>8 to 30</b> characters</p>
                     </div>
                     <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
@@ -67,7 +63,7 @@
                             document.getElementById("checkbox1").style.display = "none";
                         }
                         nameId.onkeyup = function(){
-                            var firstLastId = document.getElementById("firstLast");
+                            var firstLastId = document.getElementById("id_firstname");
                             var onlyAlphaId = document.getElementById("onlyAlpha");
                             var nameLengthId = document.getElementById("nameLength");
                             var alphabet = /^[A-Za-z ]+$/;
