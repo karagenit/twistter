@@ -21,6 +21,11 @@
 	      <li><a href="#">Friends</a></li>
 	      <li><a href="#">Search</a></li>
 	      <li><a href="settingsPage">Settings</a></li>
+        {% if userid %}
+        <li><a href="logout">Log Out</a></li>
+        {% else %}
+        <li><a href="/">Log In</a></li>
+        {% endif %}
 	    </ul>
 	  </nav>
 	</div>
