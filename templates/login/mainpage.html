@@ -2,33 +2,32 @@
 {% load staticfiles %}
 <html>
 <head>
-	  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
-	  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-	  <link rel="stylesheet" href="{% static 'css/login.css' %}">
-		<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 <body>
 
 <div class="text-center">
-	<div class="custom-padding">
-	  <nav>
-	    <div class="logo">Logo</div>
-	    <ul class="menu-area">
-	      <li><a href="#">Home</a></li>
-        {% if userid %}
-        <li><a href="users/{{ userid }}">My Profile</a></li>
-        {% endif %}
-	      <li><a href="#">Friends</a></li>
-	      <li><a href="#">Search</a></li>
-	      <li><a href="settingsPage">Settings</a></li>
-        {% if userid %}
-        <li><a href="logout">Log Out</a></li>
-        {% else %}
-        <li><a href="/">Log In</a></li>
-        {% endif %}
-	    </ul>
-	  </nav>
-	</div>
+    <div class="custom-padding">
+        <nav>
+            <div class="logo">Logo</div>
+            <ul class="menu-area">
+                {% if userid %}
+                    <li><a href="#">Home</a></li>
+                    <li><a href="users/{{ userid }}">My Profile</a></li>
+                    <li><a href="makePost">Make Post</a></li>
+                <li><a href="#">Friends</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="settingsPage">Settings</a></li>
+                    <li><a href="logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="/">Log In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </div>
 </body>
 </html>
