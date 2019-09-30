@@ -28,6 +28,8 @@ class RegisterView(TemplateView):
 
         # TODO validate all fields exist & are valid
 
+        request.session['userid'] = user.pk
+
         return redirect('mainpage')
 
 class MainPageView(TemplateView):
