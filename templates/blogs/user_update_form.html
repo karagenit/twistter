@@ -18,7 +18,8 @@
                   <h2>Settings</h2>
                   <hr>
                     <form onsubmit="return formChangeUsername()" method="POST" action="">
-                      <div class="form-group">
+                        {% csrf_token %}
+                        <div class="form-group">
                           <label for="usernameinput">Change Username</label>
                           <input type="text" class="form-control" id="usernameinput" placeholder="New username">
                       </div>
@@ -30,6 +31,7 @@
                         <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
                     </form>
                     <form method="POST" action="">
+                        {% csrf_token %}
                       <div class="form-group">
                           <label for="emailinput">Change email address</label>
                           <input type="email" class="form-control" id="emailinput" placeholder="currentemailaddress@destination.com" required>
@@ -37,6 +39,7 @@
                         <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
                     </form>
                     <form onsubmit="return formChangePassword()" method="POST" action="">
+                        {% csrf_token %}
                       <div class="form-group">
                           <label for="passwordinput">Change password</label>
                           <input type="password" class="form-control" id="passwordinput" placeholder="CurrentPasswordButWithBulletPoints">
@@ -52,6 +55,7 @@
                         <input type="password" class="form-control" name="confirmpasswordinput" id="confirmpasswordinput" placeholder="Re-enter Password">
                       </div>
                         <button type="submit" class="btn btn-primary" onclick=formChangePassword() value="Submit" method="POST" action="/register">Confirm Changes</button>
+                        {% csrf_token %}
                     </form>
                     <br><br>
                     <div align="right">
