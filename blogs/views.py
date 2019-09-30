@@ -52,17 +52,15 @@ class SettingsPageView(UpdateView):
 class ProfilePageView(TemplateView):
     template_name = "userprofilepage.html"
 
-class MakePostView(CreateView):
+class MakePostView(TemplateView):
     template_name = "makepostpage.html"
-    model = Post
-    fields = ['content']
-    def get_initial(self,*args,**kwargs):
-        initial = super(MakePostView, self).get_initial(**kwargs)
-        initial['creator_id'] = self.request.session.get('userid')
-        return initial
-    #def get(self):
-    #    if self.request.session.get('userid') is None:
-    #        return HttpResponse("ERROR")
+
+    def post(self,request):
+        content = request.POST.get('postinput', None)
+        user = User.objects.get(id=self.request.session.get('userid'))
+        post = Post(content=content, creator=user)
+        post.save()
+
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
