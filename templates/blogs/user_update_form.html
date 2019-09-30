@@ -14,167 +14,22 @@
         <div class="col">
         </div>
         <div class="col">
-            <div class = "register">
-                  <h2>Settings</h2>
-                  <hr>
-                    <form onsubmit="return formChangeUsername()" method="POST" action="">
-                        {% csrf_token %}
-                        <div class="form-group">
-                          <label for="usernameinput">Change Username</label>
-                            {{ form.username }}
-                      </div>
-                      <div id="checkbox2">
-                          <h6>Username must contain the following:</h6>
-                          <p id="noSpace" class="invalid">No <b>spaces or special characters</b> allowed</p>
-                          <p id="usernameLength" class="invalid">Length of <b>3 to 30</b> characters</p>
-                      </div>
-                        <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
-                    </form>
-                    <form method="POST" action="">
-                        {% csrf_token %}
-                      <div class="form-group">
-                          <label for="emailinput">Change email address</label>
-                        {{ form.email }}
-                      </div>
-                        <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
-                    </form>
-                    <form onsubmit="return formChangePassword()" method="POST" action="">
-                        {% csrf_token %}
-                      <div class="form-group">
-                          <label for="passwordinput">Change password</label>
-                            {{ form.password }}
-                      </div>
-                      <div id="checkbox4">
-                          <h6>Password must contain the following:</h6>
-                          <p id="case" class="invalid">A <b>lowercase and uppercase</b> character</p>
-                          <p id="number" class="invalid">A <b>numerical</b> character</p>
-                          <p id="passLength" class="invalid">Length of <b>8 to 30</b> characters</p>
-                      </div>
-                      <div class="form-group">
-                        <label for="confirmpasswordinput">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirmpasswordinput" id="confirmpasswordinput" placeholder="Re-enter Password">
-                      </div>
-                        <button type="submit" class="btn btn-primary" onclick=formChangePassword() value="Submit" method="POST" action="/register">Confirm Changes</button>
-                    </form>
-                    <br><br>
-                    <div align="right">
-                      <button type="submit" class="btn btn-primary" value="Submit" onclick=alertFunction()>Delete Account</button>
-                    </div>
-                    <script>
-                        //Username Checkbox
-                        var usernameId = document.getElementById("id_username");
-                        var noSpaceTest = false;
-                        var usernameLengthTest = false;
-                        usernameId.onfocus = function(){
-                            document.getElementById("checkbox2").style.display = "block";
-                        }
-                        usernameId.onblur = function(){
-                            document.getElementById("checkbox2").style.display = "none";
-                        }
-                        usernameId.onkeyup = function(){
-                            var noSpaceId = document.getElementById("noSpace");
-                            var usernameLengthId = document.getElementById("usernameLength");
-                            var specialCharacters = /[!@#$%^&*(),.?":{}|<>]/g;
-                            if(!(usernameId.value.match(' ')
-                                || usernameId.value.match(specialCharacters))
-                                && usernameId.value.length > 0){
-                                noSpaceId.classList.remove("invalid");
-                                noSpaceId.classList.add("valid");
-                                noSpaceTest = true;
-                            }else{
-                                noSpaceId.classList.remove("valid");
-                                noSpaceId.classList.add("invalid");
-                                noSpaceTest = false;
-                            }
-                            if((usernameId.value.length >= 3)
-                                && (usernameId.value.length <= 30)){
-                                usernameLengthId.classList.remove("invalid");
-                                usernameLengthId.classList.add("valid");
-                                usernameLengthTest = true;
-                            }else{
-                                usernameLengthId.classList.remove("valid");
-                                usernameLengthId.classList.add("invalid");
-                                usernameLengthTest = false;
-                            }
-                        }
-                        //Password Checkbox
-                        var pass = document.getElementById("id_password");
-                        var confpass = document.getElementById("confirmpasswordinput");
-                        pass.onfocus = function(){
-                            document.getElementById("checkbox4").style.display = "block";
-                        }
-                        pass.onblur = function(){
-                            document.getElementById("checkbox4").style.display = "none";
-                        }
-                        confpass.onfocus = function(){
-                            document.getElementById("checkbox4").style.display = "block";
-                        }
-                        confpass.onblur = function(){
-                            document.getElementById("checkbox4").style.display = "none";
-                        }
-                        var caseTest = false;
-                        var numberTest = false;
-                        var passLengthTest = false;
-                        pass.onkeyup = function(){
-                            var caseId = document.getElementById("case");
-                            var numberId = document.getElementById("number");
-                            var passLengthId = document.getElementById("passLength");
-                            var lowerCaseLetters = /[a-z]/g;
-                            var upperCaseLetters = /[A-Z]/g;
-                            if(pass.value.match(lowerCaseLetters)
-                                && pass.value.match(upperCaseLetters)){
-                                caseId.classList.remove("invalid");
-                                caseId.classList.add("valid");
-                                caseTest = true;
-                            }else{
-                                caseId.classList.remove("valid");
-                                caseId.classList.add("invalid");
-                                caseTest = false;
-                            }
-                            var numericalCharacters = /[0-9]/g;
-                            if(pass.value.match(numericalCharacters)){
-                                numberId.classList.remove("invalid");
-                                numberId.classList.add("valid");
-                                numberTest = true;
-                            }else{
-                                numberId.classList.remove("valid");
-                                numberId.classList.add("invalid");
-                                numberTest = false;
-                            }
-                            if((pass.value.length >= 8)
-                                && (pass.value.length <= 30)){
-                                passLengthId.classList.remove("invalid");
-                                passLengthId.classList.add("valid");
-                                passLengthTest = true;
-                            }else{
-                                passLengthId.classList.remove("valid");
-                                passLengthId.classList.add("invalid");
-                                passLengthTest = false;
-                            }
-                        }
-                        //formValidate()
-                        function formChangeUsername(){
-                            if(!(noSpaceTest && usernameLengthTest)){
-                              alert("Please Complete The Username Field Correctly.");
-                              return false;
-                            }
-                            return true;
-                        }
-                        function formChangePassword(){
-                          if(!(passLengthTest && numberTest && caseTest)){
-              							alert("Please Complete The Password Field Correctly.");
-              							return false;
-              						}
-                          if(confpass.value != pass.value){
-                            alert("Passwords are not matching.")
-                            return false;
-                          }
-                          return true;
-                        }
-                        function alertFunction() {
-                            confirm("Are you sure you want to delete your account? This cannot be undone.");
-                        }
-                    </script>
+            <div class="register">
+                <h2>Settings</h2>
+                <hr>
+                <form method="post">{% csrf_token %}
+                    {{ form.username }}
+                    <input type="submit" value="Update">
+                </form>
+
+                <form method="post">{% csrf_token %}
+                    {{ form.email }}
+                    <input type="submit" value="Update">
+                </form>
+
+                <form method="post">{% csrf_token %}
+                    {{ form.password }}
+                    <input type="submit" value="Update">
                 </form>
             </div>
         </div>
