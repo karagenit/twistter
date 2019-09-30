@@ -10,12 +10,12 @@
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
-                <label>Post</label>
-            </div>
-                {{ form.content}}
-            <div class="text-center">
+			    <label for="postinput">Post</label>
+			    <input type="text" class="form-control" id="postinput" placeholder="Enter post" name="postinput">
+			  </div>
+			  <div class="text-center">
                   <input type="submit" onclick="window.location.href = 'mainPage';" value="Post">
-            </div>
+              </div>
         </form>
     </div>
 </body>
