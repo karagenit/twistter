@@ -21,7 +21,7 @@
                         {% csrf_token %}
                         <div class="form-group">
                           <label for="usernameinput">Change Username</label>
-                          <input type="text" class="form-control" id="usernameinput" placeholder="New username">
+                            {{ form.username }}
                       </div>
                       <div id="checkbox2">
                           <h6>Username must contain the following:</h6>
@@ -34,7 +34,7 @@
                         {% csrf_token %}
                       <div class="form-group">
                           <label for="emailinput">Change email address</label>
-                          <input type="email" class="form-control" id="emailinput" placeholder="currentemailaddress@destination.com" required>
+                        {{ form.email }}
                       </div>
                         <button type="submit" class="btn btn-primary" value="Submit">Confirm Changes</button>
                     </form>
@@ -42,7 +42,7 @@
                         {% csrf_token %}
                       <div class="form-group">
                           <label for="passwordinput">Change password</label>
-                          <input type="password" class="form-control" id="passwordinput" placeholder="CurrentPasswordButWithBulletPoints">
+                            {{ form.password }}
                       </div>
                       <div id="checkbox4">
                           <h6>Password must contain the following:</h6>
@@ -55,7 +55,6 @@
                         <input type="password" class="form-control" name="confirmpasswordinput" id="confirmpasswordinput" placeholder="Re-enter Password">
                       </div>
                         <button type="submit" class="btn btn-primary" onclick=formChangePassword() value="Submit" method="POST" action="/register">Confirm Changes</button>
-                        {% csrf_token %}
                     </form>
                     <br><br>
                     <div align="right">
