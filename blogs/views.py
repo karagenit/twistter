@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import User, Post
+from .getposts import get_posts
 
 import hashlib
 
@@ -67,8 +68,20 @@ class SearchView(TemplateView):
 
     def post(self,request):
         user_name = request.POST.get('searchinput', None)
-        #user = User.objects.get(username=user_name)
-        return HttpResponse(user_name)
+        user = User.objects.get(username=user_name)
+        fn = user.firstname
+        ln = user.lastname
+        em = user.email
+        id = user.id
+        posts = get_posts(id)
+        posts.append(user_name)
+        posts.append(' ')
+        posts.append(fn)
+        posts.append(' ')
+        posts.append(ln)
+        posts.append(' ')
+        posts.append(em)
+        return HttpResponse(posts)
 
 
 def encrypt_string(string):

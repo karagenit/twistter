@@ -24,11 +24,11 @@
 <form method="POST">
     {% csrf_token %}
     <div class="form-group">
-        <label for="searchinput">Search for user:</label>
+        <label for="searchinput">Search for Friend:</label>
         <input type="text" class="form-control" id="searchinput" placeholder="Enter username" name="searchinput">
     </div>
     <div class="text-center">
-        <input type="submit"value="Search">
+        <input type="submit" onclick="window.location.href = 'mainPage';" value="Search">
     </div>
 </form>
 
