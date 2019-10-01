@@ -10,3 +10,5 @@
 *.xml
 *.xml
 .idea/workspace.xml
+newenv
+.vscode
