@@ -62,6 +62,14 @@ class MakePostView(TemplateView):
         post.save()
         return redirect('mainpage')
 
+class SearchView(TemplateView):
+    template_name = "searchpage.html"
+
+    def post(self,request):
+        user_name = request.POST.get('searchinput', None)
+        #user = User.objects.get(username=user_name)
+        return HttpResponse(user_name)
+
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
