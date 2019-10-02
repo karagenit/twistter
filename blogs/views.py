@@ -50,8 +50,13 @@ class SettingsPageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
 
-class ProfilePageView(TemplateView):
-    template_name = "userprofilepage.html"
+class ProfilePageView(UpdateView):
+    template_name_suffix = '_profile_page'
+    model = User
+    fields = ['firstname', 'lastname', 'username', 'email', 'password']
+
+    def get_object(self, queryset=None):
+        return User.objects.get(pk=self.request.session['userid'])
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
