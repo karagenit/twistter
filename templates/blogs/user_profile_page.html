@@ -15,7 +15,26 @@
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="/static/img/profile-default.jpg" class="img-responsive" alt="">
+					<img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
+					<form action="/action_page.php" accept="image/gif, image/jpeg">
+					  Select image: <input type='file' onchange="readURL(this);" />
+					  <input type="submit" value="Submit" onclick="upload()">
+					</form>
+					<script type="text/javascript">function readURL(input) {
+							if (input.files && input.files[0]) {
+								var reader = new FileReader();
+					
+								reader.onload = function (e) {
+									$('#blah')
+										.attr('src', e.target.result)
+										.width(128)
+										.height(128);
+								};
+					
+								reader.readAsDataURL(input.files[0]);
+							}
+						}
+					</script>
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
