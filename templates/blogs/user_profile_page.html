@@ -16,17 +16,32 @@
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<img src="/static/img/profile-default.jpg" class="img-responsive" alt="">
-				</div>
+                </div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
 						{{user.firstname}} {{user.lastname}}
 					</div>
-					<div class="profile-usertitle-job">
+					<div class="profile-usertitle-username">
 						{{user.username}}
-					</div>
-				</div>
+                    </div>
+                    <div class="profile-usertitle-email">
+                        {{user.email}}
+                    </div>
+                    <div>
+                        <textarea rows="4" cols="30">
+                            {{user.biography}}
+                        </textarea> 
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
+				<div class="profile-userbuttons">
+                        <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
 						<li>
@@ -46,7 +61,7 @@
 		</div>
 		<div class="col-md-9">
             <div class="profile-content">
-			   Some user related content goes here...
+			   Posts go here...
             </div>
 		</div>
 	</div>
