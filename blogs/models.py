@@ -8,7 +8,7 @@ class User(models.Model):
     password    = models.CharField(max_length=50)
     birthday    = models.DateField(null=True)
     biography   = models.TextField(max_length=120, blank=True)
-    profile_pic = models.ImageField(default='/static/img/profile-default.jpg', blank=True, upload_to="uploads/")
+    profile_pic = models.ImageField(blank=True, upload_to="uploads/")
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
