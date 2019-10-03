@@ -80,6 +80,18 @@
                        <button>Submit</button>
                      </div>
                     </form>
+                    {% if userid %}
+                        <form method="post" enctype="multipart/form-data" action="/">
+                            {% csrf_token %}
+                            <div>
+                                <label for="file">Add New Profile Picture</label>
+                                <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
+                            </div>
+                            <div>
+                                <button>Submit</button>
+                            </div>
+                        </form>
+                    {% endif %}
                     <script type="text/javascript">
                       function readURL(input) {
                         if (input.files && input.files[0]) {
@@ -117,10 +129,12 @@
                 <!-- SIDEBAR BUTTONS -->
 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Edit biography
-                </button>
+                {% if userid %}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit biography
+                    </button>
+                {% endif %}
 
                 <!-- Modal -->
                 <form name="bio" method="POST">
@@ -177,11 +191,13 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <button type="button" class="btn btn-primary">
-                            <a href="settingsPage"><font color="white">Account settings</font></a>
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            <a href="#"><font color="white">Help</font></a>
-                        </button>
+                            {% if userid %}
+                                <a href="settingsPage"><font color="white">Account settings</font></a>
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    <a href="#"><font color="white">Help</font></a>
+                                </button>
+                            {% endif %}
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -189,17 +205,26 @@
         </div>
         <div class="col-md-6">
             <div class="profile-content">
-              {% user_posts user as posts %}
-              {% for post in posts %}
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                      <p class="card-text">{{ post.content }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal2">
-                                    Edit
-                                </button>
+                {% user_posts user as posts %}
+                {% for post in posts %}
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <!-- Button trigger modal -->
+                                    {% if userid %}
+                                        <button type="button" class="btn btn-sm btn-outline-seco`ndary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            Delete Post
+                                        </button>
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">{{ post.created }}</small>
                             </div>
                             <small class="text-muted">{{ post.created }}</small>
                         </div>
@@ -210,6 +235,11 @@
         </div>
     </div>
 </div>
+<script>
+    function hotLatina(id) {
+        document.getElementById("post_edit").value = document.getElementById("post_content_" + id.toString()).innerHTML;
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
