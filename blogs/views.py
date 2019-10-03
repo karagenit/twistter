@@ -91,25 +91,10 @@ class ProfilePageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
 
-
-    def post(self,request,pk):
-        print(request.FILES)
-        if 'new_bio' in request.POST:
-            user = User.objects.get(id=self.request.session.get('userid'))
-            user.biography = request.POST.get('new_bio', None)
-            user.save()
-        if 'file' in request.FILES:
-            user = User.objects.get(id=self.request.session.get('userid'))
-            user.profile_pic = request.FILES.get('file', None)
-            user.save()
-            print (user.profile_pic)
-        return redirect('mainpage')
-
     def get_context_data(self, **kwargs):
         context = super(ProfilePageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
         return context
-
 
 
 class MakePostView(TemplateView):
