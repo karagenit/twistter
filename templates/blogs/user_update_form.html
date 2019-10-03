@@ -19,17 +19,17 @@
                 <hr>
                 <form method="post">{% csrf_token %}
                     {{ form.username }}
-                    <input type="submit" value="Update">
+                    <input type="submit" name = "username_change" value="Update">
                 </form>
 
                 <form method="post">{% csrf_token %}
                     {{ form.email }}
-                    <input type="submit" value="Update">
+                    <input type="submit" name="email_change" value="Update">
                 </form>
 
                 <form method="post">{% csrf_token %}
                     {{ form.password }}
-                    <input type="submit" value="Update">
+                    <input type="submit" name="password_change" value="Update">
                 </form>
 
                 <input type="hidden" name="user_id" value="{{ user.id }}">

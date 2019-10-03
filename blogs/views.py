@@ -55,8 +55,21 @@ class SettingsPageView(UpdateView):
         if 'delete_user' in request.POST:
             delete_user(self.request.session.get('userid'))
             return redirect('login')
-        else:
-            response = 'other'
+        if 'username_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.username = request.POST.get("username")
+            user.save()
+            return redirect('settingspage')
+        if 'email_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.email = request.POST.get("email")
+            user.save()
+            return redirect('settingspage')
+        if 'password_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.password = encrypt_string(request.POST.get("password"))
+            user.save()
+            return redirect('settingspage')
         return HttpResponse(response)
 
 class ProfilePageView(UpdateView):
@@ -112,7 +125,6 @@ def my_authenticate(username, password):
         return None
 
 def login_user(request):
-    print("Logging in...")
     username = request.POST.get('usernameinput', None)
     password = request.POST.get('passwordinput', None)
     user = my_authenticate(username, password)
@@ -123,3 +135,7 @@ def login_user(request):
     else:
         print("Failure")
         return redirect('login')
+
+def logout_user(request):
+    request.session['userid'] = None
+    return redirect('login')
