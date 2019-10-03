@@ -72,16 +72,18 @@
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
-                    <form method="post" enctype="multipart/form-data" action="/">
-                        {% csrf_token %}
-                        <div>
-                            <label for="file">Choose file to upload</label>
-                            <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
-                        </div>
-                        <div>
-                            <button>Submit</button>
-                        </div>
-                    </form>
+                    {% if userid %}
+                        <form method="post" enctype="multipart/form-data" action="/">
+                            {% csrf_token %}
+                            <div>
+                                <label for="file">Choose file to upload</label>
+                                <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
+                            </div>
+                            <div>
+                                <button>Submit</button>
+                            </div>
+                        </form>
+                    {% endif %}
                     <script type="text/javascript">
                         function readURL(input) {
                             if (input.files && input.files[0]) {
@@ -119,10 +121,12 @@
                 <!-- SIDEBAR BUTTONS -->
 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Edit biography
-                </button>
+                {% if userid %}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit biography
+                    </button>
+                {% endif %}
 
                 <!-- Modal -->
                 <form name="bio" method="POST" action="/">
@@ -139,7 +143,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Write a brand new biography!" id="biography"></input>
+                                        <input class="form-control" placeholder="Write a brand new biography!"
+                                               id="biography"></input>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -182,11 +187,13 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <button type="button" class="btn btn-primary">
-                            <a href="settingsPage"><font color="white">Account settings</font></a>
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            <a href="#"><font color="white">Help</font></a>
-                        </button>
+                            {% if userid %}
+                                <a href="settingsPage"><font color="white">Account settings</font></a>
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    <a href="#"><font color="white">Help</font></a>
+                                </button>
+                            {% endif %}
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -202,13 +209,16 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-sm btn-outline-seco`ndary" data-toggle="modal"
-                                            data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">
-                                        Delete Post
-                                    </button>
+                                    {% if userid %}
+                                        <button type="button" class="btn btn-sm btn-outline-seco`ndary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            Delete Post
+                                        </button>
+                                    {% endif %}
                                 </div>
                                 <small class="text-muted">{{ post.created }}</small>
                             </div>
@@ -221,9 +231,9 @@
 </div>
 
 <script>
-function hotLatina(id) {
-    document.getElementById("post_edit").value=document.getElementById("post_content_" + id.toString()).innerHTML;
-}
+    function hotLatina(id) {
+        document.getElementById("post_edit").value = document.getElementById("post_content_" + id.toString()).innerHTML;
+    }
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
