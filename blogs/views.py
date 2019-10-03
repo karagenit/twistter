@@ -98,20 +98,22 @@ class SearchView(TemplateView):
     def post(self,request):
         user_name = request.POST.get('searchinput', None)
         user = User.objects.get(username=user_name)
-        fn = user.firstname
-        ln = user.lastname
-        em = user.email
-        id = user.id
-        posts = get_posts(id)
-        posts.append(user_name)
-        posts.append(' ')
-        posts.append(fn)
-        posts.append(' ')
-        posts.append(ln)
-        posts.append(' ')
-        posts.append(em)
-        return HttpResponse(posts)
+        #fn = user.firstname
+        #ln = user.lastname
+        #em = user.email
+        #id = user.id
+        #posts = get_posts(id)
+        #posts.append(user_name)
+        #posts.append(' ')
+        #posts.append(fn)
+        #posts.append(' ')
+        #posts.append(ln)
+        #posts.append(' ')
+        #posts.append(em)
+        return redirect('friend_page')
 
+class FriendView(TemplateView):
+    template_name = "friend_page_profile.html"
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
