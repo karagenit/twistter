@@ -93,13 +93,16 @@ class ProfilePageView(UpdateView):
 
 
     def post(self,request,pk):
+        print(request.FILES)
         if 'new_bio' in request.POST:
             user = User.objects.get(id=self.request.session.get('userid'))
             user.biography = request.POST.get('new_bio', None)
             user.save()
-        if 'pic' in request.POST:
+        if 'file' in request.FILES:
             user = User.objects.get(id=self.request.session.get('userid'))
-        print (request)
+            user.profile_pic = request.FILES.get('file', None)
+            user.save()
+            print (user.profile_pic)
         return redirect('mainpage')
 
     def get_context_data(self, **kwargs):

@@ -70,7 +70,7 @@
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
-                    <form method="post" enctype="multipart/form-data" name="image">
+                    <form method="post" enctype="multipart/form-data" name="image" id="image">
                       {% csrf_token %}
                        <div>
                          <label for="file">Choose file to upload</label>
