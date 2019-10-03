@@ -7,7 +7,7 @@ class User(models.Model):
     email       = models.EmailField(unique=True)
     password    = models.CharField(max_length=50)
     birthday    = models.DateField(null=True)
-    biography   = models.TextField(max_length=120, blank=True)
+    biography   = models.TextField(default="Enter Bio", max_length=120, blank=True)
     profile_pic = models.ImageField(default="/static/img/profile-default.jpg", blank=True, upload_to="uploads/")
 
 ###
