@@ -33,8 +33,9 @@
                 </form>
 
                 <input type="hidden" name="user_id" value="{{ user.id }}">
-                <form action='delete_user {{ user_id }}' method='GET'>
-                    <button type='submit'>Delete Account</button>
+                <form method='post'>
+                    {% csrf_token %}
+                    <button name="delete_user" type='submit'>Delete Account</button>
                 </form>
             </div>
         </div>

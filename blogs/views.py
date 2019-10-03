@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import User, Post
 from .getposts import get_posts
+from .deleteuser import delete_user
 
 import hashlib
 
@@ -50,6 +51,14 @@ class SettingsPageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
 
+    def post(self,request):
+        if 'delete_user' in request.POST:
+            delete_user(self.request.session.get('userid'))
+            return redirect('login')
+        else:
+            response = 'other'
+        return HttpResponse(response)
+
 class ProfilePageView(UpdateView):
     template_name_suffix = '_profile_page'
     model = User
@@ -57,6 +66,8 @@ class ProfilePageView(UpdateView):
 
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
+
+
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
@@ -86,7 +97,7 @@ class SearchView(TemplateView):
         posts.append(ln)
         posts.append(' ')
         posts.append(em)
-        return HttpResponse(friend_profile_page)
+        return HttpResponse(posts)
 
 
 def encrypt_string(string):
