@@ -4,11 +4,11 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
+from django.urls import reverse
 
 from .models import User, Post
 from .getposts import get_posts
 from .deleteuser import delete_user
-
 import hashlib
 
 class LoginView(TemplateView):
@@ -89,7 +89,7 @@ class ProfilePageView(UpdateView):
     fields = ['firstname', 'lastname', 'username', 'email', 'password']
 
     def get_object(self, queryset=None):
-        return User.objects.get(pk=self.request.session['userid'])
+        return User.objects.get(pk=self.kwargs['pk'])
 
 
     def post(self,request,pk):
@@ -161,7 +161,7 @@ class SearchView(TemplateView):
         #posts.append(ln)
         #posts.append(' ')
         #posts.append(em)
-        return redirect('friend_page')
+        return redirect(reverse('userprofilepage', kwargs={'pk': user.pk}))
 
 class FriendView(TemplateView):
     template_name = "friend_page_profile.html"
