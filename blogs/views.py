@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.db import IntegrityError
+
 from .models import User, Post
 from .getposts import get_posts
 from .deleteuser import delete_user
@@ -27,9 +29,13 @@ class RegisterView(TemplateView):
         user = User(firstname=firstname, lastname=lastname, username=username, email=email,
                     password=enc_password)
 
-        user.save()
-
         # TODO validate all fields exist & are valid
+
+        try:
+            user.save()
+        except IntegrityError:
+            # TODO tell user username/email is already taken
+            return redirect('register')
 
         request.session['userid'] = user.pk
 
