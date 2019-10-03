@@ -118,9 +118,9 @@ def encrypt_string(string):
 
 def my_authenticate(username, password):
     password = encrypt_string(password)
-    user = User.objects.get(username=username)
-    if user.password == password:
-        return user
+    query = User.objects.filter(username=username)
+    if query.exists() and query[0].password == password:
+        return query[0]
     else:
         return None
 
@@ -129,11 +129,10 @@ def login_user(request):
     password = request.POST.get('passwordinput', None)
     user = my_authenticate(username, password)
     if user is not None:
-        print("Success")
         request.session['userid'] = user.pk
         return redirect('mainpage')
     else:
-        print("Failure")
+        # TODO: display error message to users
         return redirect('login')
 
 def logout_user(request):
