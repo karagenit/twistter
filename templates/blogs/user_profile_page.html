@@ -1,3 +1,5 @@
+{% load post_extras %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,10 +115,11 @@
         </div>
         <div class="col-md-6">
             <div class="profile-content">
+              {% user_posts user as posts %}
+              {% for post in posts %}
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
+                      <p class="card-text">{{ post.content }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -126,33 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
     </div>
