@@ -31,6 +31,11 @@
                     {{ form.password }}
                     <input type="submit" value="Update">
                 </form>
+
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <form action='delete_user {{ user_id }}' method='GET'>
+                    <button type='submit'>Delete Account</button>
+                </form>
             </div>
         </div>
     </div>

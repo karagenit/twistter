@@ -14,5 +14,5 @@ urlpatterns = [
     path('users/<int:pk>', ProfilePageView.as_view(), name='userprofilepage'),
     path('login', login_user),
     path('post', MakePostView.as_view(), name='makepostpage'),
-    path('search', SearchView.as_view(), name='searchpage')
+    path('search', SearchView.as_view(), name='searchpage'),
 ]
