@@ -25,7 +25,7 @@ class RegisterView(TemplateView):
         password = request.POST.get('passwordinput', None)
         password_confirm = request.POST.get('confirmpasswordinput', None)
         enc_password = encrypt_string(password)
-        
+
         user = User(firstname=firstname, lastname=lastname, username=username, email=email,
                     password=enc_password)
 
@@ -43,7 +43,7 @@ class RegisterView(TemplateView):
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -56,6 +56,11 @@ class SettingsPageView(UpdateView):
 
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
+
+    def get_context_data(self, **kwargs):
+        context = super(SettingsPageView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
 
     def post(self,request):
         if 'delete_user' in request.POST:
@@ -86,10 +91,19 @@ class ProfilePageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
 
+    def get_context_data(self, **kwargs):
+        context = super(ProfilePageView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
 
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(MakePostView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
 
     def post(self,request):
         content = request.POST.get('postinput', None)
@@ -100,6 +114,11 @@ class MakePostView(TemplateView):
 
 class SearchView(TemplateView):
     template_name = "searchpage.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
 
     def post(self,request):
         user_name = request.POST.get('searchinput', None)
