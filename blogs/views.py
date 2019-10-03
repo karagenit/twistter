@@ -55,8 +55,21 @@ class SettingsPageView(UpdateView):
         if 'delete_user' in request.POST:
             delete_user(self.request.session.get('userid'))
             return redirect('login')
-        else:
-            response = 'other'
+        if 'username_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.username = request.POST.get("username")
+            user.save()
+            return redirect('settingspage')
+        if 'email_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.email = request.POST.get("email")
+            user.save()
+            return redirect('settingspage')
+        if 'password_change' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.password = encrypt_string(request.POST.get("password"))
+            user.save()
+            return redirect('settingspage')
         return HttpResponse(response)
 
 class ProfilePageView(UpdateView):
