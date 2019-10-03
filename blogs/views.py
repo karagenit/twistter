@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.db import IntegrityError
+
 from .models import User, Post
 from .getposts import get_posts
 from .deleteuser import delete_user
@@ -27,9 +29,13 @@ class RegisterView(TemplateView):
         user = User(firstname=firstname, lastname=lastname, username=username, email=email,
                     password=enc_password)
 
-        user.save()
-
         # TODO validate all fields exist & are valid
+
+        try:
+            user.save()
+        except IntegrityError:
+            # TODO tell user username/email is already taken
+            return redirect('register')
 
         request.session['userid'] = user.pk
 
@@ -120,9 +126,9 @@ def encrypt_string(string):
 
 def my_authenticate(username, password):
     password = encrypt_string(password)
-    user = User.objects.get(username=username)
-    if user.password == password:
-        return user
+    query = User.objects.filter(username=username)
+    if query.exists() and query[0].password == password:
+        return query[0]
     else:
         return None
 
@@ -131,11 +137,10 @@ def login_user(request):
     password = request.POST.get('passwordinput', None)
     user = my_authenticate(username, password)
     if user is not None:
-        print("Success")
         request.session['userid'] = user.pk
         return redirect('mainpage')
     else:
-        print("Failure")
+        # TODO: display error message to users
         return redirect('login')
 
 def logout_user(request):
