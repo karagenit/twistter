@@ -164,13 +164,14 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="This should store the content of the original post." name="updated_post" id='updated_post'></input>
+                                        <input class="form-control" placeholder="This should store the content of the original post." name="updated_post" id='updated_post' ></input>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button>Save Changes</button>
-                                </div>
+                                    <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes</button>
+                                	<input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+								</div>
                             </div>
                         </div>
                     </div>
@@ -211,12 +212,14 @@
                                                 data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
                                             Edit
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+									<form id="delete" method="post">
+										{% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post" name="delete_post" value="{{ post.id }}">
                                             Delete Post
                                         </button>
+									</form>
                                     {% endif %}
                                 </div>
-                                <small class="text-muted">{{ post.created }}</small>
                             </div>
                             <small class="text-muted">{{ post.created }}</small>
                         </div>
@@ -229,7 +232,8 @@
 </div>
 <script>
     function hotLatina(id) {
-        document.getElementById("post_edit").value = document.getElementById("post_content_" + id.toString()).innerHTML;
+        //document.getElementById("post_edit").value = document.getElementById("post_content_" + id.toString()).innerHTML;
+    	document.getElementById("post_edit_id").value = id;
     }
 </script>
 

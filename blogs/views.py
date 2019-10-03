@@ -104,8 +104,16 @@ class ProfilePageView(UpdateView):
             user.save()
             print (user.profile_pic)
         if 'updated_post' in request.POST:
-            print (request.POST.get('updated_post', None))
+            post_id = (request.POST.get('post_edit_id', None))
+            post = Post.objects.get(id=post_id)
+            post.content = request.POST.get('updated_post', None)
+            post.save()
+        if 'delete_post' in request.POST:
+            post_id = request.POST.get('delete_post', None)
+            post = Post.objects.get(id=post_id)
+            post.delete()
         print (request.POST)
+
         return redirect('mainpage')
 
     def get_context_data(self, **kwargs):
