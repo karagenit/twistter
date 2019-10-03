@@ -70,16 +70,6 @@
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
-                    <form method="post" enctype="multipart/form-data" name="image" id="image">
-                      {% csrf_token %}
-                       <div>
-                         <label for="file">Choose file to upload</label>
-                         <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
-                       </div>
-                       <div>
-                       <button>Submit</button>
-                     </div>
-                    </form>
                     {% if userid %}
                         <form method="post" enctype="multipart/form-data" action="/">
                             {% csrf_token %}
@@ -121,7 +111,7 @@
                     <div class="profile-usertitle-email">
                         {{ user.email }}
                     </div>
-                    <div>
+                    <div class="profile-usertitle-email">
                         {{ user.biography }}
                     </div>
                 </div>
@@ -160,7 +150,9 @@
                           </div>
                       </div>
                   </div>
-
+				</form>
+				<form name="edit_post" method="POST">
+                  {% csrf_token %}
                     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -172,7 +164,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="This should store the content of the original post."></input>
+                                        <input class="form-control" placeholder="This should store the content of the original post." name="updated_post" id='updated_post'></input>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
