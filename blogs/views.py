@@ -125,7 +125,6 @@ def my_authenticate(username, password):
         return None
 
 def login_user(request):
-    print("Logging in...")
     username = request.POST.get('usernameinput', None)
     password = request.POST.get('passwordinput', None)
     user = my_authenticate(username, password)
@@ -136,3 +135,7 @@ def login_user(request):
     else:
         print("Failure")
         return redirect('login')
+
+def logout_user(request):
+    request.session['userid'] = None
+    return redirect('login')

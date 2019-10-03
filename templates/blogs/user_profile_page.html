@@ -18,11 +18,18 @@
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
-                    <form action="/action_page.php" accept="image/gif, image/jpeg">
-                        Select image: <input type='file' onchange="readURL(this);"/>
-                        <input type="submit" value="Submit" onclick="upload()">
+                    <form method="post" enctype="multipart/form-data" action="/">
+                      {% csrf_token %}
+                       <div>
+                         <label for="file">Choose file to upload</label>
+                         <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
+                       </div>
+                       <div>
+                       <button>Submit</button>
+                     </div>
                     </form>
-                    <script type="text/javascript">function readURL(input) {
+                    <script type="text/javascript">
+                      function readURL(input) {
                         if (input.files && input.files[0]) {
                             var reader = new FileReader();
 
@@ -82,7 +89,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" type="submit" class="btn btn-primary" value="Submit">Save changes</button>
+                                    <button type="button" type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
                           </div>
                       </div>
@@ -108,9 +115,48 @@
                 <!-- END MENU -->
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
             <div class="profile-content">
-                Posts go here...
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
