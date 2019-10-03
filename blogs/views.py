@@ -86,7 +86,7 @@ class SearchView(TemplateView):
         posts.append(ln)
         posts.append(' ')
         posts.append(em)
-        return HttpResponse(posts)
+        return HttpResponse(friend_profile_page)
 
 
 def encrypt_string(string):
