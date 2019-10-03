@@ -86,6 +86,15 @@ class ProfilePageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.request.session['userid'])
 
+    def post(self,request,pk):
+        if 'new_bio' in request.POST:
+            user = User.objects.get(id=self.request.session.get('userid'))
+            user.biography = request.POST.get('new_bio', None)
+            user.save()
+        if 'pic' in request.POST:
+            user = User.objects.get(id=self.request.session.get('userid'))
+        print (request)
+        return redirect('mainpage')
 
 
 class MakePostView(TemplateView):
