@@ -16,3 +16,7 @@ Run: `python3 manage.py migrate`
 #### Running Tests
 
 `python3 manage.py test test/`
+
+#### Setting Up Admin
+
+`python3 manage.py createsuperuser`
