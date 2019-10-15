@@ -138,7 +138,7 @@ class MakePostView(TemplateView):
         user = User.objects.get(id=self.request.session.get('userid'))
         post = Post(content=content, creator=user)
         post.save()
-        return redirect('mainpage')
+        return redirect('makepostpage')
 
 class SearchView(TemplateView):
     template_name = "searchpage.html"
@@ -151,18 +151,6 @@ class SearchView(TemplateView):
     def post(self,request):
         user_name = request.POST.get('searchinput', None)
         user = User.objects.get(username=user_name)
-        #fn = user.firstname
-        #ln = user.lastname
-        #em = user.email
-        #id = user.id
-        #posts = get_posts(id)
-        #posts.append(user_name)
-        #posts.append(' ')
-        #posts.append(fn)
-        #posts.append(' ')
-        #posts.append(ln)
-        #posts.append(' ')
-        #posts.append(em)
         return redirect(reverse('userprofilepage', kwargs={'pk': user.pk}))
 
 class FriendView(TemplateView):
