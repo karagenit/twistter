@@ -9,6 +9,7 @@ from django.urls import reverse
 from .models import User, Post
 from .getposts import get_posts
 from .deleteuser import delete_user
+from .tagcode import addtag
 import hashlib
 
 class LoginView(TemplateView):
@@ -132,6 +133,7 @@ class MakePostView(TemplateView):
         return context
 
     def post(self,request):
+        print (request.POST)
         content = request.POST.get('postinput', None)
         user = User.objects.get(id=self.request.session.get('userid'))
         post = Post(content=content, creator=user)
