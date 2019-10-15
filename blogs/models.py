@@ -1,21 +1,22 @@
 from django.db import models
 
 class User(models.Model):
-    firstname   = models.CharField(max_length=50)
-    lastname    = models.CharField(max_length=50)
-    username    = models.CharField(max_length=50, unique=True)
-    email       = models.EmailField(unique=True)
-    password    = models.CharField(max_length=50)
-    birthday    = models.DateField(null=True)
-    biography   = models.TextField(default="Enter Bio", max_length=120, blank=True)
-    profile_pic = models.ImageField(blank=True, upload_to="uploads/")
+    firstname    = models.CharField(max_length=50)
+    lastname     = models.CharField(max_length=50)
+    username     = models.CharField(max_length=50, unique=True)
+    email        = models.EmailField(unique=True)
+    password     = models.CharField(max_length=50)
+    birthday     = models.DateField(null=True)
+    biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
+    profile_pic  = models.ImageField(blank=True, upload_to="uploads/")
+    banned_until = models.DateField(null=True)
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
 #
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_creator")
-    likers  = models.ManyToManyField(User, related_name="post_liker")
+    likers  = models.ManyToManyField(User, related_name="post_liker", blank=True)
     content = models.TextField()
     created = models.DateField(auto_now_add=True)
 
