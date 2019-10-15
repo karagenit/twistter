@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from .models import User, Post, Tag, Follow, Report
 
-admin.site.register(User)
+from datetime import date, timedelta
+
 admin.site.register(Post)
 admin.site.register(Tag)
 admin.site.register(Follow)
@@ -25,3 +26,12 @@ class ReportAdmin(admin.ModelAdmin):
     get_post_author.short_description = 'Poster'
 
 admin.site.register(Report, ReportAdmin)
+
+def temp_ban_user(modeladmin, request, queryset):
+    queryset.update(banned_until = date.today() + timedelta(days=7))
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['firstname', 'lastname']
+    actions = [temp_ban_user]
+
+admin.site.register(User, UserAdmin)
