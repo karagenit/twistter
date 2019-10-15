@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
 
-from .models import User, Post, Tag
+from .models import User, Post, Report, Tag
 from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag
@@ -193,3 +193,18 @@ def login_user(request):
 def logout_user(request):
     request.session['userid'] = None
     return redirect('login')
+
+##
+# TODO: proper error handling:
+# - User not logged in
+# - User ID invalid
+# - Post ID invalid
+#
+# TODO: implement for AJAX
+#
+def report_post(request, pk):
+    user = User.objects.get(pk=request.session['userid'])
+    post = Post.objects.get(pk=pk)
+    report = Report(reporter=user, post=post)
+    report.save()
+    return redirect('mainpage')

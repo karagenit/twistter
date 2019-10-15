@@ -42,3 +42,7 @@ class Follow(models.Model):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
     tags = models.ManyToManyField(Tag)
+
+class Report(models.Model):
+    reporter = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
