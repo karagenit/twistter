@@ -1,9 +1,9 @@
 from .models import Post, User, Tag
 
-def addtag(self, name, post):
+def addtag(name, post):
     try:
         tag = Tag.objects.get(name=name)
-    except ObjectDoesNotExist:
+    except tag.DoesNotExist:
         tag = Tag(name=name)
         tag.save()
     tag.posts.add(post)

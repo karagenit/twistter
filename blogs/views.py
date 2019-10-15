@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
 
-from .models import User, Post
+from .models import User, Post, Tag
 from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag
