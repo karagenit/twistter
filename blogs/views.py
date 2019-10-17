@@ -134,11 +134,14 @@ class MakePostView(TemplateView):
 
     def post(self,request):
         print (request.POST)
+        tags = request.POST.get('taginput', None).split(",")
         content = request.POST.get('postinput', None)
         user = User.objects.get(id=self.request.session.get('userid'))
         post = Post(content=content, creator=user)
         post.save()
-        return redirect('makepostpage')
+        for tag in tags:
+            addtag(tag, post)
+        return redirect('mainpage')
 
 class SearchView(TemplateView):
     template_name = "searchpage.html"
