@@ -153,7 +153,10 @@ class SearchView(TemplateView):
 
     def post(self,request):
         user_name = request.POST.get('searchinput', None)
-        user = User.objects.get(username=user_name)
+        try:
+            user = User.objects.get(username=user_name)
+        except User.DoesNotExist:
+            return redirect('searchpage')
         return redirect(reverse('userprofilepage', kwargs={'pk': user.pk}))
 
 class FriendView(TemplateView):
@@ -184,6 +187,10 @@ def login_user(request):
 def logout_user(request):
     request.session['userid'] = None
     return redirect('login')
+
+def check_logged_in(request):
+    if request.session['userid'] is None:
+        return redirect('login')
 
 ##
 # TODO: proper error handling:
