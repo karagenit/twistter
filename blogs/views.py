@@ -12,7 +12,6 @@ from .deleteuser import delete_user
 from .tagcode import addtag, removetag
 import hashlib
 
-
 class LoginView(TemplateView):
     template_name = "login/login.html"
 
@@ -47,7 +46,13 @@ class RegisterView(TemplateView):
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
-
+        
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -59,8 +64,17 @@ class SettingsPageView(UpdateView):
     model = User
     fields = ['firstname', 'lastname', 'username', 'email', 'password']
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_object(self, queryset=None):
-        return User.objects.get(pk=self.request.session['userid'])
+        try:
+            return User.objects.get(pk=self.request.session['userid'])
+        except User.DoesNotExist:
+            return None
 
     def get_context_data(self, **kwargs):
         context = super(SettingsPageView, self).get_context_data(**kwargs)
@@ -93,7 +107,13 @@ class ProfilePageView(UpdateView):
     template_name_suffix = '_profile_page'
     model = User
     fields = ['firstname', 'lastname', 'username', 'email', 'password']
-
+    
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.kwargs['pk'])
 
@@ -141,7 +161,13 @@ class ProfilePageView(UpdateView):
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
-
+    
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(MakePostView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -162,6 +188,12 @@ class MakePostView(TemplateView):
 class SearchView(TemplateView):
     template_name = "searchpage.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -208,12 +240,6 @@ def login_user(request):
 def logout_user(request):
     request.session['userid'] = None
     return redirect('login')
-
-
-def check_logged_in(request):
-    if request.session['userid'] is None:
-        return redirect('login')
-
 
 ##
 # TODO: proper error handling:

@@ -277,7 +277,7 @@
                 </div>
                 <div>
                     {% for tag in post.tag_set.all %}
-                    <p> {{ tag.name }}</p>
+                    <p> Tags: {{ tag.name }}</p>
                     {% endfor %}
                     <p> Likes: {{ post.likers.count }}</p>
                 </div>
