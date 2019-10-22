@@ -61,38 +61,30 @@
             {% endif %}
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-            <div class="register">
-                <h2>Settings</h2>
-                <hr>
-                <form method="post">{% csrf_token %}
-                    {{ form.username }}
-                    <input type="submit" name="username_change" value="Update">
-                </form>
+    <div class="register">
+        <div class="col align-self-center">
+            <h2 class="col align-self-center">Settings</h2>
+            <hr>
+            <form method="post">{% csrf_token %}
+                {{ form.username }}
+                <input type="submit" name="username_change" value="Update">
+            </form>
 
-                <form method="post">{% csrf_token %}
-                    {{ form.email }}
-                    <input type="submit" name="email_change" value="Update">
-                </form>
+            <form method="post">{% csrf_token %}
+                {{ form.email }}
+                <input type="submit" name="email_change" value="Update">
+            </form>
 
-                <form method="post">{% csrf_token %}
-                    {{ form.password }}
-                    <input type="submit" name="password_change" value="Update">
-                </form>
+            <form method="post">{% csrf_token %}
+                {{ form.password }}
+                <input type="submit" name="password_change" value="Update">
+            </form>
 
-                <input type="hidden" name="user_id" value="{{ user.id }}">
-                <form method='post'>
-                    {% csrf_token %}
-                    <button class="btn btn-danger" name="delete_user" type='submit'>Delete Account</button>
-                </form>
-            </div>
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <form method='post'>
+                {% csrf_token %}
+                <button class="btn btn-danger" name="delete_user" type='submit'>Delete Account</button>
+            </form>
         </div>
-    </div>
-</div>
 </body>
 </html>
