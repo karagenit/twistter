@@ -201,14 +201,15 @@
                                     <div class="form-group">
                                         <input class="form-control"
                                                placeholder="This should store the tags of the post."
-                                               name="edit_tags" id='edit_tags'></input>
+                                               name="edit_tags" id='edit_tags'>
+                                        </input>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
+                                    <button type="submit" id="edit_tags_save" name="edit_tags_save" onclick="editTags({{ post.id }})">Save Changes
                                     </button>
-                                    <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                                    <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
                                 </div>
                             </div>
                         </div>
@@ -248,7 +249,7 @@
                                     data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
                                 Edit
                             </button>
-                            <form id="edit_tags" method="post">
+                            <form id="edit_tags_form" method="post">
                                 {% csrf_token %}
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                         data-target="#exampleModal3">
@@ -262,10 +263,10 @@
                                     Delete Post
                                 </button>
                             </form>
-                            <form id="like_post" method="post">
+                            <form id="like_post_form" method="post">
                                 {% csrf_token %}
                                 <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
-                                        type="submit">
+                                        type="submit" value="{{ post.id }}">
                                     Like
                                 </button>
                             </form>
@@ -273,6 +274,12 @@
                             <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
                     </div>
+                </div>
+                <div>
+                    {% for tag in post.tag_set.all %}
+                    <p> {{ tag.name }}</p>
+                    {% endfor %}
+                    <p> Likes: {{ post.likers.count }}</p>
                 </div>
                 <small class="text-muted">{{ post.created }}</small>
             </div>
@@ -282,10 +289,21 @@
 
 <script>
     function hotLatina(id) {
-        //document.getElementById("post_edit").value = document.getElementById("post_content_" + id.toString()).innerHTML;
         document.getElementById("post_edit_id").value = id;
+        document.get
     }
 </script>
+<script>
+    function liked(id) {
+        document.getElementById("liked_id").value = id;
+    }
+</script>
+<script>
+    function editTags(id) {
+        document.getElementById("tags_edit_id").value = id;
+    }
+</script>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

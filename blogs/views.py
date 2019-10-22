@@ -98,7 +98,6 @@ class ProfilePageView(UpdateView):
         return User.objects.get(pk=self.kwargs['pk'])
 
     def post(self, request, pk):
-        print(request.FILES)
         if 'new_bio' in request.POST:
             user = User.objects.get(id=self.request.session.get('userid'))
             user.biography = request.POST.get('new_bio', None)
@@ -125,8 +124,9 @@ class ProfilePageView(UpdateView):
         if 'like_post' in request.POST:
             post_id = request.POST.get('like_post', None)
             post = Post.objects.get(id=post_id)
-        print (request.POST)
-
+            user = User.objects.get(id=self.request.session.get('userid'))
+            post.likers.add(user)
+            print(post.likers.all().count())
         return redirect('mainpage')
 
     def get_context_data(self, **kwargs):

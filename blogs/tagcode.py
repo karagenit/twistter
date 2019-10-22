@@ -14,3 +14,10 @@ def get_tags_by_post(post):
 
 def get_posts_by_tag(tag):
     return tag.posts.all()
+
+def removetag(name, post):
+    try:
+        tag = Tag.objects.get(name=name)
+    except:
+        return
+    tag.posts.remove(post)
