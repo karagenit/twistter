@@ -72,9 +72,13 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
+                    {% if user.profile_pic %}
+                    <img id="blah" src={{ user.profile_pic.url }} class="img-responsive">
+                    {% else %}
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
+                    {% endif %}
                     {% if userid %}
-                        <form method="post" enctype="multipart/form-data" action="/">
+                        <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div>
                                 <label for="file">Add New Profile Picture</label>

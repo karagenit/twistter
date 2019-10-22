@@ -125,7 +125,7 @@ class ProfilePageView(UpdateView):
             user.save()
         if 'file' in request.FILES:
             user = User.objects.get(id=self.request.session.get('userid'))
-            user.profile_pic = request.POST.get('file', None)
+            user.profile_pic = request.FILES.get('file', None)
             user.save()
             print (user.profile_pic)
         if 'updated_post' in request.POST:
