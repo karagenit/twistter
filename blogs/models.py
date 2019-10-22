@@ -8,7 +8,7 @@ class User(models.Model):
     password     = models.CharField(max_length=50)
     birthday     = models.DateField(null=True)
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
-    profile_pic  = models.ImageField(blank=True, upload_to="uploads/")
+    profile_pic  = models.ImageField(upload_to='images/')
     banned_until = models.DateField(null=True)
 
 ###
