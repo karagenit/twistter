@@ -12,8 +12,10 @@ from .deleteuser import delete_user
 from .tagcode import addtag
 import hashlib
 
+
 class LoginView(TemplateView):
     template_name = "login/login.html"
+
 
 class RegisterView(TemplateView):
     template_name = "login/register.html"
@@ -42,6 +44,7 @@ class RegisterView(TemplateView):
 
         return redirect('mainpage')
 
+
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
 
@@ -49,6 +52,7 @@ class MainPageView(TemplateView):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
         return context
+
 
 class SettingsPageView(UpdateView):
     template_name_suffix = '_update_form'
@@ -63,7 +67,7 @@ class SettingsPageView(UpdateView):
         context['userid'] = self.request.session.get('userid', None)
         return context
 
-    def post(self,request):
+    def post(self, request):
         if 'delete_user' in request.POST:
             delete_user(self.request.session.get('userid'))
             return redirect('login')
@@ -84,6 +88,7 @@ class SettingsPageView(UpdateView):
             return redirect('settingspage')
         return HttpResponse(response)
 
+
 class ProfilePageView(UpdateView):
     template_name_suffix = '_profile_page'
     model = User
@@ -92,8 +97,7 @@ class ProfilePageView(UpdateView):
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.kwargs['pk'])
 
-
-    def post(self,request,pk):
+    def post(self, request, pk):
         print(request.FILES)
         if 'new_bio' in request.POST:
             user = User.objects.get(id=self.request.session.get('userid'))
@@ -109,10 +113,18 @@ class ProfilePageView(UpdateView):
             post = Post.objects.get(id=post_id)
             post.content = request.POST.get('updated_post', None)
             post.save()
+        if 'updated_tags' in request.POST:
+            post_id = (request.POST.get('post_edit_id', None))
+            post = Post.objects.get(id=post_id)
+            post.content = request.POST.get('updated_post', None)
+            post.save()
         if 'delete_post' in request.POST:
             post_id = request.POST.get('delete_post', None)
             post = Post.objects.get(id=post_id)
             post.delete()
+        if 'like_post' in request.POST:
+            post_id = request.POST.get('like_post', None)
+            post = Post.objects.get(id=post_id)
         print (request.POST)
 
         return redirect('mainpage')
@@ -123,7 +135,6 @@ class ProfilePageView(UpdateView):
         return context
 
 
-
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
 
@@ -132,7 +143,7 @@ class MakePostView(TemplateView):
         context['userid'] = self.request.session.get('userid', None)
         return context
 
-    def post(self,request):
+    def post(self, request):
         print (request.POST)
         tags = request.POST.get('taginput', None).split(",")
         content = request.POST.get('postinput', None)
@@ -143,6 +154,7 @@ class MakePostView(TemplateView):
             addtag(tag, post)
         return redirect('mainpage')
 
+
 class SearchView(TemplateView):
     template_name = "searchpage.html"
 
@@ -151,7 +163,7 @@ class SearchView(TemplateView):
         context['userid'] = self.request.session.get('userid', None)
         return context
 
-    def post(self,request):
+    def post(self, request):
         user_name = request.POST.get('searchinput', None)
         try:
             user = User.objects.get(username=user_name)
@@ -159,11 +171,14 @@ class SearchView(TemplateView):
             return redirect('searchpage')
         return redirect(reverse('userprofilepage', kwargs={'pk': user.pk}))
 
+
 class FriendView(TemplateView):
     template_name = "friend_page_profile.html"
 
+
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
+
 
 def my_authenticate(username, password):
     password = encrypt_string(password)
@@ -172,6 +187,7 @@ def my_authenticate(username, password):
         return query[0]
     else:
         return None
+
 
 def login_user(request):
     username = request.POST.get('usernameinput', None)
@@ -184,13 +200,16 @@ def login_user(request):
         # TODO: display error message to users
         return redirect('login')
 
+
 def logout_user(request):
     request.session['userid'] = None
     return redirect('login')
 
+
 def check_logged_in(request):
     if request.session['userid'] is None:
         return redirect('login')
+
 
 ##
 # TODO: proper error handling:
