@@ -74,7 +74,7 @@
                 <div class="profile-userpic">
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
                     {% if userid %}
-                        <form method="post" enctype="multipart/form-data" action="/">
+                        <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div>
                                 <label for="file">Add New Profile Picture</label>
