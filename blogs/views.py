@@ -9,7 +9,7 @@ from django.urls import reverse
 from .models import User, Post, Report, Tag
 from .getposts import get_posts
 from .deleteuser import delete_user
-from .tagcode import addtag
+from .tagcode import addtag, removetag
 import hashlib
 
 
@@ -98,6 +98,7 @@ class ProfilePageView(UpdateView):
         return User.objects.get(pk=self.kwargs['pk'])
 
     def post(self, request, pk):
+        print(request.POST)
         if 'new_bio' in request.POST:
             user = User.objects.get(id=self.request.session.get('userid'))
             user.biography = request.POST.get('new_bio', None)
@@ -113,10 +114,13 @@ class ProfilePageView(UpdateView):
             post.content = request.POST.get('updated_post', None)
             post.save()
         if 'edit_tags' in request.POST:
-            post_id = (request.POST.get('post_edit_id', None))
+            post_id = (request.POST.get('tags_edit_id', None))
             post = Post.objects.get(id=post_id)
-            post.content = request.POST.get('updated_post', None)
-            post.save()
+            name = request.POST.get('edit_tags', None)
+            if not post.tag_set.filter(name=name).exists():
+                addtag(name,post)
+            else:
+                removetag(name, post)
         if 'delete_post' in request.POST:
             post_id = request.POST.get('delete_post', None)
             post = Post.objects.get(id=post_id)
