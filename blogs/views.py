@@ -6,6 +6,8 @@ from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
 
+from datetime import date
+
 from .models import User, Post, Report, Tag
 from .getposts import get_posts
 from .deleteuser import delete_user
@@ -158,6 +160,8 @@ class ProfilePageView(UpdateView):
         context['userid'] = self.request.session.get('userid', None)
         return context
 
+class BannedView(TemplateView):
+    template_name = "banned.html"
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
@@ -230,6 +234,8 @@ def login_user(request):
     password = request.POST.get('passwordinput', None)
     user = my_authenticate(username, password)
     if user is not None:
+        if user.banned_until is not None and user.banned_until > date.today():
+            return redirect('banned')
         request.session['userid'] = user.pk
         return redirect('mainpage')
     else:

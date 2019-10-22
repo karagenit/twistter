@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, logout_user, FriendView, report_post
+from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, logout_user, FriendView, report_post, BannedView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -18,4 +18,5 @@ urlpatterns = [
     path('logout', logout_user),
     path('friend', FriendView.as_view(), name='friend_page'),
     path('report/<int:pk>', report_post, name='report'),
+    path('banned', BannedView.as_view(), name='banned'),
 ]
