@@ -113,7 +113,7 @@ class ProfilePageView(UpdateView):
             post = Post.objects.get(id=post_id)
             post.content = request.POST.get('updated_post', None)
             post.save()
-        if 'updated_tags' in request.POST:
+        if 'edit_tags' in request.POST:
             post_id = (request.POST.get('post_edit_id', None))
             post = Post.objects.get(id=post_id)
             post.content = request.POST.get('updated_post', None)
