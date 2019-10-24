@@ -227,9 +227,15 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
 
+                             <button type="button" class="btn btn-primary">
+                            {% if userid %}
+                                <a href="settingsPage"><font color="white">Account settings</font></a>
+                                </button>
+
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
+                                {% endif %}
 
                     </ul>
                 </div>
