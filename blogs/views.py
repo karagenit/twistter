@@ -158,7 +158,7 @@ class ProfilePageView(UpdateView):
             follower = User.objects.get(id=self.request.session.get('userid'))
             following = User.objects.get(username=request.POST.get('followuser'))
             tag = Tag.objects.get(name=request.POST.get('followtag'))
-            if request.POST.get('Following') is 1:
+            if request.POST.get('Following') is '1':
                 addFollow(follower, following, tag)
             else:
                 removeFollow(follower, following, tag)
