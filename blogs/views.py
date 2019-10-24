@@ -1,6 +1,7 @@
 from django.views.generic import UpdateView
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
@@ -217,6 +218,34 @@ class FriendView(TemplateView):
 
 class UserSearchView(TemplateView):
     template_name = "user_search_page.html"
+
+class UserSearchResultView(ListView):
+    template_name = "user_search_result_page.html"
+    model = Post
+
+    def get_queryset(self, **kwargs):
+        if 'word_search' in self.request.GET:
+            post_content = self.request.GET.get('word_search')
+            return Post.objects.filter(content__icontains=post_content)
+
+        if 'tag_search' in self.request.GET:
+            post_tag = self.request.GET.get('tag_search')
+            return Post.objects.filter(tag__name=post_tag)
+        
+        if 'user_search' in self.request.GET:
+            post_user = self.request.GET.get('user_search')
+            user_id = User.objects.get(username=post_user).id
+            return Post.objects.filter(creator=user_id)
+
+        if 'tag_user_search' in self.request.GET:
+            post_combo = self.request.GET.get('tag_user_search')
+            split_combo = post_combo.split('/')
+            user_id = User.objects.get(username=split_combo[1]).id
+            return Post.objects.filter(tag__name=split_combo[0],creator=user_id) 
+        
+        if 'date_search' in self.request.GET:
+            date = self.request.GET.get('date_search')
+            return Post.objects.filter(created=date)
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()

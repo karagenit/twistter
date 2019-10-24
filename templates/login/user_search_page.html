@@ -58,26 +58,26 @@
 <div class="container">
     <div class="register">
         <div class="col align-self-center">
-            <h2 class="col align-self-center">Search Filter</h2>
+            <h2 class="col align-self-center">Search Filter?</h2>
             <hr>
-            <form method="post">{% csrf_token %}
+            <form method="get" action="/search/results">{% csrf_token %}
                 Date <input type="text" name="date_search" placeholder="mm/dd/yyyy"
                             pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
                 <input type="submit" name="date_search_update" value="Search"><br>
             </form>
-            <form method="post">{% csrf_token %}
+            <form method="get" action="/search/results">{% csrf_token %}
                 Word <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
                 <input type="submit" name="word_search_update" value="Search"><br>
             </form>
-            <form method="post">{% csrf_token %}
+            <form method="get" action="/search/results">{% csrf_token %}
                 Tag <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
                 <input type="submit" name="tag_search_update" value="Search"><br>
             </form>
-            <form method="post">{% csrf_token %}
+            <form method="get" action="/search/results">{% csrf_token %}
                 User <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
                 <input type="submit" name="user_search_update" value="Search"><br>
             </form>
-            <form method="post">{% csrf_token %}
+            <form method="get" action="/search/results">{% csrf_token %}
                 Tag/User <input type="text" name="tag_user_search" placeholder="Enter tag/user"
                                 pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
                 <input type="submit" name="tag_user_search_update" value="Search"><br>
