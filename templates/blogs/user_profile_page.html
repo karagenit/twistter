@@ -54,6 +54,9 @@
                     <a class="nav-link" href="/makePost"><img src="/static/img/scroll.png" height=25% width=25%>Make
                         Post</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="search_page">Search</a>
+                </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -127,7 +130,7 @@
 
 
                 {% if userid %}
-                    
+
                 {% endif %}
 
                 <!-- Modal -->
@@ -221,11 +224,11 @@
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
                     <ul class="nav">
-                        
+
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
-                            
+
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -273,12 +276,12 @@
                         {% endif %}
                     </div>
                 </div>
-                <ul>Tags: 
-                    {% for tag in post.tag_set.all %} 
-                    <li>{{ tag.name }}   
+                <ul>Tags:
+                    {% for tag in post.tag_set.all %}
+                    <li>{{ tag.name }}
                     {% endfor %}
                     <br>
-                    Likes: {{ post.likers.count }} 
+                    Likes: {{ post.likers.count }}
                 </ul>
                 <small class="text-muted">{{ post.created }}</small>
             </div>

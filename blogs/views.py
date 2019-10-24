@@ -48,13 +48,13 @@ class RegisterView(TemplateView):
 
 class MainPageView(TemplateView):
     template_name = "mainpage.html"
-        
+
     def dispatch(self, *args, **kwargs):
         if self.request.session['userid'] is None:
             return redirect('login')
         else:
             return super().dispatch(*args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -71,7 +71,7 @@ class SettingsPageView(UpdateView):
             return redirect('login')
         else:
             return super().dispatch(*args, **kwargs)
-    
+
     def get_object(self, queryset=None):
         try:
             return User.objects.get(pk=self.request.session['userid'])
@@ -109,13 +109,13 @@ class ProfilePageView(UpdateView):
     template_name_suffix = '_profile_page'
     model = User
     fields = ['firstname', 'lastname', 'username', 'email', 'password']
-    
+
     def dispatch(self, *args, **kwargs):
         if self.request.session['userid'] is None:
             return redirect('login')
         else:
             return super().dispatch(*args, **kwargs)
-    
+
     def get_object(self, queryset=None):
         return User.objects.get(pk=self.kwargs['pk'])
 
@@ -165,13 +165,13 @@ class BannedView(TemplateView):
 
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
-    
+
     def dispatch(self, *args, **kwargs):
         if self.request.session['userid'] is None:
             return redirect('login')
         else:
             return super().dispatch(*args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super(MakePostView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -197,7 +197,7 @@ class SearchView(TemplateView):
             return redirect('login')
         else:
             return super().dispatch(*args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -215,6 +215,8 @@ class SearchView(TemplateView):
 class FriendView(TemplateView):
     template_name = "friend_page_profile.html"
 
+class UserSearchView(TemplateView):
+    template_name = "user_search_page.html"
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
