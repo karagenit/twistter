@@ -23,39 +23,36 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ userid }}"><img src="/static/img/profile.png" height=28%
-                                                                 width=28%>My Profile</a><span
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ userid }}">My Profile</a><span
                         class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="/mainPage"><img src="/static/img/home.png" height=35% width=35%>Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mainPage">Home</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="/search"><img src="/static/img/friends.png" height=36%
-                                                            width=36%>Friends</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Friends</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="settingsPage"><img src="/static/img/gear.png" height=30%
-                                                                 width=30%>Settings</a> <span
+                <li class="nav-item">
+                    <a class="nav-link" href="settingsPage">Settings</a> <span
                         class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/makePost"><img src="/static/img/scroll.png" height=25% width=25%>Make
+                    <a class="nav-link" href="/makePost">Make
                         Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="search_page">Search</a>
+                    <a class="nav-link" href="/search_page">Search</a>
                 </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -64,7 +61,7 @@
                 </form>
                 </div>
             {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
                 </li>
             {% endif %}

@@ -18,34 +18,32 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/users/{{ userid }}"><img src="/static/img/profile.png" height=28%
-                                                                        width=28%>My Profile</a><span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="/mainPage"><img src="/static/img/home.png" height=35% width=35%>Home</a>
-                    <span
-                            class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="/search"><img src="/static/img/friends.png" height=36%
-                                                            width=36%>Friends</a>
-                    <span
-                            class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="settingsPage"><img src="/static/img/gear.png" height=30%
-                                                                 width=30%>Settings</a> <span
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
                         class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/makePost"><img src="/static/img/scroll.png" height=25% width=25%>Make
+                    <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/mainPage">Home</a>
+                    <span
+                            class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Friends</a>
+                    <span
+                            class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="settingsPage">Settings</a> <span
+                        class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/makePost">Make
                         Post</a>
                 </li>
                 <li class="nav-item">
@@ -58,36 +56,59 @@
                 </form>
                 </div>
             {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
                 </li>
             {% endif %}
 </nav>
 <div class="container">
     <div class="register">
-        <div class="col align-self-center">
-            <h2 class="col align-self-center">Settings</h2>
-            <hr>
-            <form method="post">{% csrf_token %}
-                {{ form.username }}
-                <input type="submit" name="username_change" value="Update">
-            </form>
-
-            <form method="post">{% csrf_token %}
-                {{ form.email }}
-                <input type="submit" name="email_change" value="Update">
-            </form>
-
-            <form method="post">{% csrf_token %}
-                {{ form.password }}
-                <input type="submit" name="password_change" value="Update">
-            </form>
-
+        <div class="row">
+            <div class="col align-self-center">
+                <h2 class="col align-self-center">Settings</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Username
+            </div>
+            <div class="col">
+                <form method="post">{% csrf_token %}
+                    {{ form.username }}
+                    <button class="btn btn-outline-secondary" name="username_change" type='submit'>Update</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Email
+            </div>
+            <div class="col">
+                <form method="post">{% csrf_token %}
+                    {{ form.email }}
+                    <button class="btn btn-outline-secondary" name="email_change" type='submit'>Update</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Password
+            </div>
+            <div class="col">
+                <form method="post">{% csrf_token %}
+                    {{ form.password }}
+                    <button class="btn btn-outline-secondary" name="password_change" type='submit'>Update</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>
                 {% csrf_token %}
                 <button class="btn btn-danger" name="delete_user" type='submit'>Delete Account</button>
             </form>
         </div>
+    </div>
 </body>
 </html>
