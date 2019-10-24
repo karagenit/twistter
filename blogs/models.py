@@ -5,7 +5,7 @@ class User(models.Model):
     lastname     = models.CharField(max_length=50)
     username     = models.CharField(max_length=50, unique=True)
     email        = models.EmailField(unique=True)
-    password     = models.CharField(max_length=50)
+    password     = models.CharField(max_length=64)
     birthday     = models.DateField(null=True)
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
     profile_pic  = models.ImageField(upload_to='images/')
