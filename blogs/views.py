@@ -8,10 +8,11 @@ from django.urls import reverse
 
 from datetime import date
 
-from .models import User, Post, Report, Tag
+from .models import User, Post, Report, Tag, Follow
 from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag, removetag
+from .followcode import addFollow, removeFollow
 import hashlib
 
 class LoginView(TemplateView):
@@ -153,6 +154,19 @@ class ProfilePageView(UpdateView):
             user = User.objects.get(id=self.request.session.get('userid'))
             post.likers.add(user)
             print(post.likers.all().count())
+        if 'followuser' in request.POST:
+            follower = User.objects.get(id=self.request.session.get('userid'))
+            following = User.objects.get(username=request.POST.get('followuser'))
+            tag = Tag.objects.get(name=request.POST.get('followtag'))
+            if request.POST.get('Following') is 1:
+                addFollow(follower, following, tag)
+            else:
+                removeFollow(follower, following, tag)
+            follow_list = Follow.objects.filter(follower=follower)
+            for follow in follow_list:
+                print (follow.following.username)
+                for tag in follow.tags.all():
+                    print (tag.name)
         return redirect('mainpage')
 
     def get_context_data(self, **kwargs):
