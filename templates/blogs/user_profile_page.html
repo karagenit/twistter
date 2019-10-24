@@ -23,27 +23,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ userid }}">My Profile</a><span
                         class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/mainPage">Home</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/search">Friends</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="settingsPage">Settings</a> <span
                         class="sr-only">(current)</span></a>
                 </li>
@@ -61,7 +61,7 @@
                 </form>
                 </div>
             {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
                 </li>
             {% endif %}
