@@ -23,27 +23,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ userid }}">My Profile</a><span
                         class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/mainPage">Home</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/search">Friends</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="settingsPage">Settings</a> <span
                         class="sr-only">(current)</span></a>
                 </li>
@@ -61,7 +61,7 @@
                 </form>
                 </div>
             {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
                 </li>
             {% endif %}
@@ -127,6 +127,11 @@
 
 
                 {% if userid %}
+
+                <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit biography
+                    </button>
 
                 {% endif %}
 
@@ -222,9 +227,15 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
 
+                             <button type="button" class="btn btn-primary">
+                            {% if userid %}
+                                <a href="settingsPage"><font color="white">Account settings</font></a>
+                                </button>
+
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
+                                {% endif %}
 
                     </ul>
                 </div>
@@ -280,21 +291,35 @@
                     <br>
                     Likes: {{ post.likers.count }}
                 </ul>
+                {% if post.image %}
+                <img src="{{ post.image.url }}">
+                {% endif %}
                 <small class="text-muted">{{ post.created }}</small>
             </div>
         </div>
     {% endfor %}
 </div>
-
+<div>
+    <form method="POST">
+    {% csrf_token %}
+        <div class="form-group" align="center">
+            <textarea class="form-control" id="followuser" name="followuser" placeholder="Username of user to follow" maxlength="100" rows="1" style="max-width: 60%"></textarea>
+        </div>
+        <div class="form-group" align="center">
+            <textarea class="form-control" id="followtag" name="followtag" placeholder="Tags to follow, enter $all to follow all" maxlength="100" rows="1" style="max-width: 60%"></textarea>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
+                   value="Follow" onclick="Follow(1)">
+            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
+                   value="Unfollow" onclick="Follow(0)">
+        </div>
+        <input type="hidden" value="-1" id="Following" name="Following">
+    </form>
+</div>
 <script>
     function hotLatina(id) {
         document.getElementById("post_edit_id").value = id;
-        document.get
-    }
-</script>
-<script>
-    function liked(id) {
-        document.getElementById("liked_id").value = id;
     }
 </script>
 <script>
@@ -302,7 +327,12 @@
         document.getElementById("tags_edit_id").value = id;
     }
 </script>
-
+<script>
+    function Follow(Bool) {
+        document.getElementById("Following").value = Bool;
+        alert(Bool);
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

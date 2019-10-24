@@ -18,25 +18,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="users/{{ userid }}">My Profile</a><span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="logout">Log Out<span class="sr-only"></span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="mainPage">Home</a> <span
                         class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="search">Friends</a>
                     <span
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="settingsPage">Settings</a> <span
                         class="sr-only">(current)</span></a>
                 </li>
@@ -54,7 +54,7 @@
                 </div>
 
             {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
                 </li>
             {% endif %}
@@ -62,7 +62,7 @@
 
 <div class="row">
 </div>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="form-group" align="center">
             <textarea class="form-control" id="postinput" name="postinput" placeholder="Add a post here..." maxlength="100" rows="8" style="max-width: 60%"></textarea>
@@ -70,6 +70,7 @@
         <div class="form-group" align="center">
             <textarea class="form-control" id="taginput" name="taginput" placeholder="Add tags here separated by commas" maxlength="100" rows="8" style="max-width: 60%"></textarea>
         </div>
+        <input type="file" id="image" name="image">
         <div class="text-center">
             <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
                    value="Send Post">
