@@ -192,16 +192,18 @@ class MakePostView(TemplateView):
         return context
 
     def post(self, request):
-        print (request.POST)
         tags = request.POST.get('taginput', None).split(",")
         content = request.POST.get('postinput', None)
+        image = None
+        print(request.FILES)
+        if request.FILES.get('image', False):
+            image = request.FILES['image']
         user = User.objects.get(id=self.request.session.get('userid'))
-        post = Post(content=content, creator=user)
+        post = Post(content=content, creator=user, image=image)
         post.save()
         for tag in tags:
             addtag(tag, post)
         return redirect('mainpage')
-
 
 class SearchView(TemplateView):
     template_name = "searchpage.html"

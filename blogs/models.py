@@ -5,7 +5,7 @@ class User(models.Model):
     lastname     = models.CharField(max_length=50)
     username     = models.CharField(max_length=50, unique=True)
     email        = models.EmailField(unique=True)
-    password     = models.CharField(max_length=50)
+    password     = models.CharField(max_length=64)
     birthday     = models.DateField(null=True)
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
     profile_pic  = models.ImageField(upload_to='images/')
@@ -17,6 +17,7 @@ class User(models.Model):
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_creator")
     likers  = models.ManyToManyField(User, related_name="post_liker", blank=True)
+    image   = models.ImageField(upload_to='pictures/', blank=True) # blank=True?
     content = models.TextField()
     created = models.DateField(auto_now_add=True)
 
