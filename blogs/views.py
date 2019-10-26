@@ -155,13 +155,14 @@ class ProfilePageView(UpdateView):
             post.likers.add(user)
             print(post.likers.all().count())
         if 'followuser' in request.POST:
-            follower = User.objects.get(id=self.request.session.get('userid'))
-            following = User.objects.get(username=request.POST.get('followuser'))
-            tag = Tag.objects.get(name=request.POST.get('followtag'))
+            follower_id = self.request.session.get('userid')
+            following_name = request.POST.get('followuser')
+            tag_name = request.POST.get('followtag')
             if request.POST.get('Following') is '1':
-                addFollow(follower, following, tag)
+                addFollow(follower_id, following_name, tag_name)
             else:
-                removeFollow(follower, following, tag)
+                removeFollow(follower_id, following_name, tag_name)
+            follower = follower = User.objects.get(id=follower_id)
             follow_list = Follow.objects.filter(follower=follower)
             for follow in follow_list:
                 print (follow.following.username)
