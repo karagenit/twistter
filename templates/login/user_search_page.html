@@ -66,7 +66,7 @@
                 Date
             </div>
             <div class="col">
-                <form method="post">{% csrf_token %}
+                <form method="get" action="/search/results">{% csrf_token %}
                     <input type="text" name="date_search" placeholder="mm/dd/yyyy"
                            pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
                     <button class="btn btn-outline-secondary" name="date_search_update" type='submit'>Search</button>
@@ -78,7 +78,7 @@
                 Word
             </div>
             <div class="col">
-                <form method="post">{% csrf_token %}
+                <form method="get" action= "/search/results">{% csrf_token %}
                     <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
                     <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search</button>
                 </form>
@@ -89,7 +89,7 @@
                 Tag
             </div>
             <div class="col">
-                <form method="post">{% csrf_token %}
+                <form method="get" action="/search/results">{% csrf_token %}
                     <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
                     <button class="btn btn-outline-secondary" name="tag_search_update" type='submit'>Search</button>
                 </form>
@@ -100,7 +100,7 @@
                 User
             </div>
             <div class="col">
-                <form method="post">{% csrf_token %}
+                <form method="get" action= "/search/results">{% csrf_token %}
                     <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
                     <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search</button>
                 </form>
@@ -111,7 +111,7 @@
                 Tag/User
             </div>
             <div class="col">
-                <form method="post">{% csrf_token %}
+                <form method="get" action="/search/results">{% csrf_token %}
                     <input type="text" name="tag_user_search" placeholder="Enter tag/user"
                            pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
                     <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>Search
