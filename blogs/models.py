@@ -48,3 +48,8 @@ class Follow(models.Model):
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
