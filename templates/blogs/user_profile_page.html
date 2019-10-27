@@ -6,7 +6,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -66,14 +65,14 @@
                 </li>
             {% endif %}
 </nav>
-<div class="container">
+<div class="container" style="padding: 3% 2%;">
     <div class="row profile">
         <div class="col-md-3">
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
                     {% if user.profile_pic %}
-                    <img id="blah" src="{{ user.profile_pic.url }}" class="img-responsive" alt="">
+                    <img id="blah" src="{{ user.profile_pic.url }}" class="img-responsive" alt="" style="margin-bottom: 2%">
                     {% else %}
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
                     {% endif %}
@@ -82,10 +81,10 @@
                             {% csrf_token %}
                             <div>
                                 <label for="file">Add New Profile Picture</label>
-                                <input type="file" id="file" name="file" onchange="readURL(this);" multiple>
+                                <input style="margin-bottom:3%;" type="file" id="file" name="file" onchange="readURL(this);" multiple>
                             </div>
                             <div>
-                                <button>Submit</button>
+                                <button style="margin-bottom: 2%; width: 104px;">Submit</button>
                             </div>
                         </form>
                     {% endif %}
@@ -129,7 +128,7 @@
                 {% if userid %}
 
                 <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <button style="margin-bottom: 3%; width:143px; margin-top:5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Edit biography
                     </button>
 
@@ -227,16 +226,20 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
 
-                             <button type="button" class="btn btn-primary">
+                             <button style="margin-right: 2%;"button" class="btn btn-primary">
                             {% if userid %}
                                 <a href="settingsPage"><font color="white">Account settings</font></a>
                                 </button>
-
+                                
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
+                                <button type="button" class="btn btn-primary">
+                                    <a href="#"><font color="white">Help</font></a>
+                                </button>
+                                
                                 {% endif %}
-
+        
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -254,29 +257,36 @@
                     <div class="btn-group">
                         <!-- Button trigger modal -->
                         {% if userid == user.id %}
-                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                            <button style="margin-right:3%;" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                     data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
                                 Edit
                             </button>
-                            <form id="edit_tags_form" method="post">
+                            <form style="margin-right:3%;" id="edit_tags_form" method="post">
                                 {% csrf_token %}
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                         data-target="#exampleModal3">
                                     Edit Tags
                                 </button>
                             </form>
-                            <form id="delete" method="post">
+                            <form style="margin-right:3%;"id="delete" method="post">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post"
                                         name="delete_post" value="{{ post.id }}">
                                     Delete Post
                                 </button>
                             </form>
-                            <form id="like_post_form" method="post">
+                            <form style="margin-right:3%;"id="like_post_form" method="post">
                                 {% csrf_token %}
                                 <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
                                         type="submit" value="{{ post.id }}">
                                     Like
+                                </button>
+                            </form>
+                            <form style="margin-right:3%;" id="edit_tags_form" method="post">
+                                {% csrf_token %}
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                        data-target="#exampleModal3">
+                                    Add Comment
                                 </button>
                             </form>
                         {% else %}
@@ -284,12 +294,17 @@
                         {% endif %}
                     </div>
                 </div>
-                <ul>Tags:
+                
+    
+                <h6 style="margin-top: 2%;"> <img src="/static/img/thumb-up-button.png" style="width: 25px; height:25px; margin-right: 2%;" alt="">{{ post.likers.count }}</h6>
+                <ul style="margin: 2% 0%; background:rgb(1, 47, 175, .2);">
+                    <span >Tags:</span>
                     {% for tag in post.tag_set.all %}
-                    <li>{{ tag.name }}
-                    {% endfor %}
                     <br>
-                    Likes: {{ post.likers.count }}
+                    <li style="margin:1% 1%;"class="btn btn-sm btn btn-outline-primary ">{{ tag.name }}
+                    {% endfor %}
+        
+                    
                 </ul>
                 {% if post.image %}
                 <img src="{{ post.image.url }}">
