@@ -199,11 +199,11 @@ class MakePostView(TemplateView):
     def post(self, request):
         tags = request.POST.get('taginput', None).split(",")
         content = request.POST.get('postinput', None)
-        image = None
-        print(request.FILES)
-        if request.FILES.get('image', False):
-            image = request.FILES['image']
+        image = request.FILES.get('image', None)
         user = User.objects.get(id=self.request.session.get('userid'))
+        if not content and not image:
+            # TODO: report error
+            return redirect('mainpage')
         post = Post(content=content, creator=user, image=image)
         post.save()
         for tag in tags:

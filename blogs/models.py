@@ -17,8 +17,8 @@ class User(models.Model):
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_creator")
     likers  = models.ManyToManyField(User, related_name="post_liker", blank=True)
-    image   = models.ImageField(upload_to='pictures/', blank=True) # blank=True?
-    content = models.TextField()
+    image   = models.ImageField(upload_to='pictures/', blank=True)
+    content = models.TextField(blank=True)
     created = models.DateField(auto_now_add=True)
 
 ###
@@ -48,3 +48,8 @@ class Follow(models.Model):
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
