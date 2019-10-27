@@ -14,6 +14,7 @@ from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag, removetag
 from .followcode import addFollow, removeFollow
+from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text
 import hashlib
 
 class LoginView(TemplateView):
@@ -60,7 +61,9 @@ class MainPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
+        context['posts'] = get_timeline_posts(User.objects.get(pk=self.request.session['userid']))
         return context
+
 
 
 class SettingsPageView(UpdateView):
