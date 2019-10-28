@@ -91,7 +91,7 @@
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post"
                                             name="delete_post" value="{{ post.id }}">
-                                        Delete Post
+                                        Delete
                                     </button>
                                 </form>
                                 </form>
@@ -102,13 +102,11 @@
                                 {% csrf_token %}
                                 <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
                                         type="submit" value="{{ post.id }}">
-                                    Like
+                                    Like ({{ post.likers.count }})
                                 </button>
                         </div>
                     </div>
-
                     <br>
-                    <a class="btn btn-sm btn-outline-secondary">{{ post.likers.count }} Likes</a>
                     <br>
                 </div>
                 <div class="card-footer">
