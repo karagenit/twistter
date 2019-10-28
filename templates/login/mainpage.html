@@ -22,7 +22,8 @@
         <ul class="navbar-nav mr-auto">
             {% if userid %}
                 <li class="nav-item">
-                    <a class="nav-link" href="users/{{ userid }}">My Profile</a><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="users/{{ userid }}">My Profile</a><span
+                        class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Log Out<span class="sr-only"></span></a>
@@ -64,7 +65,7 @@
 </nav>
 <div class="container">
     {% for post in posts %}
-        <div class="card mb-4 shadow-sm">
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}</p>
                 <div class="d-flex justify-content-between align-items-center">
@@ -97,20 +98,21 @@
                                 </button>
                             </form>
                         {% else %}
-                            <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
+                            <a class="btn btn-primary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
                     </div>
                 </div>
-                <ul>Tags:
-                    {% for tag in post.tag_set.all %}
-                    <li>{{ tag.name }}
-                    {% endfor %}
-                    <br>
-                    Likes: {{ post.likers.count }}
-                </ul>
+                {% for tag in post.tag_set.all %}
+                    <a class="btn btn-sm btn-outline-secondary">{{ tag.name }}</a>
+                {% endfor %}
+                <br>
+                <a class="btn btn-sm btn-outline-secondary">{{ post.likers.count }} Likes</a>
                 {% if post.image %}
-                <img src="{{ post.image.url }}">
+                    <img src="{{ post.image.url }}">
                 {% endif %}
+                <br>
+            </div>
+            <div class="card-footer">
                 <small class="text-muted">{{ post.created }}</small>
             </div>
         </div>
