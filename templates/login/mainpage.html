@@ -66,6 +66,9 @@
 <div class="container">
     {% for post in posts %}
         <div class="card" style="width: 18rem;">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top" alt="Image displayed at top of card">
+            {% endif %}
             <div class="card-body">
                 <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}</p>
                 <div class="d-flex justify-content-between align-items-center">
@@ -107,9 +110,6 @@
                 {% endfor %}
                 <br>
                 <a class="btn btn-sm btn-outline-secondary">{{ post.likers.count }} Likes</a>
-                {% if post.image %}
-                    <img src="{{ post.image.url }}">
-                {% endif %}
                 <br>
             </div>
             <div class="card-footer">
