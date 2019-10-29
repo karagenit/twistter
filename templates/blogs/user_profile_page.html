@@ -307,13 +307,7 @@
                                     Delete Post
                                 </button>
                             </form>
-                            <form style="margin-right:3%;"id="like_post_form" method="post">
-                                {% csrf_token %}
-                                <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
-                                        type="submit" value="{{ post.id }}">
-                                    Like
-                                </button>
-                            </form>
+                        {% else %}
                             <form style="margin-right:3%;" id="make_comment_form" method="post">
                                 {% csrf_token %}
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
@@ -321,7 +315,13 @@
                                     Add Comment
                                 </button>
                             </form>
-                        {% else %}
+                        <form style="margin-right:3%;"id="like" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
+                                        type="submit" value="{{ post.id }}">
+                                    Like
+                                </button>
+                            </form>
                             <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
                     </div>

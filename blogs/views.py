@@ -130,7 +130,7 @@ class ProfilePageView(UpdateView):
         return User.objects.get(pk=self.kwargs['pk'])
 
     def post(self, request, pk):
-        post_request_from_post(request)
+        post_request_from_post(self, request)
         return redirect(reverse('userprofilepage', kwargs={'pk': self.kwargs['pk']}))
 
     def get_context_data(self, **kwargs):
@@ -227,6 +227,17 @@ class UserSearchResultView(ListView):
             date_array = given.split('/')
             date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created=date)
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
+
+
+    def post(self, request):
+        post_request_from_post(self, request)
+        print ('flag')
+        return redirect('mainpage')
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()

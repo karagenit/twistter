@@ -18,7 +18,7 @@ from .followcode import addFollow, removeFollow
 from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text
 import hashlib
 
-def post_request_from_post(request):
+def post_request_from_post(self,request):
     print(request.POST)
     if 'new_bio' in request.POST:
         user = User.objects.get(id=self.request.session.get('userid'))
@@ -51,7 +51,6 @@ def post_request_from_post(request):
         post = Post.objects.get(id=post_id)
         user = User.objects.get(id=self.request.session.get('userid'))
         post.likers.add(user)
-        print(post.likers.all().count())
     if 'followuser' in request.POST:
         follower_id = self.request.session.get('userid')
         following_name = request.POST.get('followuser')
