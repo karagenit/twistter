@@ -102,6 +102,19 @@
                 </form>
             </div>
         </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Private
+            </div>
+            <div class="col">
+                <form method="post">{% csrf_token %}
+                    {{ form.private }}
+                    <button class="btn btn-outline-secondary" name="private_change" type='submit'>Update</button>
+                </form>
+            </div>
+        </div>
+
         <div class="row">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>

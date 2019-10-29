@@ -74,7 +74,7 @@ class MainPageView(TemplateView):
 class SettingsPageView(UpdateView):
     template_name_suffix = '_update_form'
     model = User
-    fields = ['firstname', 'lastname', 'username', 'email', 'password']
+    fields = ['firstname', 'lastname', 'username', 'email', 'password', 'private']
 
     def dispatch(self, *args, **kwargs):
         if self.request.session['userid'] is None:
@@ -110,6 +110,12 @@ class SettingsPageView(UpdateView):
         if 'password_change' in request.POST:
             user = User.objects.get(pk=self.request.session['userid'])
             user.password = encrypt_string(request.POST.get("password"))
+            user.save()
+            return redirect('settingspage')
+        if 'private_change' in request.POST:
+            print(request.POST)
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.private = 'private' in request.POST
             user.save()
             return redirect('settingspage')
         return HttpResponse(response)
