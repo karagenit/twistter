@@ -9,7 +9,7 @@ class User(models.Model):
     birthday     = models.DateField(blank=True, null=True)
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
     profile_pic  = models.ImageField(upload_to='images/', blank=True)
-    banned_until = models.DateField(null=True)
+    banned_until = models.DateField(blank=True, null=True)
     blocking     = models.ManyToManyField("User", blank=True)
     private      = models.BooleanField(default=False)
 
