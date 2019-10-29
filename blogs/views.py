@@ -264,7 +264,9 @@ class UserSearchResultView(ListView):
             return Post.objects.filter(tag__name=split_combo[0],creator=user_id) 
         
         if 'date_search' in self.request.GET:
-            date = self.request.GET.get('date_search')
+            given = self.request.GET.get('date_search')
+            date_array = given.split('/')
+            date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created=date)
 
 def encrypt_string(string):
