@@ -50,6 +50,11 @@ def post_request_from_post(self,request):
         post_id = request.POST.get('like_post', None)
         post = Post.objects.get(id=post_id)
         user = User.objects.get(id=self.request.session.get('userid'))
+        for usr in post.likers.all():
+            print (usr.username)
+            if usr.username == user.username:
+                post.likers.remove(user)
+                return
         post.likers.add(user)
     if 'followuser' in request.POST:
         follower_id = self.request.session.get('userid')
