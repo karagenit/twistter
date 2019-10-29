@@ -10,6 +10,7 @@ class User(models.Model):
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
     profile_pic  = models.ImageField(upload_to='images/')
     banned_until = models.DateField(null=True)
+    blocking     = models.ManyToManyField("User", blank=True)
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)

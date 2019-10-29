@@ -76,7 +76,7 @@
                     {% else %}
                     <img id="blah" src="/static/img/profile-default.jpg" class="img-responsive" alt="">
                     {% endif %}
-                    {% if userid %}
+                    {% if userid == user.id %}
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div>
@@ -125,7 +125,7 @@
                 <!-- SIDEBAR BUTTONS -->
 
 
-                {% if userid %}
+                {% if userid == user.id %}
 
                 <!-- Button trigger modal -->
                     <button style="margin-bottom: 3%; width:143px; margin-top:5%;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -226,18 +226,21 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
 
-                             <button style="margin-right: 2%;"button" class="btn btn-primary">
-                            {% if userid %}
+                            {% if userid == user.id %}
+                             <button style="margin-right: 2%" class="btn btn-primary">
                                 <a href="settingsPage"><font color="white">Account settings</font></a>
                                 </button>
                                 
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
-                                <button type="button" class="btn btn-primary">
-                                    <a href="#"><font color="white">Help</font></a>
+                                {% else %}
+                                <form action="/block/{{ user.id }}" method="POST">
+                                  {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">
+                                  Block
                                 </button>
-                                
+                                </form>
                                 {% endif %}
         
                     </ul>
