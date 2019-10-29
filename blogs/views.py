@@ -314,3 +314,11 @@ def report_post(request, pk):
     report = Report(reporter=user, post=post)
     report.save()
     return redirect('mainpage')
+
+def block_user(request, pk):
+    blockee = User.objects.get(pk=pk)
+    blocker = User.objects.get(pk=request.session['userid'])
+    blocker.blocking.add(blockee)
+    blocker.save()
+    # TODO: delete existing following relationship
+    return redirect('mainpage')
