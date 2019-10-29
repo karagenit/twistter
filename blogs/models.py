@@ -6,11 +6,12 @@ class User(models.Model):
     username     = models.CharField(max_length=50, unique=True)
     email        = models.EmailField(unique=True)
     password     = models.CharField(max_length=64)
-    birthday     = models.DateField(null=True)
+    birthday     = models.DateField(blank=True, null=True)
     biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
-    profile_pic  = models.ImageField(upload_to='images/')
-    banned_until = models.DateField(null=True)
+    profile_pic  = models.ImageField(upload_to='images/', blank=True)
+    banned_until = models.DateField(blank=True, null=True)
     blocking     = models.ManyToManyField("User", blank=True)
+    private      = models.BooleanField(default=False)
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)

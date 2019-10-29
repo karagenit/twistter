@@ -280,6 +280,7 @@
     </div>
 </div>
 <div class="container">
+    {% if user.id == userid or not user.private %} <!-- only display our posts OR public posts -->
     {% user_posts user as posts %}
     {% for post in posts %}
         <div class="card mb-4 shadow-sm">
@@ -345,6 +346,7 @@
             </div>
         </div>
     {% endfor %}
+    {% endif %}
 </div>
 <div>
     <form method="POST">

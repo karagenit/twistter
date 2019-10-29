@@ -15,6 +15,10 @@ class Command(BaseCommand):
         u2 = User(firstname='John', lastname='Doe', username='jdoe',
              email='john@test.com', password=password, biography='Hello')
         u2.save()
+        u3 = User(firstname='Private', lastname='Test', username='private',
+             email='private@hidden.com', password=password, biography='Hidden')
+        u3.private = True
+        u3.save()
 
         Post(creator=u1, content='First Post Ever').save()
         Post(creator=u1, content='Second Post').save()
