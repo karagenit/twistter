@@ -10,10 +10,8 @@ def addFollow(follower_id,following_name, tag_name):
     tag_query = Tag.objects.filter(name=tag_name)
     if tag_query.exists():
         tag = tag_query[0]
-        print("tag found")
     else:
         tag = Tag(name=tag_name)
-        print("new tag")
         tag.save()
     follow_list = Follow.objects.filter(follower=follower, following=following)
     if follow_list.count() > 0:
