@@ -63,108 +63,126 @@
                 </li>
             {% endif %}
 </nav>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            {% for post in posts %}
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <!-- Button trigger modal -->
-                                {% if userid == post.creator.id %}
-                                    <button style="margin-right:3%;" type="button"
-                                            class="btn btn-sm btn-outline-secondary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
-                                        Edit
-                                    </button>
-                                    <form style="margin-right:3%;" id="edit_tags_form" method="post">
-                                        {% csrf_token %}
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"
-                                                data-toggle="modal"
-                                                data-target="#exampleModal3" id="edit_tag_botton" name="edit_tag_botton"
-                                                onclick="editTags({{ post.id }})">
-                                            Edit Tags
-                                        </button>
-                                    </form>
-                                    <form style="margin-right:3%;" id="delete" method="post">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post"
-                                                name="delete_post" value="{{ post.id }}">
-                                            Delete Post
-                                        </button>
-                                    </form>
-                                {% else %}
-                                    <form style="margin-right:3%;" id="make_comment_form" method="post">
-                                        {% csrf_token %}
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"
-                                                data-toggle="modal"
-                                                data-target="#exampleModal4" id="add_comment_button"
-                                                name="add_comment_button" onclick="addComment({{ post.id }})">
-                                            Add Comment
-                                        </button>
-                                    </form>
-                                    <form style="margin-right:3%;" id="like" method="post">
-                                        {% csrf_token %}
-                                        <button class="btn btn-sm btn-outline-secondary " id="like_post"
-                                                name="like_post"
-                                                type="submit" value="{{ post.id }}">
-                                            Like
-                                        </button>
-                                    </form>
-                                    <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report
-                                        Post</a>
-                                {% endif %}
-                                <form style="margin-right:3%;" id="quote_post_form" method="post">
-                                    {% csrf_token %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                            data-target="#exampleModal5" id="quote_post_button" name="quote_post_button"
-                                            onclick="quotePost({{ post.id }})">
-                                        Quote
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <h6 style="margin-top: 2%;"><img src="/static/img/thumb-up-button.png"
-                                                         style="width: 25px; height:25px; margin-right: 2%;"
-                                                         alt="">{{ post.likers.count }}</h6>
-                        <ul style="margin: 2% 1%; padding-top:2%;background:rgb(1, 47, 175, .2);">
-                            <h6>Tags:</h6>
-                            {% for tag in post.tag_set.all %}
-                                <br>
-                                <li style="margin:0% 1%; margin-bottom: 2%;"
-                                    class="btn btn-sm btn btn-outline-primary ">
-                                {{ tag.name }}
-                            {% endfor %}
-
-
-                        </ul>
-
-                        <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
-                            <h6>Comments:</h6>
-                            {% for comment in post.comment_set.all %}
-                                <br>
-                                <h6>{{ post.creator.username }}: </h6>
-                                <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
-                            {% endfor %}
-
-
-                        </ul>
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}">
-                        {% endif %}
-                        <small class="text-muted">{{ post.created }}</small>
-                    </div>
+<div class="float-left" style="margin: 3% 3%;">
+    <div class="container">
+        <div class="row profile">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <h1 class="display-4">Timeline</h1>
+                    <p class="lead">Here you can see the posts of users you are following.</p>
                 </div>
-            {% endfor %}
+                {% for post in posts %}
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <!-- Button trigger modal -->
+                                    {% if userid == post.creator.id %}
+                                        <button style="margin-right:3%;" type="button"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
+                                            Edit
+                                        </button>
+                                        <form style="margin-right:3%;" id="edit_tags_form" method="post">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal3" id="edit_tag_botton"
+                                                    name="edit_tag_botton"
+                                                    onclick="editTags({{ post.id }})">
+                                                Edit Tags
+                                            </button>
+                                        </form>
+                                        <form style="margin-right:3%;" id="delete" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary "
+                                                    id="delete_post"
+                                                    name="delete_post" value="{{ post.id }}">
+                                                Delete Post
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form style="margin-right:3%;" id="make_comment_form" method="post">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal4" id="add_comment_button"
+                                                    name="add_comment_button" onclick="addComment({{ post.id }})">
+                                                Add Comment
+                                            </button>
+                                        </form>
+                                        <form style="margin-right:3%;" id="like" method="post">
+                                            {% csrf_token %}
+                                            <button class="btn btn-sm btn-outline-secondary " id="like_post"
+                                                    name="like_post"
+                                                    type="submit" value="{{ post.id }}">
+                                                Like
+                                            </button>
+                                        </form>
+                                        <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report
+                                            Post</a>
+                                    {% endif %}
+                                    <form style="margin-right:3%;" id="quote_post_form" method="post">
+                                        {% csrf_token %}
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal5" id="quote_post_button"
+                                                name="quote_post_button"
+                                                onclick="quotePost({{ post.id }})">
+                                            Quote
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <h6 style="margin-top: 2%;"><img src="/static/img/thumb-up-button.png"
+                                                             style="width: 25px; height:25px; margin-right: 2%;"
+                                                             alt="">{{ post.likers.count }}</h6>
+                            <ul style="margin: 2% 1%; padding-top:2%;background:rgb(1, 47, 175, .2);">
+                                <h6>Tags:</h6>
+                                {% for tag in post.tag_set.all %}
+                                    <br>
+                                    <li style="margin:0% 1%; margin-bottom: 2%;"
+                                        class="btn btn-sm btn btn-outline-primary ">
+                                    {{ tag.name }}
+                                {% endfor %}
+
+
+                            </ul>
+
+                            <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
+                                <h6>Comments:</h6>
+                                {% for comment in post.comment_set.all %}
+                                    <br>
+                                    <h6>{{ post.creator.username }}: </h6>
+                                    <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
+                                {% endfor %}
+
+
+                            </ul>
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}">
+                            {% endif %}
+                            <small class="text-muted">{{ post.created }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+    </div>
+</div>
+
+<div class="float-right" style="margin: 3% 3%;">
+    <div class="container">
         <div class="col">
+            <div class="jumbotron jumbotron-fluid background-transparent">
+                <h1 class="display-4 background-transparent">Search</h1>
+                <p class="lead">Here you can filter the posts in your feed.</p>
+            </div>
             <div class="register">
                 <div class="row">
-                    <h2 class="text-center">Search</h2>
+                    <h2 class="text-center">Filter Timeline</h2>
                     <hr>
                 </div>
                 <div class="row justify-content-md-center">
@@ -224,19 +242,8 @@
                         <form method="get" action="/search/results">{% csrf_token %}
                             <input type="text" name="tag_user_search" placeholder="Enter tag/user"
                                    pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
-                            <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>Search
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="row justify-content-md-center">
-                    <div class="col col-lg-2">
-                        Top Posts
-                    </div>
-                    <div class="col">
-                        <form method="get" action="/search/results">{% csrf_token %}
-                            <input type="text" name="top_tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
-                            <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
+                            <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>
+                                Search
                             </button>
                         </form>
                     </div>
