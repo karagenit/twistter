@@ -65,6 +65,88 @@
 </nav>
 <div class="center">
     <div class="container">
+        <div class="register">
+            <div class="row">
+                <h2 class="text-center">Search Filter</h2>
+                <hr>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    Date
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="date_search" placeholder="mm/dd/yyyy"
+                               pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
+                        <button class="btn btn-outline-secondary" name="date_search_update" type='submit'>Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    Word
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
+                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    Tag
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
+                        <button class="btn btn-outline-secondary" name="tag_search_update" type='submit'>Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    User
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
+                        <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    Tag/User
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="tag_user_search" placeholder="Enter tag/user"
+                               pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
+                        <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    Top Posts
+                </div>
+                <div class="col">
+                    <form method="get" action="/search/results">{% csrf_token %}
+                        <input type="text" name="top_tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
+                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         {% for post in posts %}
             <div class="card" style="width: 18rem;">
                 {% if post.image %}
