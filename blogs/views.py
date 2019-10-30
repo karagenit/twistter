@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
+from django.db.models import Count
 
 from datetime import date
 
@@ -233,6 +234,11 @@ class UserSearchResultView(ListView):
             date_array = given.split('/')
             date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created=date)
+        
+        if 'top_tag_search' in self.request.GET:
+            tag = self.request.GET.get('top_tag_search')
+            top_posts = Post.objects.filter(tag__name=tag).annotate(t_count=Count('likers')).order_by('-t_count')
+            return top_posts
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
