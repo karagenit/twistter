@@ -63,12 +63,14 @@
                 </li>
             {% endif %}
 </nav>
-
-
 <div class="float-left" style="margin: 3% 3%;">
     <div class="container">
         <div class="row profile">
             <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <h1 class="display-4">Timeline</h1>
+                    <p class="lead">Here you can see the posts of users you are following.</p>
+                </div>
                 {% for post in posts %}
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
@@ -173,86 +175,91 @@
 
 <div class="float-right" style="margin: 3% 3%;">
     <div class="container">
-        <div class="register">
-            <div class="row">
-                <h2 class="text-center">Filter Timeline</h2>
-                <hr>
+        <div class="col">
+            <div class="jumbotron jumbotron-fluid background-transparent">
+                <h1 class="display-4 background-transparent">Search</h1>
+                <p class="lead">Here you can filter the posts in your feed.</p>
             </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Date
+            <div class="register">
+                <div class="row">
+                    <h2 class="text-center">Filter Timeline</h2>
+                    <hr>
                 </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="date_search" placeholder="mm/dd/yyyy"
-                               pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
-                        <button class="btn btn-outline-secondary" name="date_search_update" type='submit'>Search
-                        </button>
-                    </form>
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        Date
+                    </div>
+                    <div class="col">
+                        <form method="get" action="/search/results">{% csrf_token %}
+                            <input type="text" name="date_search" placeholder="mm/dd/yyyy"
+                                   pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
+                            <button class="btn btn-outline-secondary" name="date_search_update" type='submit'>Search
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Word
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        Word
+                    </div>
+                    <div class="col">
+                        <form method="get" action="/search/results">{% csrf_token %}
+                            <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
+                            <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
-                        </button>
-                    </form>
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        Tag
+                    </div>
+                    <div class="col">
+                        <form method="get" action="/search/results">{% csrf_token %}
+                            <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
+                            <button class="btn btn-outline-secondary" name="tag_search_update" type='submit'>Search
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Tag
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        User
+                    </div>
+                    <div class="col">
+                        <form method="get" action="/search/results">{% csrf_token %}
+                            <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
+                            <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="tag_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    User
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Tag/User
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="tag_user_search" placeholder="Enter tag/user"
-                               pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>
-                            Search
-                        </button>
-                    </form>
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-2">
+                        Tag/User
+                    </div>
+                    <div class="col">
+                        <form method="get" action="/search/results">{% csrf_token %}
+                            <input type="text" name="tag_user_search" placeholder="Enter tag/user"
+                                   pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
+                            <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>
+                                Search
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
 
 </body>
 </html>
