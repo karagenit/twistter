@@ -82,17 +82,4 @@
         crossorigin="anonymous"></script>
 
 </body>
-
-{% for follow in following_list %}
-    <div>
-       Print: {{ follow.following.username }}
-    </div>
-    {% for tag in follow.tags.all %}
-    <div>
-        {{ tag.name }}
-    </div>
-    {% endfor %}
-{% endfor %}
-
-
 </html>
