@@ -127,6 +127,7 @@
                     
                         <p>{{ user.biography }}</p>
                     </div>
+                    
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
@@ -365,10 +366,12 @@
         
                     
                 </ul>
+               
                 <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
                     <h6 >Comments:</h6>
                     {% for comment in post.comment_set.all %}
                     <br>
+                    <h6 >{{ post.creator.username }}: </h6>
                     <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
                     {% endfor %}
         
