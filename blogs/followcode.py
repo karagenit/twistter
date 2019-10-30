@@ -7,6 +7,8 @@ def addFollow(follower_id,following_name, tag_name):
         following = following_query[0]
     else:
         return
+    if follower in following.blocking.all():
+        return
     tag_query = Tag.objects.filter(name=tag_name)
     if tag_query.exists():
         tag = tag_query[0]
