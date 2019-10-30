@@ -65,6 +65,7 @@
                 </li>
             {% endif %}
 </nav>
+<div class="float-left" style="margin: 3% 3%;">
 <div class="container" style="padding: 3% 2%;">
     <div class="row profile">
         <div class="col-md-3">
@@ -80,7 +81,7 @@
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div>
-                                <label for="file">Add New Profile Picture</label>
+                                <label for="file"></label>
                                 <input style="margin-bottom:3%;" type="file" id="file" name="file" onchange="readURL(this);" multiple>
                             </div>
                             <div>
@@ -107,18 +108,24 @@
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
+                <div class="profile-usertitle" style="margin:10% 3%;" >
                     <div class="profile-usertitle-name">
-                        {{ user.firstname }} {{ user.lastname }}
+                        <h6>{{ user.firstname }} {{ user.lastname }}</h6>
                     </div>
                     <div class="profile-usertitle-username">
-                        {{ user.username }}
+                        <h6>{{ user.username }}</h6>
                     </div>
                     <div class="profile-usertitle-email">
-                        {{ user.email }}
+                        <h6>{{ user.email }}</h6>
                     </div>
-                    <div class="profile-usertitle-email">
-                        {{ user.biography }}
+                    <h6>Bio:</h6>
+                    <div class="profile-usertitle-email" style="border-radius: 25px;
+                    border: 2px solid rgb(33, 42, 173);
+                    padding: 20px;
+                    width: 250px;
+                    height: 100%;">
+                    
+                        <p>{{ user.biography }}</p>
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -256,10 +263,9 @@
                     <ul class="nav">
 
                             {% if userid == user.id %}
-                             <button style="margin-right: 2%" class="btn btn-primary">
+                             <button style="margin-right: 2%; margin-bottom:3%;" class="btn btn-primary">
                                 <a href="settingsPage"><font color="white">Account settings</font></a>
                                 </button>
-                                
                                 <button type="button" class="btn btn-primary">
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
@@ -279,7 +285,27 @@
         </div>
     </div>
 </div>
-<div class="container">
+</div>
+<div class="float-right" style="margin-top:3%; margin-right:3%; ">
+    <form method="POST">
+    {% csrf_token %}
+        <div class="form-group" align="center">
+            <textarea class="form-control" id="followuser" name="followuser" placeholder="Username of user to follow" maxlength="100" rows="1" style="width:300px"></textarea>
+        </div>
+        <div class="form-group" align="center">
+            <textarea class="form-control" id="followtag" name="followtag" placeholder="Tags to follow, enter $all to follow all" maxlength="100" rows="1" style="width:300px"></textarea>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
+                   value="Follow" onclick="Follow(1)">
+            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
+                   value="Unfollow" onclick="Follow(0)">
+        </div>
+        <input type="hidden" value="-1" id="Following" name="Following">
+    </form>
+</div>
+<div class="float-center">
+<div class="container" style="margin:3%3%;">
     {% if user.id == userid or not user.private %} <!-- only display our posts OR public posts -->
     {% user_posts user as posts %}
     {% for post in posts %}
@@ -357,24 +383,8 @@
     {% endfor %}
     {% endif %}
 </div>
-<div>
-    <form method="POST">
-    {% csrf_token %}
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="followuser" name="followuser" placeholder="Username of user to follow" maxlength="100" rows="1" style="max-width: 60%"></textarea>
-        </div>
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="followtag" name="followtag" placeholder="Tags to follow, enter $all to follow all" maxlength="100" rows="1" style="max-width: 60%"></textarea>
-        </div>
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
-                   value="Follow" onclick="Follow(1)">
-            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
-                   value="Unfollow" onclick="Follow(0)">
-        </div>
-        <input type="hidden" value="-1" id="Following" name="Following">
-    </form>
 </div>
+
 <script>
     function hotLatina(id) {
         document.getElementById("post_edit_id").value = id;
