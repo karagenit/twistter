@@ -241,18 +241,6 @@
                     </form>
                 </div>
             </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Top Posts
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="top_tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 
