@@ -79,3 +79,17 @@ def post_request_from_post(self,request):
         add_comment(post, commenter, content)
         for comment in post.comment_set.all():
             print (comment.content)
+    print ('q flag')
+    if 'quote_post_text' in request.POST:
+        print ('quote')
+        tags = request.POST.get('quote_post_tag', None).split(",")
+        content = request.POST.get('quote_post_text', None)
+        user = User.objects.get(id=self.request.session.get('userid'))
+        quoted_post = Post.objects.get(id=request.POST.get('quote_post_text', None))
+        if not content:
+            return redirect('mainpage')
+        post = Post(content=content, creator=user)
+        post.quote = quoted_post
+        post.save()
+        for tag in tags:
+            addtag(tag, post)

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="/mainPage"><font size="3" face="Candara" color="green">Twistter</font>
@@ -65,10 +64,37 @@
                 </li>
             {% endif %}
 </nav>
-<div>
-	<div>
-		<div>
-			<div>
+<div class="container" style="padding: 3% 2%;">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- Modal -->
+                <form name="bio" method="POST">
+                    {% csrf_token %}
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Biography</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input class="form-control" name="new_bio" id='new_bio'
+                                               placeholder="Biography goes here"></input>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button>Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <form name="edit_post" method="POST">
                     {% csrf_token %}
                     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
@@ -76,7 +102,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -105,7 +131,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Tags</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -135,7 +161,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -150,9 +176,45 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                                    <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
                                     </button>
                                     <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                 <form name="quote_post" method="POST">
+                    {% csrf_token %}
+                    <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        Text:
+                                        <input class="form-control"
+                                               placeholder="Make a post quoting selected post"
+                                               name="quote_post_text" id='quote_post_text'>
+                                        </input>
+                                        Tags:
+                                        <input class="form-control"
+                                               placeholder="Enter comma seperated tags"
+                                               name="quote_post_tag" id='quote_post_tag'>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                                    </button>
+                                    <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +224,9 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="float-center">
+<div class="container" style="margin:3%3%;">
+    Results:
     {% for post in object_list %}
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
@@ -189,14 +253,7 @@
                                     Delete Post
                                 </button>
                             </form>
-						{% else %}
-                            <form style="margin-right:3%;"id="like_post_form" method="post">
-                                {% csrf_token %}
-                                <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
-                                        type="submit" value="{{ post.id }}">
-                                    Like
-                                </button>
-                            </form>
+                        {% else %}
                             <form style="margin-right:3%;" id="make_comment_form" method="post">
                                 {% csrf_token %}
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
@@ -204,8 +261,22 @@
                                     Add Comment
                                 </button>
                             </form>
+                        <form style="margin-right:3%;"id="like" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
+                                        type="submit" value="{{ post.id }}">
+                                    Like
+                                </button>
+                            </form>
                             <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
+                            <form style="margin-right:3%;" id="quote_post_form" method="post">
+                              {% csrf_token %}
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                        data-target="#exampleModal5" id="quote_post_button" name="quote_post_button" onclick="quotePost({{ post.id }})">
+                                    Quote
+                                </button>
+                            </form>
                     </div>
                 </div>
 
@@ -215,19 +286,21 @@
                     <h6 >Tags:</h6>
                     {% for tag in post.tag_set.all %}
                     <br>
-                    <li style="margin:1% 1%;"class="btn btn-sm btn btn-outline-primary ">{{ tag.name }}
+                    <li style="margin:0% 1%; margin-bottom: 2%;"class="btn btn-sm btn btn-outline-primary ">{{ tag.name }}
                     {% endfor %}
 
 
                 </ul>
+
                 <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
                     <h6 >Comments:</h6>
                     {% for comment in post.comment_set.all %}
                     <br>
+                    <h6 >{{ post.creator.username }}: </h6>
                     <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
                     {% endfor %}
-        
-                    
+
+
                 </ul>
                 {% if post.image %}
                 <img src="{{ post.image.url }}">
@@ -237,3 +310,44 @@
         </div>
     {% endfor %}
 </div>
+</div>
+
+<script>
+    function hotLatina(id) {
+        document.getElementById("post_edit_id").value = id;
+    }
+</script>
+<script>
+    function editTags(id) {
+        document.getElementById("tags_edit_id").value = id;
+    }
+</script>
+<script>
+    function Follow(Bool) {
+        document.getElementById("Following").value = Bool;
+    }
+</script>
+<script>
+    function addComment(id) {
+        document.getElementById("add_comment_id").value = id;
+    }
+</script>
+<script>
+    function quotePost(id) {
+        document.getElementById("quote_post_id").value = id;
+        alert(id)
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+<br>
+<br>
+</html>

@@ -176,7 +176,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -205,7 +205,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Tags</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -235,7 +235,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -250,9 +250,45 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                                    <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
                                     </button>
                                     <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                 <form name="quote_post" method="POST">
+                    {% csrf_token %}
+                    <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        Text:
+                                        <input class="form-control"
+                                               placeholder="Make a post quoting selected post"
+                                               name="quote_post_text" id='quote_post_text'>
+                                        </input>
+                                        Tags:
+                                        <input class="form-control"
+                                               placeholder="Enter comma seperated tags"
+                                               name="quote_post_tag" id='quote_post_tag'>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                                    </button>
+                                    <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
                                 </div>
                             </div>
                         </div>
@@ -352,6 +388,13 @@
                             </form>
                             <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
+                            <form style="margin-right:3%;" id="quote_post_form" method="post">
+                              {% csrf_token %}
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                        data-target="#exampleModal5" id="quote_post_button" name="quote_post_button" onclick="quotePost({{ post.id }})">
+                                    Quote
+                                </button>
+                            </form>
                     </div>
                 </div>
                 
@@ -406,6 +449,12 @@
 <script>
     function addComment(id) {
         document.getElementById("add_comment_id").value = id;
+    }
+</script>
+<script>
+    function quotePost(id) {
+        document.getElementById("quote_post_id").value = id;
+        alert(id)
     }
 </script>
 
