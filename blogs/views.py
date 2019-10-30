@@ -15,7 +15,7 @@ from .commentcode import add_comment
 from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag, removetag
-from .followcode import addFollow, removeFollow
+from .followcode import addFollow, removeFollow, getFollowers, getFollowing
 from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text
 from .postrequestcode import post_request_from_post
 import hashlib
@@ -143,6 +143,8 @@ class ProfilePageView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProfilePageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
+        context['following_list'] = getFollowing(self.request.session.get('userid', None))
+        context['follower_list'] = getFollowers(self.request.session.get('userid', None))
         return context
 
 class BannedView(TemplateView):

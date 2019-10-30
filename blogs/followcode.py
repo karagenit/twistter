@@ -43,3 +43,19 @@ def removeFollow(follower_id,following_name, tag_name):
         follow.tags.remove(tag)
         if follow.tags.count() is 0:
             follow.delete()
+
+def getFollowing(user_id):
+    user = User.objects.get(id=user_id)
+    following_list_query = Follow.objects.filter(following=user)
+    following_list = []
+    for follow in following_list_query:
+        following_list.append(follow)
+    return following_list
+
+def getFollowers(user_id):
+    user = User.objects.get(id=user_id)
+    follower_list_query = Follow.objects.filter(follower=user)
+    follower_list = []
+    for follow in follower_list_query:
+        follower_list.append(follow)
+    return follower_list

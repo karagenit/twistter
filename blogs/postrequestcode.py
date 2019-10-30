@@ -85,7 +85,7 @@ def post_request_from_post(self,request):
         tags = request.POST.get('quote_post_tag', None).split(",")
         content = request.POST.get('quote_post_text', None)
         user = User.objects.get(id=self.request.session.get('userid'))
-        quoted_post = Post.objects.get(id=request.POST.get('quote_post_text', None))
+        quoted_post = Post.objects.get(id=request.POST.get('quote_post_id', None))
         if not content:
             return redirect('mainpage')
         post = Post(content=content, creator=user)
