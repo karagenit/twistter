@@ -32,3 +32,11 @@ DATABASE_URL=sqlite:///db.sqlite3
 `python3 manage.py add_data`
 
 This will create a couple example users, posts, reports, etc. to make testing easier. You will probably need to wipe the DB with `python3 manage.py flush` first, which will also require you to recreate the admin account.
+
+#### Uploading to Heroku
+
+First, install the heroku command line utility, create a heroku app, and provision the postgres addon.
+
+Then, set the heroku remote to your app name and push to the heroku repo via `git push heroku master`.
+
+Then, setup the database with `heroku run python3 manage.py migrate`.
