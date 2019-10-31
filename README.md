@@ -13,6 +13,12 @@ Finally, in the root directory of this repo, run `python3 manage.py runserver` a
 
 Run: `python3 manage.py migrate`
 
+Also, you'll need to create a file named `.env` with the following contents:
+
+```
+DATABASE_URL=sqlite:///db.sqlite3
+```
+
 #### Running Tests
 
 `python3 manage.py test test/`

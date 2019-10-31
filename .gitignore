@@ -14,3 +14,4 @@ newenv
 .vscode
 .DS_Store
 media/
+.env
