@@ -64,11 +64,144 @@
             {% endif %}
 </nav>
 
+<form name="edit_post" method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control"
+                               placeholder="This should store the content of the original post."
+                               name="updated_post" id='updated_post'></input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
+                    </button>
+                    <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form name="updated_tags" method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control"
+                               placeholder="This should store the tags of the post."
+                               name="edit_tags" id='edit_tags'>
+                        </input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                    </button>
+                    <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form name="add_comment" method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control"
+                               placeholder="Comment Text"
+                               name="add_comment" id='add_comment'>
+                        </input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
+                    </button>
+                    <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form name="quote_post" method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        Text:
+                        <input class="form-control"
+                               placeholder="Make a post quoting selected post"
+                               name="quote_post_text" id='quote_post_text'>
+                        </input>
+                        Tags:
+                        <input class="form-control"
+                               placeholder="Enter comma seperated tags"
+                               name="quote_post_tag" id='quote_post_tag'>
+                        </input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                    </button>
+                    <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <div class="float-left" style="margin: 3% 3%;">
     <div class="container">
         <div class="row profile">
             <div class="col">
+                <div class="jumbotron jumbotron-fluid">
+                    <h1 class="display-4">Timeline</h1>
+                    <p class="lead">Here you can see the posts of users you are following.</p>
+                </div>
                 {% for post in posts %}
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
@@ -173,98 +306,57 @@
 
 <div class="float-right" style="margin: 3% 3%;">
     <div class="container">
-        <div class="register">
-            <div class="row">
-                <h2 class="text-center">Filter Timeline</h2>
-                <hr>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Date
+        <div class="row-profile">
+            <div class="col">
+                <div class="jumbotron jumbotron-fluid background-transparent">
+                    <h1 class="display-4 background-transparent">Filter</h1>
+                    <p class="lead">Here you can filter the posts in your feed.</p>
                 </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="date_search" placeholder="mm/dd/yyyy"
-                               pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
-                        <button class="btn btn-outline-secondary" name="date_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Word
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="word_search" placeholder="Enter word" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Tag
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="tag_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    User
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search
-                        </button>
-                    </form>
+                <div class="register">
+                    <div class="row">
+                        <h2 class="text-center">Filter Timeline</h2>
+                        <hr>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            Date
+                        </div>
+                        <div class="col">
+                            <form method="get" action="/search/results">{% csrf_token %}
+                                <input type="text" name="date_search" placeholder="mm/dd/yyyy"
+                                       pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
+                                <button class="btn btn-outline-secondary" name="date_search_update"
+                                        type='submit'>Search
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            Word
+                        </div>
+                        <div class="col">
+                            <form method="get" action="/search/results">{% csrf_token %}
+                                <input type="text" name="word_search" placeholder="Enter word"
+                                       pattern="[a-zA-Z0-9]+">
+                                <button class="btn btn-outline-secondary" name="word_search_update"
+                                        type='submit'>Search
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Tag/User
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="tag_user_search" placeholder="Enter tag/user"
-                               pattern="[a-zA-Z0-9]+/[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="tag_user_search_update" type='submit'>
-                            Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-                    Top Posts
-                </div>
-                <div class="col">
-                    <form method="get" action="/search/results">{% csrf_token %}
-                        <input type="text" name="top_tag_search" placeholder="Enter tag" pattern="[a-zA-Z0-9]+">
-                        <button class="btn btn-outline-secondary" name="word_search_update" type='submit'>Search
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                    crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                    crossorigin="anonymous"></script>
 
 </body>
 </html>
