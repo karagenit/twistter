@@ -64,12 +64,12 @@ def post_request_from_post(self,request):
             addFollow(follower_id, following_name, tag_name)
         else:
             removeFollow(follower_id, following_name, tag_name)
-        follower = User.objects.get(id=follower_id)
-        follow_list = Follow.objects.filter(follower=follower)
-        for follow in follow_list:
-            print (follow.following.username)
-            for tag in follow.tags.all():
-                print (tag.name)
+        #follower = User.objects.get(id=follower_id)
+        #follow_list = Follow.objects.filter(follower=follower)
+        #for follow in follow_list:
+        #    print (follow.following.username)
+        #    for tag in follow.tags.all():
+        #        print (tag.name)
     if 'add_comment' in request.POST:
         commenter_id = self.request.session.get('userid')
         commenter = User.objects.get(id=commenter_id)
@@ -77,11 +77,7 @@ def post_request_from_post(self,request):
         post = Post.objects.get(id=post_id)
         content = request.POST.get('add_comment', None)
         add_comment(post, commenter, content)
-        for comment in post.comment_set.all():
-            print (comment.content)
-    print ('q flag')
     if 'quote_post_text' in request.POST:
-        print ('quote')
         tags = request.POST.get('quote_post_tag', None).split(",")
         content = request.POST.get('quote_post_text', None)
         user = User.objects.get(id=self.request.session.get('userid'))

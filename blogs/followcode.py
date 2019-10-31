@@ -9,6 +9,8 @@ def addFollow(follower_id,following_name, tag_name):
         return
     if follower in following.blocking.all():
         return
+    if following.username == follower.username:
+        return
     tag_query = Tag.objects.filter(name=tag_name)
     if tag_query.exists():
         tag = tag_query[0]
@@ -21,8 +23,9 @@ def addFollow(follower_id,following_name, tag_name):
     else:
         follow = Follow(follower=follower, following=following)
         follow.save()
-    if tag.name is '$all':
-        follow.tags.delete()
+    if tag.name == '$all':
+        for tg in follow.tags.all():
+            follow.tags.remove(tg)
     if follow.tags.filter(name='$all').exists():
         return
     follow.tags.add(tag)
@@ -45,6 +48,18 @@ def removeFollow(follower_id,following_name, tag_name):
         follow.tags.remove(tag)
         if follow.tags.count() is 0:
             follow.delete()
+
+def deleteFollow(follower_id,following_name):
+    follower = User.objects.get(id=follower_id)
+    following_query = User.objects.filter(username=following_name)
+    if following_query.exists():
+        following = following_query[0]
+    else:
+        return
+    follow_list = Follow.objects.filter(follower=follower, following=following)
+    if follow_list.count() > 0:
+        follow = follow_list[0]
+        follow.delete()
 
 def getFollowers(user_id):
     user = User.objects.get(id=user_id)
