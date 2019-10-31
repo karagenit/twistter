@@ -111,33 +111,61 @@
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle" style="margin:10% 3%;">
-                        <div class="profile-usertitle-name">
-                            <h6>{{ user.firstname }} {{ user.lastname }}</h6>
-                        </div>
-                        <div class="profile-usertitle-username">
-                            <h6>{{ user.username }}</h6>
-                        </div>
-                        <div class="profile-usertitle-email">
-                            <h6>{{ user.email }}</h6>
-                        </div>
-                        <h6>Bio:</h6>
-                        <div class="profile-usertitle-email" style="border-radius: 25px;
-                    border: 2px solid rgb(33, 42, 173);
-                    padding: 20px;
-                    width: 250px;
-                    height: 100%;">
+                    {% if userid != user.id %}
+                      {% if user.private == False %}
+                        <div class="profile-usertitle" style="margin:10% 3%;">
+                            <div class="profile-usertitle-name">
+                                <h6>{{ user.firstname }} {{ user.lastname }}</h6>
+                            </div>
+                            <div class="profile-usertitle-username">
+                                <h6>{{ user.username }}</h6>
+                            </div>
+                            <div class="profile-usertitle-email">
+                                <h6>{{ user.email }}</h6>
+                            </div>
+                            <h6>Bio:</h6>
+                            <div class="profile-usertitle-email" style="border-radius: 25px;
+                        border: 2px solid rgb(33, 42, 173);
+                        padding: 20px;
+                        width: 250px;
+                        height: 100%;">
 
-                            <p>{{ user.biography }}</p>
+                                <p>{{ user.biography }}</p>
+                            </div>
+
                         </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- SIDEBAR BUTTONS -->
+                        {% else %}
+                          <div class="profile-usertitle-name">
+                            <h6>{{user.username}} has set their profile to private</h6>
+                          </div>
+                        {% endif %}
+                      {% else %}
+                        <div class="profile-usertitle" style="margin:10% 3%;">
+                            <div class="profile-usertitle-name">
+                                <h6>{{ user.firstname }} {{ user.lastname }}</h6>
+                            </div>
+                            <div class="profile-usertitle-username">
+                                <h6>{{ user.username }}</h6>
+                            </div>
+                            <div class="profile-usertitle-email">
+                                <h6>{{ user.email }}</h6>
+                            </div>
+                            <h6>Bio:</h6>
+                            <div class="profile-usertitle-email" style="border-radius: 25px;
+                        border: 2px solid rgb(33, 42, 173);
+                        padding: 20px;
+                        width: 250px;
+                        height: 100%;">
 
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
+                                <p>{{ user.biography }}</p>
+                            </div>
 
+                        </div>
+                    {% endif %}
 
                     {% if userid == user.id %}
-
                         <!-- Button trigger modal -->
                         <button style="margin-bottom: 3%; width:143px; margin-top:5%;" type="button"
                                 class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
