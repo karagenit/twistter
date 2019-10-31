@@ -165,6 +165,8 @@ class ProfilePageView(UpdateView):
         context['following_list'] = getFollowing(self.request.session.get('userid', None))
         context['follower_list'] = getFollowers(self.request.session.get('userid', None))
         context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
+        print(context)
+        context['follows_me'] = context['user'].followings.filter(following__id = context['userid']).exists()
         return context
 
 class BannedView(TemplateView):
@@ -230,6 +232,12 @@ class UserSearchView(TemplateView):
 class UserSearchResultView(ListView):
     template_name = "user_search_result_page.html"
     model = Post
+    
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
 
     def get_queryset(self, **kwargs):
         if 'word_search' in self.request.GET:
