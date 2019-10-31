@@ -17,7 +17,7 @@ from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag, removetag
 from .followcode import addFollow, removeFollow, getFollowers, getFollowing
-from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text
+from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date
 from .postrequestcode import post_request_from_post
 import hashlib
 
@@ -63,13 +63,31 @@ class MainPageView(TemplateView):
             return super().dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        user = User.objects.get(pk=self.request.session['userid'])
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
-        context['posts'] = get_timeline_posts(User.objects.get(pk=self.request.session['userid']))
+        if 'word_search' in self.request.GET:
+            word = self.request.GET.get('word_search',None)
+            context['posts'] = timeline_by_text(user,word)
+        elif 'date_search' in self.request.GET:
+            given = self.request.GET.get('date_search',None)
+            date_array = given.split('/')
+            date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
+            context['posts'] = timeline_by_date(user,date)
+        elif 'tag_search' in self.request.GET:
+            tag_name = self.request.GET.get('tag_search',None)
+            print('context 3')
+            print(tag_name)
+            context['posts'] = timeline_by_tag(user,tag_name)
+        else:
+            print('context 4')
+            context['posts'] = get_timeline_posts(user)
         return context
 
     def post(self,request):
-        post_request_from_post(request)
+        print(request)
+        post_request_from_post(self,request)
+        return redirect('mainpage')
 
 
 

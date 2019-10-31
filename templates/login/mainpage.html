@@ -322,7 +322,7 @@
                             Date
                         </div>
                         <div class="col">
-                            <form method="get" action="/search/results">{% csrf_token %}
+                            <form method="get" action="/mainPage">{% csrf_token %}
                                 <input type="text" name="date_search" placeholder="mm/dd/yyyy"
                                        pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
                                 <button class="btn btn-outline-secondary" name="date_search_update"
@@ -336,7 +336,7 @@
                             Word
                         </div>
                         <div class="col">
-                            <form method="get" action="/search/results">{% csrf_token %}
+                            <form method="get" action="/mainPage">{% csrf_token %}
                                 <input type="text" name="word_search" placeholder="Enter word"
                                        pattern="[a-zA-Z0-9]+">
                                 <button class="btn btn-outline-secondary" name="word_search_update"
@@ -345,9 +345,50 @@
                             </form>
                         </div>
                     </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            Tag
+                        </div>
+                        <div class="col">
+                            <form method="get" action="/mainPage">{% csrf_token %}
+                                <input type="text" name="tag_search" placeholder="Enter tag"
+                                       pattern="[a-zA-Z0-9]+">
+                                <button class="btn btn-outline-secondary" name="tag_search_update"
+                                        type='submit'>Search
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+</div>
+<script>
+    function hotLatina(id) {
+        document.getElementById("post_edit_id").value = id;
+    }
+</script>
+<script>
+    function editTags(id) {
+        document.getElementById("tags_edit_id").value = id;
+    }
+</script>
+<script>
+    function Follow(Bool) {
+        document.getElementById("Following").value = Bool;
+    }
+</script>
+<script>
+    function addComment(id) {
+        document.getElementById("add_comment_id").value = id;
+    }
+</script>
+<script>
+    function quotePost(id) {
+        document.getElementById("quote_post_id").value = id;
+    }
+</script>
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
                     crossorigin="anonymous"></script>
