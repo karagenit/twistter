@@ -31,5 +31,5 @@ class UserTestCase(TestCase):
         response = c.post('/settingspage',
                           {'private_change': True})
 
-        self.assertequals(response.status_code, 302)
-        self.assertnotequals(user.objects.get(username=username).private, true)
+        self.assertEquals(response.status_code, 302)
+        self.assertNotEquals(user.objects.get(username=username).private, true)
