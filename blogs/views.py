@@ -232,7 +232,7 @@ class UserSearchView(TemplateView):
 class UserSearchResultView(ListView):
     template_name = "user_search_result_page.html"
     model = Post
-    
+
     def dispatch(self, *args, **kwargs):
         if self.request.session['userid'] is None:
             return redirect('login')
@@ -252,7 +252,7 @@ class UserSearchResultView(ListView):
             post_user = self.request.GET.get('user_search')
             user_id = User.objects.get(username=post_user).id
             return Post.objects.filter(creator=user_id)
-        
+
         if 'name_search' in self.request.GET:
             post_user = self.request.GET.get('name_search')
             name = post_user.split(" ")
@@ -341,6 +341,7 @@ def block_user(request, pk):
     blocker.blocking.add(blockee)
     blocker.save()
     # TODO: delete existing following relationship
+    deleteFollow(pk, blocker.username)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def unblock_user(request, pk):
