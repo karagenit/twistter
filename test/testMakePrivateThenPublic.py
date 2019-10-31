@@ -1,6 +1,3 @@
-# if user changes username, check if it changes
-# TODO: implement
-
 # if user changes email address, check if it changes
 
 from django.test import TestCase, Client
@@ -15,7 +12,7 @@ class UserTestCase(TestCase):
         email = 'test@test.com'
         password = 'test'
 
-        username_new = 'fuck'
+        email_new = 'new@new.com'
 
         c = Client()
 
@@ -25,11 +22,14 @@ class UserTestCase(TestCase):
                            'emailinput': email, 'passwordinput': password,
                            'confirmpasswordinput': password})
 
-        # change email address
-        response = c.post('/settingsPage',
-                          {'username': username_new, 'username_change': True})
 
-        self.assertEquals(response.status_code, 302)
-        self.assertNotEquals(User.objects.get(username=username_new), None)
+        # set privacy to true
+        response = c.post('/settingspage',
+                          {'private_change': true})
 
-# TODO: finish filter timeline/search, settings tests
+        # set privacy to false
+        response = c.post('/settingspage',
+                          {'private_change': true})
+
+        self.assertequals(response.status_code, 302)
+        self.assertnotequals(user.objects.get(username=username).private, true)
