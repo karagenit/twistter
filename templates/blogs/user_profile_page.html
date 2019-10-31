@@ -425,7 +425,7 @@
         {% endfor %}
         Followers:
         {% for follow in follower_list %}
-            <br>{{ follow.following.username }}</br>
+            <br>{{ follow.follower.username }}</br>
             {% for tag in follow.tags.all %}
                 <br>{{ tag.name }}</br>
             {% endfor %}
