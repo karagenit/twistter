@@ -362,16 +362,18 @@
     </form>
     {% endif %}
     <div>
+        Following:
         {% for follow in following_list %}
-            {{ follow.following }}
-            {% for tag in follow.tags %}
-                {{ tag.name }}
+            <br>{{ follow.following.username }}</br>
+            {% for tag in follow.tags.all %}
+                <br>{{ tag.name }}</br>
             {% endfor %}
         {% endfor %}
+        Followers:
         {% for follow in follower_list %}
-            {{ follow.following }}
+            <br>{{ follow.following.username }}</br>
             {% for tag in follow.tags.all %}
-        <div>{{ tag.name }}</div>
+                <br>{{ tag.name }}</br>
             {% endfor %}
         {% endfor %}
     </div>
