@@ -1,11 +1,9 @@
 # if user changes email address, check if it changes
-# TODO: implement
 
 from django.test import TestCase, Client
-
 from blogs.models import User
-
 from blogs.views import encrypt_string
+
 
 class UserTestCase(TestCase):
     def test_change_email(self):
@@ -26,10 +24,7 @@ class UserTestCase(TestCase):
 
         # change email address
         response = c.post('/settingsPage',
-                          {'nameinput': name, 'usernameinput': username,
-                           'emailinput': email_new, 'passwordinput': password,
-                           'confirmpasswordinput': password})
-
+                          {'email': email_new, 'email_change': True})
 
         self.assertEquals(response.status_code, 302)
-        #self.assertNotEquals(User.objects.get(username=username), None)
+        self.assertNotEquals(User.objects.get(email=email_new), None)
