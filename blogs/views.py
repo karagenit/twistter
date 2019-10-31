@@ -230,6 +230,12 @@ class UserSearchView(TemplateView):
 class UserSearchResultView(ListView):
     template_name = "user_search_result_page.html"
     model = Post
+    
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
 
     def get_queryset(self, **kwargs):
         if 'word_search' in self.request.GET:
