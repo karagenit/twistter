@@ -139,3 +139,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
 
 django_heroku.settings(locals())
+
+# Hacky DB fix
+del DATABASES['default']['OPTIONS']['sslmode']
