@@ -316,7 +316,7 @@
                                 </button>
                             {% else %}
                               {% if user in logged_in_user.blocking.all %}
-                                <form action="/block/{{ user.id }}" method="POST">
+                                <form action="/unblock/{{ user.id }}" method="POST">
                                   {% csrf_token %}
                                   <button type="submit" class="btn btn-primary">
                                       Unblock

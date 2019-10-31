@@ -307,3 +307,10 @@ def block_user(request, pk):
     blocker.save()
     # TODO: delete existing following relationship
     return redirect('mainpage')
+
+def unblock_user(request, pk):
+    blockee = User.objects.get(pk=pk)
+    blocker = User.objects.get(pk=request.session['userid'])
+    blocker.blocking.remove(blockee)
+    blocker.save()
+    return redirect('mainpage')
