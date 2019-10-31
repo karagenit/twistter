@@ -101,8 +101,19 @@
             </div>
             <div class="col">
                 <form method="get" action= "/search/results">{% csrf_token %}
-                    <input type="text" name="user_search" placeholder="Enter user" pattern="[a-zA-Z0-9]+">
+                    <input type="text" name="user_search" placeholder="Enter username" pattern="[a-zA-Z0-9]+">
                     <button class="btn btn-outline-secondary" name="user_search_update" type='submit'>Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Name
+            </div>
+            <div class="col">
+                <form method="get" action= "/search/results">{% csrf_token %}
+                    <input type="text" name="name_search" placeholder="Enter name" pattern="[a-zA-Z0-9 ]+">
+                    <button class="btn btn-outline-secondary" name="name_search_update" type='submit'>Search</button>
                 </form>
             </div>
         </div>
