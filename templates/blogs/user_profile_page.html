@@ -359,16 +359,7 @@
                    value="Unfollow" onclick="Follow(0)">
         </div>
 
-        {% for follow in following_list %}
-            <div>
-                {{ follow.following.username }}
-            </div>
-            {% for tag in follow.tags.all %}
-            <div>
-                {{ tag.name }}
-            </div>
-            {% endfor %}
-        {% endfor %}
+        
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
     {% endif %}
