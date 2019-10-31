@@ -389,6 +389,20 @@
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
     {% endif %}
+    <div>
+        {% for follow in following_list %}
+            {{ follow.following }}
+            {% for tag in follow.tags %}
+                {{ tag.name }}
+            {% endfor %}
+        {% endfor %}
+        {% for follow in follower_list %}
+            {{ follow.following }}
+            {% for tag in follow.tags.all %}
+        <div>{{ tag.name }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 <div class="float-center">
     <div class="container" style="margin:3%3%;">
