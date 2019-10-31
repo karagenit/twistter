@@ -6,7 +6,7 @@ from blogs.models import User
 from blogs.views import encrypt_string
 
 class UserTestCase(TestCase):
-    def test_change_email(self):
+    def test_change_everything(self):
         name = 'Test User'
         username = 'testuser'
         email = 'test@test.com'

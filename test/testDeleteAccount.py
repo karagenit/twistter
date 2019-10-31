@@ -8,7 +8,7 @@ from blogs.models import User
 from blogs.views import encrypt_string
 
 class UserTestCase(TestCase):
-    def test_change_email(self):
+    def test_delete_account(self):
         name = 'Test User'
         username = 'testuser'
         email = 'test@test.com'
@@ -26,8 +26,6 @@ class UserTestCase(TestCase):
 
         # change email address
         response = c.post('/settingsPage',
-                          {'delete_user'})
-
+                          {'delete_user': True})
 
         self.assertEquals(response.status_code, 302)
-        self.assertNotEquals(User.objects.get(username=username), None)

@@ -27,4 +27,4 @@ class UserTestCase(TestCase):
                           {'email': email_new, 'email_change': True})
 
         self.assertEquals(response.status_code, 302)
-        self.assertNotEquals(User.objects.get(username=username), None)
+        self.assertNotEquals(User.objects.get(email=email_new), None)
