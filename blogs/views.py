@@ -64,21 +64,15 @@ class MainPageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         user = User.objects.get(pk=self.request.session['userid'])
-        print('context request:')
-        print(self.request)
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
         if 'word_search' in self.request.GET:
             word = self.request.GET.get('word_search',None)
-            print(word)
-            print('context 1')
             context['posts'] = timeline_by_text(user,word)
         elif 'date_search' in self.request.GET:
             given = self.request.GET.get('date_search',None)
             date_array = given.split('/')
             date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
-            print(date)
-            print('context 2')
             context['posts'] = timeline_by_date(user,date)
         elif 'tag_search' in self.request.GET:
             tag_name = self.request.GET.get('tag_search',None)
@@ -88,7 +82,6 @@ class MainPageView(TemplateView):
         else:
             print('context 4')
             context['posts'] = get_timeline_posts(user)
-
         return context
 
     def post(self,request):
