@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
@@ -306,11 +307,11 @@ def block_user(request, pk):
     blocker.blocking.add(blockee)
     blocker.save()
     # TODO: delete existing following relationship
-    return redirect('mainpage')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def unblock_user(request, pk):
     blockee = User.objects.get(pk=pk)
     blocker = User.objects.get(pk=request.session['userid'])
     blocker.blocking.remove(blockee)
     blocker.save()
-    return redirect('mainpage')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
