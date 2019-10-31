@@ -6,7 +6,7 @@ from blogs.views import encrypt_string
 
 
 class UserTestCase(TestCase):
-    def test_make_private_then_public(self):
+    def test_make_private(self):
         name = 'Test User'
         username = 'testuser'
         email = 'test@test.com'
@@ -23,13 +23,5 @@ class UserTestCase(TestCase):
                            'confirmpasswordinput': password})
 
 
-        # set privacy to true
-        response = c.post('/settingspage',
-                          {'private_change': true})
-
-        # set privacy to false
-        response = c.post('/settingspage',
-                          {'private_change': true})
-
-        self.assertequals(response.status_code, 302)
-        self.assertnotequals(user.objects.get(username=username).private, true)
+        self.assertEquals(response.status_code, 302)
+        self.assertEquals(User.objects.get(username=username).private, True)
