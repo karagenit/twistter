@@ -165,6 +165,8 @@ class ProfilePageView(UpdateView):
         context['following_list'] = getFollowing(self.request.session.get('userid', None))
         context['follower_list'] = getFollowers(self.request.session.get('userid', None))
         context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
+        print(context)
+        context['follows_me'] = context['user'].followings.filter(following__id = context['userid']).exists()
         return context
 
 class BannedView(TemplateView):
