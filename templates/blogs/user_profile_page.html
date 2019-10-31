@@ -358,6 +358,17 @@
             <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
                    value="Unfollow" onclick="Follow(0)">
         </div>
+
+        {% for follow in following_list %}
+            <div>
+                {{ follow.following.username }}
+            </div>
+            {% for tag in follow.tags.all %}
+            <div>
+                {{ tag.name }}
+            </div>
+            {% endfor %}
+        {% endfor %}
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
     {% endif %}
@@ -452,6 +463,7 @@
 
 
                         </ul>
+
 
                         {% if post.image %}
                             <img src="{{ post.image.url }}">
