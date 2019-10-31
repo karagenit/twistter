@@ -162,8 +162,8 @@ class ProfilePageView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProfilePageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
-        context['following_list'] = getFollowing(self.request.session.get('userid', None))
-        context['follower_list'] = getFollowers(self.request.session.get('userid', None))
+        context['following_list'] = getFollowing(context['user'].id)
+        context['follower_list'] = getFollowers(context['user'].id)
         context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
         print(context)
         context['follows_me'] = context['user'].followings.filter(following__id = context['userid']).exists()
