@@ -24,7 +24,7 @@ class UserTestCase(TestCase):
 
 
         # set privacy to true
-        response = c.post('/settingsPage',
+        response = c.post('/settingspage',
                           {'private_change': True})
 
         self.assertEquals(response.status_code, 302)

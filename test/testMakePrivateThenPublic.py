@@ -25,11 +25,11 @@ class UserTestCase(TestCase):
 
         # set privacy to true
         response = c.post('/settingspage',
-                          {'private_change': true})
+                          {'private_change': True})
 
         # set privacy to false
         response = c.post('/settingspage',
-                          {'private_change': true})
+                          {'private_change': True})
 
         self.assertequals(response.status_code, 302)
         self.assertnotequals(user.objects.get(username=username).private, true)
