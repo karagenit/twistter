@@ -32,4 +32,4 @@ class UserTestCase(TestCase):
                           {'private_change': True})
 
         self.assertEquals(response.status_code, 302)
-        self.assertNotEquals(user.objects.get(username=username).private, true)
+        self.assertNotEquals(User.objects.get(username=username).private, True)
