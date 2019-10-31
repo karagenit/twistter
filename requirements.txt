@@ -3,3 +3,4 @@ gunicorn
 django-heroku
 #psychopg2
 python-dotenv==0.10.3
+pillow
