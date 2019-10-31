@@ -340,6 +340,7 @@
     </div>
 </div>
 <div class="float-right" style="margin-top:3%; margin-right:3%; ">
+    {% if userid == user.id %}
     <form method="POST">
         {% csrf_token %}
         <div class="form-group" align="center">
@@ -359,6 +360,7 @@
         </div>
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
+    {% endif %}
 </div>
 <div class="float-center">
     <div class="container" style="margin:3%3%;">
