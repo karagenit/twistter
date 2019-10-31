@@ -145,6 +145,7 @@ class ProfilePageView(UpdateView):
         context['userid'] = self.request.session.get('userid', None)
         context['following_list'] = getFollowing(self.request.session.get('userid', None))
         context['follower_list'] = getFollowers(self.request.session.get('userid', None))
+        context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
         return context
 
 class BannedView(TemplateView):
@@ -219,7 +220,7 @@ class UserSearchResultView(ListView):
         if 'tag_search' in self.request.GET:
             post_tag = self.request.GET.get('tag_search')
             return Post.objects.filter(tag__name=post_tag)
-        
+
         if 'user_search' in self.request.GET:
             post_user = self.request.GET.get('user_search')
             user_id = User.objects.get(username=post_user).id
@@ -229,14 +230,14 @@ class UserSearchResultView(ListView):
             post_combo = self.request.GET.get('tag_user_search')
             split_combo = post_combo.split('/')
             user_id = User.objects.get(username=split_combo[1]).id
-            return Post.objects.filter(tag__name=split_combo[0],creator=user_id) 
-        
+            return Post.objects.filter(tag__name=split_combo[0],creator=user_id)
+
         if 'date_search' in self.request.GET:
             given = self.request.GET.get('date_search')
             date_array = given.split('/')
             date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created=date)
-        
+
         if 'top_tag_search' in self.request.GET:
             tag = self.request.GET.get('top_tag_search')
             top_posts = Post.objects.filter(tag__name=tag).annotate(t_count=Count('likers')).order_by('-t_count')

@@ -72,6 +72,7 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
+
                         {% if user.profile_pic %}
                             <img id="blah" src="{{ user.profile_pic.url }}" class="img-responsive" alt=""
                                  style="margin-bottom: 2%">
@@ -306,7 +307,6 @@
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
                         <ul class="nav">
-
                             {% if userid == user.id %}
                                 <button style="margin-right: 2%; margin-bottom:3%;" class="btn btn-primary">
                                     <a href="settingsPage"><font color="white">Account settings</font></a>
@@ -315,14 +315,22 @@
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
                             {% else %}
+                              {% if user in logged_in_user.blocking.all %}
                                 <form action="/block/{{ user.id }}" method="POST">
-                                    {% csrf_token %}
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-primary">
+                                      Unblock
+                                  </button>
+                                </form>
+                                {% else %}
+                                <form action="/block/{{ user.id }}" method="POST">
+                                  {% csrf_token %}
                                     <button type="submit" class="btn btn-primary">
-                                        Block
+                                      Block
                                     </button>
                                 </form>
+                              {% endif %}
                             {% endif %}
-
                         </ul>
                     </div>
                     <!-- END MENU -->
