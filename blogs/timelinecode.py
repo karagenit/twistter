@@ -16,11 +16,7 @@ def get_timeline_posts(user):
             for post in tagged_posts:
                 if post not in all_posts:
                     all_posts.append(post)
-    n = len(all_posts)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if all_posts[j].created < all_posts[j+1].created:
-                all_posts[j], all_posts[j + 1] = all_posts[j + 1], all_posts[j]
+    all_posts.sort(key=lambda x: x.created.timestamp(), reverse=True)
     return all_posts
 
 def timeline_by_tag(user,tag_name):
@@ -42,11 +38,7 @@ def timeline_by_tag(user,tag_name):
                 if post.tag_set.all().filter(name=tag_name).count() is 1:
                     if post not in all_posts:
                         all_posts.append(post)
-    n = len(all_posts)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if all_posts[j].created < all_posts[j + 1].created:
-                all_posts[j], all_posts[j + 1] = all_posts[j + 1], all_posts[j]
+    all_posts.sort(key=lambda x: x.created.timestamp(), reverse=True)
     return all_posts
 
 def timeline_by_text(user, text):
@@ -67,11 +59,7 @@ def timeline_by_text(user, text):
                 if text in post.content:
                     if post not in all_posts:
                         all_posts.append(post)
-    n = len(all_posts)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if all_posts[j].created < all_posts[j + 1].created:
-                all_posts[j], all_posts[j + 1] = all_posts[j + 1], all_posts[j]
+    all_posts.sort(key=lambda x: x.created.timestamp(), reverse=True)
     return all_posts
 
 def timeline_by_date(user, date):
@@ -93,9 +81,5 @@ def timeline_by_date(user, date):
                 print (date is post.created)
                 if post not in all_posts:
                     all_posts.append(post)
-    n = len(all_posts)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if all_posts[j].created < all_posts[j + 1].created:
-                all_posts[j], all_posts[j + 1] = all_posts[j + 1], all_posts[j]
+    all_posts.sort(key=lambda x: x.created.timestamp(), reverse=True)
     return all_posts
