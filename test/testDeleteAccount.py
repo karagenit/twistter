@@ -1,5 +1,4 @@
 # if user deletes account, check if it is deleted
-# TODO: implement
 
 from django.test import TestCase, Client
 
