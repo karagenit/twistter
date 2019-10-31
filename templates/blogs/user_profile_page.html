@@ -410,6 +410,8 @@
             <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
                    value="Unfollow" onclick="Follow(0)">
         </div>
+
+        
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
     {% endif %}
@@ -520,6 +522,7 @@
 
 
                         </ul>
+
 
                         {% if post.image %}
                             <img src="{{ post.image.url }}">

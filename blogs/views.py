@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from datetime import date
 
@@ -232,6 +232,12 @@ class UserSearchView(TemplateView):
 class UserSearchResultView(ListView):
     template_name = "user_search_result_page.html"
     model = Post
+    
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
 
     def get_queryset(self, **kwargs):
         if 'word_search' in self.request.GET:
@@ -246,6 +252,14 @@ class UserSearchResultView(ListView):
             post_user = self.request.GET.get('user_search')
             user_id = User.objects.get(username=post_user).id
             return Post.objects.filter(creator=user_id)
+        
+        if 'name_search' in self.request.GET:
+            post_user = self.request.GET.get('name_search')
+            name = post_user.split(" ")
+            if len(name) is 1:
+                return Post.objects.filter(Q(creator__firstname__icontains=name[0]) | Q(creator__lastname__icontains=name[0]))
+            else:
+                return Post.objects.filter(Q(creator__firstname__icontains=name[0]) | Q(creator__lastname__icontains=name[0]) | Q(creator__firstname__icontains=name[1]) | Q(creator__lastname__icontains=name[1]))
 
         if 'tag_user_search' in self.request.GET:
             post_combo = self.request.GET.get('tag_user_search')
