@@ -1,0 +1,4 @@
+django==2.2.4
+gunicorn
+django-heroku
+psychopg2
