@@ -72,6 +72,7 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
+
                         {% if user.profile_pic %}
                             <img id="blah" src="{{ user.profile_pic.url }}" class="img-responsive" alt=""
                                  style="margin-bottom: 2%">
@@ -306,7 +307,6 @@
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
                         <ul class="nav">
-
                             {% if userid == user.id %}
                                 <button style="margin-right: 2%; margin-bottom:3%;" class="btn btn-primary">
                                     <a href="settingsPage"><font color="white">Account settings</font></a>
@@ -315,14 +315,22 @@
                                     <a href="#"><font color="white">Help</font></a>
                                 </button>
                             {% else %}
+                              {% if user in logged_in_user.blocking.all %}
+                                <form action="/unblock/{{ user.id }}" method="POST">
+                                  {% csrf_token %}
+                                  <button type="submit" class="btn btn-primary">
+                                      Unblock
+                                  </button>
+                                </form>
+                                {% else %}
                                 <form action="/block/{{ user.id }}" method="POST">
-                                    {% csrf_token %}
+                                  {% csrf_token %}
                                     <button type="submit" class="btn btn-primary">
-                                        Block
+                                      Block
                                     </button>
                                 </form>
+                              {% endif %}
                             {% endif %}
-
                         </ul>
                     </div>
                     <!-- END MENU -->
@@ -332,6 +340,7 @@
     </div>
 </div>
 <div class="float-right" style="margin-top:3%; margin-right:3%; ">
+    {% if userid == user.id %}
     <form method="POST">
         {% csrf_token %}
         <div class="form-group" align="center">
@@ -351,6 +360,7 @@
         </div>
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
+    {% endif %}
 </div>
 <div class="float-center">
     <div class="container" style="margin:3%3%;">
@@ -442,6 +452,17 @@
 
 
                         </ul>
+                        <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
+                            <h6>Quotes:</h6>
+                            {% for quote in post.quote_set.all %}
+                                <br>
+                                <h6>{{ post.creator.username }}: </h6>
+                                <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ post.quote.content }}</div>
+                            {% endfor %}
+
+
+                        </ul>
+
                         {% if post.image %}
                             <img src="{{ post.image.url }}">
                         {% endif %}

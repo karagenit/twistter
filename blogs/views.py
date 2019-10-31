@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
@@ -170,6 +171,7 @@ class ProfilePageView(UpdateView):
         context['userid'] = self.request.session.get('userid', None)
         context['following_list'] = getFollowing(self.request.session.get('userid', None))
         context['follower_list'] = getFollowers(self.request.session.get('userid', None))
+        context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
         return context
 
 class BannedView(TemplateView):
@@ -244,7 +246,7 @@ class UserSearchResultView(ListView):
         if 'tag_search' in self.request.GET:
             post_tag = self.request.GET.get('tag_search')
             return Post.objects.filter(tag__name=post_tag)
-        
+
         if 'user_search' in self.request.GET:
             post_user = self.request.GET.get('user_search')
             user_id = User.objects.get(username=post_user).id
@@ -254,14 +256,14 @@ class UserSearchResultView(ListView):
             post_combo = self.request.GET.get('tag_user_search')
             split_combo = post_combo.split('/')
             user_id = User.objects.get(username=split_combo[1]).id
-            return Post.objects.filter(tag__name=split_combo[0],creator=user_id) 
-        
+            return Post.objects.filter(tag__name=split_combo[0],creator=user_id)
+
         if 'date_search' in self.request.GET:
             given = self.request.GET.get('date_search')
             date_array = given.split('/')
             date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created=date)
-        
+
         if 'top_tag_search' in self.request.GET:
             tag = self.request.GET.get('top_tag_search')
             top_posts = Post.objects.filter(tag__name=tag).annotate(t_count=Count('likers')).order_by('-t_count')
@@ -330,4 +332,11 @@ def block_user(request, pk):
     blocker.blocking.add(blockee)
     blocker.save()
     # TODO: delete existing following relationship
-    return redirect('mainpage')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def unblock_user(request, pk):
+    blockee = User.objects.get(pk=pk)
+    blocker = User.objects.get(pk=request.session['userid'])
+    blocker.blocking.remove(blockee)
+    blocker.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
