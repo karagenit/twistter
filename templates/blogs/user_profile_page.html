@@ -449,9 +449,10 @@
 </div>
 <div class="float-center">
     <div class="container" style="margin:3%3%;">
-        {% if user.id == userid or not user.private %} <!-- only display our posts OR public posts -->
+        {% if user.id == userid or follows_me or not user.private %} <!-- only display our posts OR public posts -->
             {% user_posts user as posts %}
             {% for post in posts %}
+            {% if user.id == userid or follows_me or not post.private %}
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         {% if post.quote %}
@@ -546,6 +547,7 @@
                         <small class="text-muted">{{ post.created }}</small>
                     </div>
                 </div>
+                                    {% endif %}
             {% endfor %}
         {% endif %}
     </div>
