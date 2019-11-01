@@ -22,7 +22,8 @@ class Post(models.Model):
     image   = models.ImageField(upload_to='pictures/', blank=True)
     content = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    quote = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+    quote   = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+    private = models.BooleanField(default=False)
 
 ###
 # Note: the blank tag will exist and is a unique tag.
