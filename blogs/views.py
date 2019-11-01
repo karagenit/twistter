@@ -191,10 +191,11 @@ class MakePostView(TemplateView):
         content = request.POST.get('postinput', None)
         image = request.FILES.get('image', None)
         user = User.objects.get(id=self.request.session.get('userid'))
+        private = 'private' in request.POST
         if not content and not image:
             # TODO: report error
             return redirect('mainpage')
-        post = Post(content=content, creator=user, image=image)
+        post = Post(content=content, creator=user, image=image, private=private)
         post.save()
         for tag in tags:
             addtag(tag, post)
