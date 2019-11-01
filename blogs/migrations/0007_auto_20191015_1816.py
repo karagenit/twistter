@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='biography',
-            field=models.TextField(blank=True, default='Enter Bio', max_length=120),
+            field=models.TextField(blank=True, default='This user has not entered a biography!', max_length=120),
         ),
         migrations.CreateModel(
             name='Report',
