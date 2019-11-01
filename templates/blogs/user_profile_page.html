@@ -111,30 +111,7 @@
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     {% if userid != user.id %}
-                      {% if follows_me %}
-                          <div class="profile-usertitle" style="margin:10% 3%;">
-                              <div class="profile-usertitle-name">
-                                  <h6>{{ user.firstname }} {{ user.lastname }}</h6>
-                              </div>
-                              <div class="profile-usertitle-username">
-                                  <h6>{{ user.username }}</h6>
-                              </div>
-                              <div class="profile-usertitle-email">
-                                  <h6>{{ user.email }}</h6>
-                              </div>
-                              <h6>Bio:</h6>
-                              <div class="profile-usertitle-email" style="border-radius: 25px;
-                          border: 2px solid rgb(33, 42, 173);
-                          padding: 20px;
-                          width: 250px;
-                          height: 100%;">
-
-                                  <p>{{ user.biography }}</p>
-                              </div>
-
-                          </div>
-                        {% else %}
-                          {% if user.private == False %}
+                        {% if follows_me %}
                             <div class="profile-usertitle" style="margin:10% 3%;">
                                 <div class="profile-usertitle-name">
                                     <h6>{{ user.firstname }} {{ user.lastname }}</h6>
@@ -156,36 +133,59 @@
                                 </div>
 
                             </div>
-                            <!-- END SIDEBAR USER TITLE -->
-                            <!-- SIDEBAR BUTTONS -->
-                            {% else %}
-                              <div class="profile-usertitle-name">
-                                <h6>{{user.username}} has set their profile to private</h6>
+                          {% else %}
+                            {% if user.private == False %}
+                              <div class="profile-usertitle" style="margin:10% 3%;">
+                                  <div class="profile-usertitle-name">
+                                      <h6>{{ user.firstname }} {{ user.lastname }}</h6>
+                                  </div>
+                                  <div class="profile-usertitle-username">
+                                      <h6>{{ user.username }}</h6>
+                                  </div>
+                                  <div class="profile-usertitle-email">
+                                      <h6>{{ user.email }}</h6>
+                                  </div>
+                                  <h6>Bio:</h6>
+                                  <div class="profile-usertitle-email" style="border-radius: 25px;
+                              border: 2px solid rgb(33, 42, 173);
+                              padding: 20px;
+                              width: 250px;
+                              height: 100%;">
+
+                                      <p>{{ user.biography }}</p>
+                                  </div>
+
                               </div>
+                              <!-- END SIDEBAR USER TITLE -->
+                              <!-- SIDEBAR BUTTONS -->
+                              {% else %}
+                                <div class="profile-usertitle-name">
+                                  <h6>{{user.username}} has set their profile to private</h6>
+                                </div>
+                            {% endif %}
                           {% endif %}
-                        {% endif %}
-                      {% else %}
-                        <div class="profile-usertitle" style="margin:10% 3%;">
-                            <div class="profile-usertitle-name">
-                                <h6>{{ user.firstname }} {{ user.lastname }}</h6>
-                            </div>
-                            <div class="profile-usertitle-username">
-                                <h6>{{ user.username }}</h6>
-                            </div>
-                            <div class="profile-usertitle-email">
-                                <h6>{{ user.email }}</h6>
-                            </div>
-                            <h6>Bio:</h6>
-                            <div class="profile-usertitle-email" style="border-radius: 25px;
-                        border: 2px solid rgb(33, 42, 173);
-                        padding: 20px;
-                        width: 250px;
-                        height: 100%;">
+                        {% else %}
+                          <div class="profile-usertitle" style="margin:10% 3%;">
+                              <div class="profile-usertitle-name">
+                                  <h6>{{ user.firstname }} {{ user.lastname }}</h6>
+                              </div>
+                              <div class="profile-usertitle-username">
+                                  <h6>{{ user.username }}</h6>
+                              </div>
+                              <div class="profile-usertitle-email">
+                                  <h6>{{ user.email }}</h6>
+                              </div>
+                              <h6>Bio:</h6>
+                              <div class="profile-usertitle-email" style="border-radius: 25px;
+                          border: 2px solid rgb(33, 42, 173);
+                          padding: 20px;
+                          width: 250px;
+                          height: 100%;">
 
-                                <p>{{ user.biography }}</p>
-                            </div>
+                                  <p>{{ user.biography }}</p>
+                              </div>
 
-                        </div>
+                          </div>
                     {% endif %}
 
                     {% if userid == user.id %}
@@ -197,163 +197,484 @@
 
                     {% endif %}
 
-                    <!-- Modal -->
-                    <form name="bio" method="POST">
-                        {% csrf_token %}
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Biography</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input class="form-control" name="new_bio" id='new_bio'
-                                                   placeholder="Biography goes here"></input>
+                    {% if userid != user.id %}
+                      {% if follows_me %}
+                        <form name="bio" method="POST">
+                            {% csrf_token %}
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Biography</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button>Save Changes</button>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control" name="new_bio" id='new_bio'
+                                                       placeholder="Biography goes here"></input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button>Save Changes</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <form name="edit_post" method="POST">
-                        {% csrf_token %}
-                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input class="form-control"
-                                                   placeholder="This should store the content of the original post."
-                                                   name="updated_post" id='updated_post'></input>
+                        </form>
+                        <form name="edit_post" method="POST">
+                            {% csrf_token %}
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
-                                        </button>
-                                        <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control"
+                                                       placeholder="This should store the content of the original post."
+                                                       name="updated_post" id='updated_post'></input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
+                                            </button>
+                                            <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <form name="updated_tags" method="POST">
-                        {% csrf_token %}
-                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input class="form-control"
-                                                   placeholder="This should store the tags of the post."
-                                                   name="edit_tags" id='edit_tags'>
-                                            </input>
+                        </form>
+                        <form name="updated_tags" method="POST">
+                            {% csrf_token %}
+                            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
-                                        </button>
-                                        <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control"
+                                                       placeholder="This should store the tags of the post."
+                                                       name="edit_tags" id='edit_tags'>
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                                            </button>
+                                            <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <form name="add_comment" method="POST">
-                        {% csrf_token %}
-                        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input class="form-control"
-                                                   placeholder="Comment Text"
-                                                   name="add_comment" id='add_comment'>
-                                            </input>
+                        </form>
+                        <form name="add_comment" method="POST">
+                            {% csrf_token %}
+                            <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
-                                        </button>
-                                        <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input class="form-control"
+                                                       placeholder="Comment Text"
+                                                       name="add_comment" id='add_comment'>
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
+                                            </button>
+                                            <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <form name="quote_post" method="POST">
-                        {% csrf_token %}
-                        <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            Text:
-                                            <input class="form-control"
-                                                   placeholder="Make a post quoting selected post"
-                                                   name="quote_post_text" id='quote_post_text'>
-                                            </input>
-                                            Tags:
-                                            <input class="form-control"
-                                                   placeholder="Enter comma seperated tags"
-                                                   name="quote_post_tag" id='quote_post_tag'>
-                                            </input>
+                        </form>
+                        <form name="quote_post" method="POST">
+                            {% csrf_token %}
+                            <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
-                                        </button>
-                                        <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                Text:
+                                                <input class="form-control"
+                                                       placeholder="Make a post quoting selected post"
+                                                       name="quote_post_text" id='quote_post_text'>
+                                                </input>
+                                                Tags:
+                                                <input class="form-control"
+                                                       placeholder="Enter comma seperated tags"
+                                                       name="quote_post_tag" id='quote_post_tag'>
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                                            </button>
+                                            <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        {% else %}
+                          {% if user.private == False %}
+                          <!-- Modal -->
+                          <form name="bio" method="POST">
+                              {% csrf_token %}
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Edit Biography</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="form-group">
+                                                  <input class="form-control" name="new_bio" id='new_bio'
+                                                         placeholder="Biography goes here"></input>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                              </button>
+                                              <button>Save Changes</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <form name="edit_post" method="POST">
+                              {% csrf_token %}
+                              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="form-group">
+                                                  <input class="form-control"
+                                                         placeholder="This should store the content of the original post."
+                                                         name="updated_post" id='updated_post'></input>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                              </button>
+                                              <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
+                                              </button>
+                                              <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <form name="updated_tags" method="POST">
+                              {% csrf_token %}
+                              <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+                                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="form-group">
+                                                  <input class="form-control"
+                                                         placeholder="This should store the tags of the post."
+                                                         name="edit_tags" id='edit_tags'>
+                                                  </input>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                              </button>
+                                              <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                                              </button>
+                                              <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <form name="add_comment" method="POST">
+                              {% csrf_token %}
+                              <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
+                                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="form-group">
+                                                  <input class="form-control"
+                                                         placeholder="Comment Text"
+                                                         name="add_comment" id='add_comment'>
+                                                  </input>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                              </button>
+                                              <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
+                                              </button>
+                                              <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <form name="quote_post" method="POST">
+                              {% csrf_token %}
+                              <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                                   aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="form-group">
+                                                  Text:
+                                                  <input class="form-control"
+                                                         placeholder="Make a post quoting selected post"
+                                                         name="quote_post_text" id='quote_post_text'>
+                                                  </input>
+                                                  Tags:
+                                                  <input class="form-control"
+                                                         placeholder="Enter comma seperated tags"
+                                                         name="quote_post_tag" id='quote_post_tag'>
+                                                  </input>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                              </button>
+                                              <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                                              </button>
+                                              <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          {% else %}
+                          {% endif %}
+                        {% endif %}
+                      {% else %}
+                      <form name="bio" method="POST">
+                          {% csrf_token %}
+                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Edit Biography</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              <input class="form-control" name="new_bio" id='new_bio'
+                                                     placeholder="Biography goes here"></input>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                          </button>
+                                          <button>Save Changes</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      <form name="edit_post" method="POST">
+                          {% csrf_token %}
+                          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel2">Edit Post</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              <input class="form-control"
+                                                     placeholder="This should store the content of the original post."
+                                                     name="updated_post" id='updated_post'></input>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                          </button>
+                                          <button type="submit" id="edit_post_save" name="edit_post_save">Save Changes
+                                          </button>
+                                          <input type="hidden" value="-1" id="post_edit_id" name="post_edit_id">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      <form name="updated_tags" method="POST">
+                          {% csrf_token %}
+                          <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel3">Edit Tags</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              <input class="form-control"
+                                                     placeholder="This should store the tags of the post."
+                                                     name="edit_tags" id='edit_tags'>
+                                              </input>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                          </button>
+                                          <button type="submit" id="edit_tags_save" name="edit_tags_save">Save Changes
+                                          </button>
+                                          <input type="hidden" value="-1" id="tags_edit_id" name="tags_edit_id">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      <form name="add_comment" method="POST">
+                          {% csrf_token %}
+                          <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel4">Add Comment</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              <input class="form-control"
+                                                     placeholder="Comment Text"
+                                                     name="add_comment" id='add_comment'>
+                                              </input>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                          </button>
+                                          <button type="submit" id="add_comment_save" name="add_comment_save">Save Changes
+                                          </button>
+                                          <input type="hidden" value="-1" id="add_comment_id" name="add_comment_id">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      <form name="quote_post" method="POST">
+                          {% csrf_token %}
+                          <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
+                               aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel5">Add Comment</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              Text:
+                                              <input class="form-control"
+                                                     placeholder="Make a post quoting selected post"
+                                                     name="quote_post_text" id='quote_post_text'>
+                                              </input>
+                                              Tags:
+                                              <input class="form-control"
+                                                     placeholder="Enter comma seperated tags"
+                                                     name="quote_post_tag" id='quote_post_tag'>
+                                              </input>
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                          </button>
+                                          <button type="submit" id="quote_post_save" name="quote_post_save">Save Changes
+                                          </button>
+                                          <input type="hidden" value="-1" id="quote_post_id" name="quote_post_id">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                    {% endif %}
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
@@ -414,37 +735,103 @@
         <input type="hidden" value="-1" id="Following" name="Following">
     </form>
     {% endif %}
-    <div>
-            <div class="overflow-auto" >
-                    <ul class="list-group" >
-                            <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Following:</li>
-                        <div style="height:250px; width: 250px;
-                        overflow-y: scroll;">
-                                {% for follow in following_list %}
-                                   <!-- <br>{{ follow.following.username }}</br>-->
-                                        <li class="list-group-item">{{ follow.following.username }}</li>
-                                        
-                                        
+          {% if userid != user.id %}
+            {% if follows_me %}
+              <div>
+                <div class="overflow-auto" >
+                        <ul class="list-group" >
+                                <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Following:</li>
+                            <div style="height:250px; width: 250px;
+                            overflow-y: scroll;">
+                                    {% for follow in following_list %}
+                                       <!-- <br>{{ follow.following.username }}</br>-->
+                                            <li class="list-group-item">{{ follow.following.username }}</li>
+
+
+                                        {% for tag in follow.tags.all %}
+                                            <br>{{ tag.name }}</br>
+
+                                        {% endfor %}
+                                    {% endfor %}
+                            </div>
+
+                            <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Followers:</li>
+                            <div style="height:250px; width: 250px; overflow-y: scroll;">
+                                {% for follow in follower_list %}
+                                    <li class="list-group-item">{{ follow.follower.username }}</li>
                                     {% for tag in follow.tags.all %}
                                         <br>{{ tag.name }}</br>
-                                       
                                     {% endfor %}
                                 {% endfor %}
-                        </div>
-                            
-                        <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Followers:</li>
-                        <div style="height:250px; width: 250px; overflow-y: scroll;">
-                            {% for follow in follower_list %}
-                                <li class="list-group-item">{{ follow.follower.username }}</li>
-                                {% for tag in follow.tags.all %}
-                                    <br>{{ tag.name }}</br>
+                            </div>
+                        </ul>
+                </div>
+              {% else %}
+                {% if user.private == False %}
+                <div>
+                  <div class="overflow-auto" >
+                          <ul class="list-group" >
+                                  <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Following:</li>
+                              <div style="height:250px; width: 250px;
+                              overflow-y: scroll;">
+                                      {% for follow in following_list %}
+                                         <!-- <br>{{ follow.following.username }}</br>-->
+                                              <li class="list-group-item">{{ follow.following.username }}</li>
+
+
+                                          {% for tag in follow.tags.all %}
+                                              <br>{{ tag.name }}</br>
+
+                                          {% endfor %}
+                                      {% endfor %}
+                              </div>
+
+                              <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Followers:</li>
+                              <div style="height:250px; width: 250px; overflow-y: scroll;">
+                                  {% for follow in follower_list %}
+                                      <li class="list-group-item">{{ follow.follower.username }}</li>
+                                      {% for tag in follow.tags.all %}
+                                          <br>{{ tag.name }}</br>
+                                      {% endfor %}
+                                  {% endfor %}
+                              </div>
+                          </ul>
+                  </div>
+                  {% else %}
+                  {% endif %}
+              {% endif %}
+              {% else %}
+              <div>
+                <div class="overflow-auto" >
+                        <ul class="list-group" >
+                                <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Following:</li>
+                            <div style="height:250px; width: 250px;
+                            overflow-y: scroll;">
+                                    {% for follow in following_list %}
+                                       <!-- <br>{{ follow.following.username }}</br>-->
+                                            <li class="list-group-item">{{ follow.following.username }}</li>
+
+
+                                        {% for tag in follow.tags.all %}
+                                            <br>{{ tag.name }}</br>
+
+                                        {% endfor %}
+                                    {% endfor %}
+                            </div>
+
+                            <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Followers:</li>
+                            <div style="height:250px; width: 250px; overflow-y: scroll;">
+                                {% for follow in follower_list %}
+                                    <li class="list-group-item">{{ follow.follower.username }}</li>
+                                    {% for tag in follow.tags.all %}
+                                        <br>{{ tag.name }}</br>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
-                        </div>
-                    </ul>
-            </div>
-            
-                  
+                            </div>
+                        </ul>
+                </div>
+                {% endif %}
+
     </div>
 </div>
 <div class="float-center">
