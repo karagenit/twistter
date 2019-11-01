@@ -7,7 +7,7 @@ class User(models.Model):
     email        = models.EmailField(unique=True)
     password     = models.CharField(max_length=64)
     birthday     = models.DateField(blank=True, null=True)
-    biography    = models.TextField(default="Enter Bio", max_length=120, blank=True)
+    biography    = models.TextField(default="This user has not entered a biography!", max_length=120, blank=True)
     profile_pic  = models.ImageField(upload_to='images/', blank=True)
     banned_until = models.DateField(blank=True, null=True)
     blocking     = models.ManyToManyField("User", blank=True)
