@@ -1,7 +1,7 @@
 # if user changes email address, check if it changes
 
 from django.test import TestCase, Client
-from blogs.models import User
+from blogs.models import User, Post
 from blogs.views import encrypt_string
 
 
