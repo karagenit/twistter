@@ -415,20 +415,36 @@
     </form>
     {% endif %}
     <div>
-        Following:
-        {% for follow in following_list %}
-            <br>{{ follow.following.username }}</br>
-            {% for tag in follow.tags.all %}
-                <br>{{ tag.name }}</br>
-            {% endfor %}
-        {% endfor %}
-        Followers:
-        {% for follow in follower_list %}
-            <br>{{ follow.follower.username }}</br>
-            {% for tag in follow.tags.all %}
-                <br>{{ tag.name }}</br>
-            {% endfor %}
-        {% endfor %}
+            <div class="overflow-auto" >
+                    <ul class="list-group" >
+                            <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Following:</li>
+                        <div style="height:250px; width: 250px;
+                        overflow-y: scroll;">
+                                {% for follow in following_list %}
+                                   <!-- <br>{{ follow.following.username }}</br>-->
+                                        <li class="list-group-item">{{ follow.following.username }}</li>
+                                        
+                                        
+                                    {% for tag in follow.tags.all %}
+                                        <br>{{ tag.name }}</br>
+                                       
+                                    {% endfor %}
+                                {% endfor %}
+                        </div>
+                            
+                        <li style="width:250px;"class="list-group-item list-group-item-action list-group-item-primary">Followers:</li>
+                        <div style="height:250px; width: 250px; overflow-y: scroll;">
+                            {% for follow in follower_list %}
+                                <li class="list-group-item">{{ follow.follower.username }}</li>
+                                {% for tag in follow.tags.all %}
+                                    <br>{{ tag.name }}</br>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </ul>
+            </div>
+            
+                  
     </div>
 </div>
 <div class="float-center">
