@@ -540,7 +540,7 @@
                             <h6>Comments:</h6>
                             {% for comment in post.comment_set.all %}
                                 <br>
-                                <h6>{{ post.creator.username }}: </h6>
+                                <h6>{{ comment.commenter.username }}: </h6>
                                 <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
                             {% endfor %}
                         </ul>

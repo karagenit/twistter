@@ -230,6 +230,11 @@ class FriendView(TemplateView):
 class UserSearchView(TemplateView):
     template_name = "user_search_page.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        return context
+
 class UserSearchResultView(ListView):
     template_name = "user_search_result_page.html"
     model = Post
@@ -287,7 +292,6 @@ class UserSearchResultView(ListView):
 
     def post(self, request):
         post_request_from_post(self, request)
-        print ('flag')
         return redirect('mainpage')
 
 def encrypt_string(string):
