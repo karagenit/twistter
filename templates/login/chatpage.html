@@ -65,9 +65,44 @@
     {% endif %}
 </nav>
 
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    Chats
+                </div>
+                <ul class="list-group list-group-flush">
+                    <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
+                    <li class="list-group-item">Username 1</li>
+                    <li class="list-group-item">Username 2</li>
+                    <li class="list-group-item">Username 3</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-10">
+            <!-- This will need to be some sort of for loop which iterates over all the existing message objects within a chat. -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Freddy Kreuger</h5>
+                    <p class="card-text">Welcome to prime time</p>
+                    <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Jason Voorhees</h5>
+                    <p class="card-text">No words</p>
+                    <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
 
-<div class="row">
-    <h1>THIS IS THE CHAT PAGE!!!!!!!!!!!!!!!!!</h1>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -83,11 +118,11 @@
 </body>
 </html>
 <script>
-function getTheStrReady() {
+    function getTheStrReady() {
 // Trimmed string
-    var inputVal = document.getElementById("new_bio").value;
-    var finputVal = inputVal.toLowerCase().replace(/\s+/,"");
-    document.getElementById("tags-demo").innerHTML += finputVal + ", ";
-    return finputVal;
-}
+        var inputVal = document.getElementById("new_bio").value;
+        var finputVal = inputVal.toLowerCase().replace(/\s+/, "");
+        document.getElementById("tags-demo").innerHTML += finputVal + ", ";
+        return finputVal;
+    }
 </script>
