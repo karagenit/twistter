@@ -21,50 +21,47 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if userid %}
-            <li class="nav-item">
-                <a class="nav-link" href="users/{{ userid }}">My Profile</a><span
-                    class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout">Log Out<span class="sr-only"></span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home</a> <span
-                    class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="search">Friends</a>
-                <span
+                <li class="nav-item">
+                    <a class="nav-link" href="users/{{ userid }}">My Profile</a><span
                         class="sr-only">(current)</span></a>
-            </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Log Out<span class="sr-only"></span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="settingsPage">Settings</a> <span
-                    class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="makePost">Make Post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="search_page">Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="chatPage">Chat</a>
-            </li>
-        </ul>
-        <!--<form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
-    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a> <span
+                        class="sr-only">(current)</span></a>
+                </li>
 
-    {% else %}
-    <li class="nav-item">
-        <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
-    </li>
-    {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="search">Friends</a>
+                    <span
+                            class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="settingsPage">Settings</a> <span
+                        class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="makePost">Make Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="search_page">Search</a>
+                </li>
+                </ul>
+                <!--<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>-->
+                </div>
+
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
+                </li>
+            {% endif %}
 </nav>
 
 <form name="edit_post" method="POST">
@@ -206,110 +203,106 @@
                     <p class="lead">Here you can see the posts of users you are following.</p>
                 </div>
                 {% for post in posts %}
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        {% if post.quote %}
-                        <p class="card-text" id="quote_content_{{ post.id }}"><b>"{{ post.quote.content }}"</b> -{{
-                            post.quote.creator.username }}</p>
-                        {% endif %}
-                        {% if post.image %}
-                        <div>
-                            <img src="{{ post.image.url }}">
-                        </div>
-                        {% endif %}
-                        <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}-{{ post.creator.username
-                            }}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <!-- Button trigger modal -->
-                                {% if userid == post.creator.id %}
-                                <button style="margin-right:3%;" type="button"
-                                        class="btn btn-sm btn-outline-secondary"
-                                        data-toggle="modal"
-                                        data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
-                                    Edit
-                                </button>
-                                <form style="margin-right:3%;" id="edit_tags_form" method="post">
-                                    {% csrf_token %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal3" id="edit_tag_botton"
-                                            name="edit_tag_botton"
-                                            onclick="editTags({{ post.id }})">
-                                        Edit Tags
-                                    </button>
-                                </form>
-                                <form style="margin-right:3%;" id="delete" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary "
-                                            id="delete_post"
-                                            name="delete_post" value="{{ post.id }}">
-                                        Delete Post
-                                    </button>
-                                </form>
-                                {% else %}
-                                <form style="margin-right:3%;" id="make_comment_form" method="post">
-                                    {% csrf_token %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal4" id="add_comment_button"
-                                            name="add_comment_button" onclick="addComment({{ post.id }})">
-                                        Add Comment
-                                    </button>
-                                </form>
-                                <form style="margin-right:3%;" id="like" method="post">
-                                    {% csrf_token %}
-                                    <button class="btn btn-sm btn-outline-secondary " id="like_post"
-                                            name="like_post"
-                                            type="submit" value="{{ post.id }}">
-                                        Like
-                                    </button>
-                                </form>
-                                <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report
-                                    Post</a>
-                                {% endif %}
-                                <form style="margin-right:3%;" id="quote_post_form" method="post">
-                                    {% csrf_token %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal5" id="quote_post_button"
-                                            name="quote_post_button"
-                                            onclick="quotePost({{ post.id }})">
-                                        Quote
-                                    </button>
-                                </form>
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            {% if post.quote %}
+                                <p class="card-text" id="quote_content_{{ post.id }}"><b>"{{ post.quote.content }}"</b> -{{ post.quote.creator.username }}</p>
+                            {% endif %}
+                            {% if post.image %}
+                                <div>
+                                <img src="{{ post.image.url }}">
+                                </div>
+                            {% endif %}
+                            <p class="card-text" id="post_content_{{ post.id }}">{{ post.content }}-{{ post.creator.username }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <!-- Button trigger modal -->
+                                    {% if userid == post.creator.id %}
+                                        <button style="margin-right:3%;" type="button"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
+                                            Edit
+                                        </button>
+                                        <form style="margin-right:3%;" id="edit_tags_form" method="post">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal3" id="edit_tag_botton"
+                                                    name="edit_tag_botton"
+                                                    onclick="editTags({{ post.id }})">
+                                                Edit Tags
+                                            </button>
+                                        </form>
+                                        <form style="margin-right:3%;" id="delete" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary "
+                                                    id="delete_post"
+                                                    name="delete_post" value="{{ post.id }}">
+                                                Delete Post
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form style="margin-right:3%;" id="make_comment_form" method="post">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                    data-toggle="modal"
+                                                    data-target="#exampleModal4" id="add_comment_button"
+                                                    name="add_comment_button" onclick="addComment({{ post.id }})">
+                                                Add Comment
+                                            </button>
+                                        </form>
+                                        <form style="margin-right:3%;" id="like" method="post">
+                                            {% csrf_token %}
+                                            <button class="btn btn-sm btn-outline-secondary " id="like_post"
+                                                    name="like_post"
+                                                    type="submit" value="{{ post.id }}">
+                                                Like
+                                            </button>
+                                        </form>
+                                        <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report
+                                            Post</a>
+                                    {% endif %}
+                                    <form style="margin-right:3%;" id="quote_post_form" method="post">
+                                        {% csrf_token %}
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal5" id="quote_post_button"
+                                                name="quote_post_button"
+                                                onclick="quotePost({{ post.id }})">
+                                            Quote
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <h6 style="margin-top: 2%;"><img src="/static/img/thumb-up-button.png"
-                                                         style="width: 25px; height:25px; margin-right: 2%;"
-                                                         alt="">{{ post.likers.count }}</h6>
-                        <ul style="margin: 2% 1%; padding-top:2%;background:rgb(1, 47, 175, .2);">
-                            <h6>Tags:</h6>
-                            {% for tag in post.tag_set.all %}
-                            <br>
-                            <li style="margin:0% 1%; margin-bottom: 2%;"
-                                class="btn btn-sm btn btn-outline-primary ">
-                                {{ tag.name }}
+                            <h6 style="margin-top: 2%;"><img src="/static/img/thumb-up-button.png"
+                                                             style="width: 25px; height:25px; margin-right: 2%;"
+                                                             alt="">{{ post.likers.count }}</h6>
+                            <ul style="margin: 2% 1%; padding-top:2%;background:rgb(1, 47, 175, .2);">
+                                <h6>Tags:</h6>
+                                {% for tag in post.tag_set.all %}
+                                    <br>
+                                    <li style="margin:0% 1%; margin-bottom: 2%;"
+                                        class="btn btn-sm btn btn-outline-primary ">
+                                    {{ tag.name }}
                                 {% endfor %}
 
 
-                        </ul>
+                            </ul>
 
-                        <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
-                            <h6>Comments:</h6>
-                            {% for comment in post.comment_set.all %}
-                            <br>
-                            <h6>{{ comment.commenter.username }}: </h6>
-                            <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">
-                                {{ comment.content }}
-                            </div>
-                            {% endfor %}
+                            <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
+                                <h6>Comments:</h6>
+                                {% for comment in post.comment_set.all %}
+                                    <br>
+                                    <h6>{{ comment.commenter.username }}: </h6>
+                                    <div style="margin-top: 1%; padding: 1% 1%; background-color: white; height:80%; width: 90%;">{{ comment.content }}</div>
+                                {% endfor %}
 
 
-                        </ul>
-                        <small class="text-muted">{{ post.created }}</small>
+                            </ul>
+                            <small class="text-muted">{{ post.created }}</small>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
@@ -401,15 +394,15 @@
         document.getElementById("quote_post_id").value = id;
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                    crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                    crossorigin="anonymous"></script>
 
 </body>
 </html>
