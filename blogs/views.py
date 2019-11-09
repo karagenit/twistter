@@ -171,6 +171,9 @@ class ProfilePageView(UpdateView):
 class BannedView(TemplateView):
     template_name = "banned.html"
 
+class ChatView(TemplateView):
+    template_name = "chatpage.html"
+
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
 

@@ -1,8 +1,7 @@
 *.sqlite3
 **/__pycache__/
 *.swp
->>>>>>> 5d34f645afa3af647cb45f615bdcf4601c9a35b9
-.idea/workspace.xml
+myenv/
 .idea/workspace.xml
 *.xml
 *.xml

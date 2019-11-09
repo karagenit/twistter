@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, logout_user, FriendView, report_post, BannedView, UserSearchView, UserSearchResultView, block_user, unblock_user
+from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, ChatView, logout_user, FriendView, report_post, BannedView, UserSearchView, UserSearchResultView, block_user, unblock_user
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('users/settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('makePost', MakePostView.as_view(), name='makepostpage'),
+    path('chatPage', ChatView.as_view(), name='chatviewpage'),
     path('users/<int:pk>', ProfilePageView.as_view(), name='userprofilepage'),
     path('login', login_user),
     path('post', MakePostView.as_view(), name='makepostpage'),
