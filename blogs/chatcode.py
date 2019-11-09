@@ -5,13 +5,11 @@ def createChat(name, creator_id):
     chat = Chat(creator=creator, name=name)
     chat.save()
     chat.members.add(creator)
-    chat.save()
 
 def addUser(chat_id, user_id):
     chat = Chat.objects.get(id=chat_id)
     user = User.objects.get(id=user_id)
     chat.members.add(user)
-    chat.save()
 
 def createMessage(creator_id, content, chat_id):
     creator = User.objects.get(id=creator_id)
@@ -22,3 +20,11 @@ def createMessage(creator_id, content, chat_id):
 def deleteMessage(message_id):
     message = Message.objects.get(id=message_id)
     message.delete()
+
+def getChats(user_id):
+    chats = []
+    for chat in Chat.objects.all():
+        user_query = chat.members.all().filter(id=user_id)
+        if user_query.exists():
+            chats.append(chat)
+    return chats

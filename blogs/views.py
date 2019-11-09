@@ -11,7 +11,7 @@ from django.db.models import Count, Q
 
 from datetime import date
 
-from .models import User, Post, Report, Tag, Follow
+from .models import User, Post, Report, Tag, Follow, Chat, Message, Comment
 from .commentcode import add_comment
 from .getposts import get_posts
 from .deleteuser import delete_user
@@ -19,6 +19,7 @@ from .tagcode import addtag, removetag
 from .followcode import addFollow, removeFollow, getFollowers, getFollowing, deleteFollow
 from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date
 from .postrequestcode import post_request_from_post
+from .chatcode import createChat, addUser, createMessage, deleteMessage, getChats
 import hashlib
 
 class LoginView(TemplateView):
@@ -175,9 +176,10 @@ class ChatView(TemplateView):
     template_name = "chatpage.html"
 
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
+        context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
         context['chat'] = Chat.objects.get(id=self.kwargs['pk'])
+        context['all_chats'] = getChats(self.request.session.get('userid', None))
         return context
 
 class MakePostView(TemplateView):
