@@ -174,6 +174,12 @@ class BannedView(TemplateView):
 class ChatView(TemplateView):
     template_name = "chatpage.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        context['chat'] = Chat.objects.get(id=self.kwargs['pk'])
+        return context
+
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
 
@@ -295,14 +301,6 @@ class UserSearchResultView(ListView):
     def post(self, request):
         post_request_from_post(self, request)
         return redirect('mainpage')
-
-class chatDisplayView(ListView):
-
-    def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        context['userid'] = self.request.session.get('userid', None)
-        context['chat'] = Chat.objects.get(id=self.kwargs['pk'])
-        return context
 
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()

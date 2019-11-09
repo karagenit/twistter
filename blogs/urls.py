@@ -11,7 +11,7 @@ urlpatterns = [
     path('settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('users/settingsPage', SettingsPageView.as_view(), name='settingspage'),
     path('makePost', MakePostView.as_view(), name='makepostpage'),
-    path('chatPage', ChatView.as_view(), name='chatviewpage'),
+    path('chatPage/<int:pk>', ChatView.as_view(), name='chatviewpage'),
     path('users/<int:pk>', ProfilePageView.as_view(), name='userprofilepage'),
     path('login', login_user),
     path('post', MakePostView.as_view(), name='makepostpage'),
@@ -24,5 +24,4 @@ urlpatterns = [
     path('search/results', UserSearchResultView.as_view(), name='search_results'),
     path('block/<int:pk>', block_user, name='block'),
     path('unblock/<int:pk>', unblock_user, name='unblock'),
-    path('chat/<int:pk>', chatDisplayView.as_view(), name='chat_display'),
 ]
