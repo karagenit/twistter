@@ -165,7 +165,6 @@ class ProfilePageView(UpdateView):
         context['following_list'] = getFollowing(context['user'].id)
         context['follower_list'] = getFollowers(context['user'].id)
         context['logged_in_user'] = User.objects.get(id=self.request.session.get('userid', None))
-        print(context)
         context['follows_me'] = context['user'].followings.filter(following__id = context['userid']).exists()
         return context
 
@@ -294,6 +293,14 @@ class UserSearchResultView(ListView):
         post_request_from_post(self, request)
         return redirect('mainpage')
 
+class chatDisplayView(ListView):
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        context['chat'] = Chat.objects.get(id=self.kwargs['pk'])
+        return context
+
 def encrypt_string(string):
     return hashlib.sha256(string.encode()).hexdigest()
 
@@ -305,7 +312,6 @@ def my_authenticate(username, password):
         return query[0]
     else:
         return None
-
 
 def login_user(request):
     username = request.POST.get('usernameinput', None)

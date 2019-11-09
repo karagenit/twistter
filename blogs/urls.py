@@ -23,4 +23,5 @@ urlpatterns = [
     path('search/results', UserSearchResultView.as_view(), name='search_results'),
     path('block/<int:pk>', block_user, name='block'),
     path('unblock/<int:pk>', unblock_user, name='unblock'),
+    path('chat/<int:pk>', chatDisplayView.as_view(), name='chat_display'),
 ]

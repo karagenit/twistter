@@ -57,3 +57,14 @@ class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
+
+class Chat(models.Model):
+    name = models.CharField(max_length=100)
+    members = models.ManyToManyField(User, blank=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="chat_creator")
+
+class Message(models.Model):
+    content = models.CharField(max_length=200)
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="message_creator")
+    created = models.DateTimeField(auto_now_add=True)
