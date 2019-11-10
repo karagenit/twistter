@@ -364,3 +364,10 @@ def unblock_user(request, pk):
     blocker.blocking.remove(blockee)
     blocker.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def request_verification(request, pk):
+    user = User.objects.get(pk=pk)
+    if user.verified == 0:
+        user.verified = 1
+        user.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

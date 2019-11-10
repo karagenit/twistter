@@ -116,6 +116,18 @@
         </div>
 
         <div class="row">
+          <div class="col col-lg-2">
+            Request Verification
+          </div>
+          <div class="col">
+            <form method="post" action="/verify/{{ user.id }}">
+              {% csrf_token %}
+              <button class="btn btn-outline-secondary" type="submit">Request</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>
                 {% csrf_token %}
