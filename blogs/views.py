@@ -321,16 +321,20 @@ def my_authenticate(username, password):
 def login_user(request):
     username = request.POST.get('usernameinput', None)
     password = request.POST.get('passwordinput', None)
+    otp_code = request.POST.get('otpinput', None)
     user = my_authenticate(username, password)
     if user is not None:
         if user.banned_until is not None and user.banned_until > date.today():
             return redirect('banned')
+        if user.otp_secret:
+            totp = pyotp.TOTP(user.otp_secret)
+            if not totp.verify(otp_code):
+                return redirect('login')
         request.session['userid'] = user.pk
         return redirect('mainpage')
     else:
         # TODO: display error message to users
         return redirect('login')
-
 
 def logout_user(request):
     request.session['userid'] = None
