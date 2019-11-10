@@ -1,5 +1,10 @@
 from django.db import models
 
+###
+# Verified Codes:
+# 0: Unverified
+# 1: Verification Requested
+# 2: Verified
 class User(models.Model):
     firstname    = models.CharField(max_length=50)
     lastname     = models.CharField(max_length=50)
@@ -12,6 +17,7 @@ class User(models.Model):
     banned_until = models.DateField(blank=True, null=True)
     blocking     = models.ManyToManyField("User", blank=True)
     private      = models.BooleanField(default=False)
+    verified     = models.IntegerField(default=0)
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
