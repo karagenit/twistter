@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import path
-from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, ChatView, logout_user, FriendView, report_post, BannedView, UserSearchView, UserSearchResultView, block_user, unblock_user, request_verification
+from .views import RegisterView, LoginView, MainPageView, ProfilePageView, SettingsPageView, login_user, MakePostView, SearchView, ChatView, logout_user, FriendView, report_post, BannedView, UserSearchView, UserSearchResultView, block_user, unblock_user, request_verification, enable_2fa, disable_2fa
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -25,4 +25,6 @@ urlpatterns = [
     path('block/<int:pk>', block_user, name='block'),
     path('unblock/<int:pk>', unblock_user, name='unblock'),
     path('verify/<int:pk>', request_verification, name='verify'),
+    path('enable2fa/<int:pk>', enable_2fa, name='enable2fa'),
+    path('disable2fa/<int:pk>', disable_2fa, name='disable2fa'),
 ]

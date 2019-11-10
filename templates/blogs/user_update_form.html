@@ -134,6 +134,26 @@
         </div>
 
         <div class="row">
+          <div class="col col-lg-2">
+            Two Factor Auth
+          </div>
+          <div class="col">
+            {% if user.otp_secret %}
+            <p>{{ user.otp_secret }}</p>
+            <form method="post" action="/disable2fa/{{ user.id }}">
+              {% csrf_token %}
+              <button class="btn btn-outline-secondary" type="submit">Disable 2FA</button>
+            </form>
+            {% else %}
+            <form method="post" action="/enable2fa/{{ user.id }}">
+              {% csrf_token %}
+              <button class="btn btn-outline-secondary" type="submit">Enable 2FA</button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="row">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>
                 {% csrf_token %}

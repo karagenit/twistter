@@ -20,7 +20,9 @@ from .followcode import addFollow, removeFollow, getFollowers, getFollowing, del
 from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date
 from .postrequestcode import post_request_from_post
 from .chatcode import createChat, addUser, createMessage, deleteMessage, getChats
+
 import hashlib
+import pyotp
 
 class LoginView(TemplateView):
     template_name = "login/login.html"
@@ -371,3 +373,17 @@ def request_verification(request, pk):
         user.verified = 1
         user.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def enable_2fa(request, pk):
+    user = User.objects.get(pk=pk)
+    if not user.otp_secret:
+        user.otp_secret = pyotp.random_base32()
+        user.save()
+    return redirect('mainpage')
+
+def disable_2fa(request, pk):
+    user = User.objects.get(pk=pk)
+    if user.otp_secret:
+        user.otp_secret = ""
+        user.save()
+    return redirect('mainpage')
