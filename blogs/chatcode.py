@@ -6,7 +6,17 @@ def createChat(name, creator_id):
     chat.save()
     chat.members.add(creator)
 
+def deleteChat(chat_id, user_id):
+    chat = Chat.objects.get(id=chat_id)
+    if chat.creator.id is user_id:
+        chat.delete()
+
 def addUser(chat_id, user_id):
+    chat = Chat.objects.get(id=chat_id)
+    user = User.objects.get(id=user_id)
+    chat.members.add(user)
+
+def removeUser(chat_id, user_id):
     chat = Chat.objects.get(id=chat_id)
     user = User.objects.get(id=user_id)
     chat.members.add(user)
