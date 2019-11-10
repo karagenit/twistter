@@ -30,8 +30,11 @@ admin.site.register(Report, ReportAdmin)
 def temp_ban_user(modeladmin, request, queryset):
     queryset.update(banned_until = date.today() + timedelta(days=7))
 
+def verify_user(modeladmin, request, queryset):
+    queryset.update(verified = 2)
+
 class UserAdmin(admin.ModelAdmin):
     list_display = ['firstname', 'lastname']
-    actions = [temp_ban_user]
+    actions = [temp_ban_user, verify_user]
 
 admin.site.register(User, UserAdmin)
