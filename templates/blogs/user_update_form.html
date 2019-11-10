@@ -120,10 +120,16 @@
             Request Verification
           </div>
           <div class="col">
+            {% if user.verified == 0 %}
             <form method="post" action="/verify/{{ user.id }}">
               {% csrf_token %}
               <button class="btn btn-outline-secondary" type="submit">Request</button>
             </form>
+            {% elif user.verified == 1 %}
+            <p>Verification pending...</p>
+            {% else %}
+            <p>Already Verified!</p>
+            {% endif %}
           </div>
         </div>
 
