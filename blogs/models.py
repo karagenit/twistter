@@ -18,6 +18,7 @@ class User(models.Model):
     blocking     = models.ManyToManyField("User", blank=True)
     private      = models.BooleanField(default=False)
     verified     = models.IntegerField(default=0)
+    otp_secret   = models.CharField(max_length=16, blank=True, default="")
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
