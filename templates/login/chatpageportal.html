@@ -9,6 +9,8 @@
 
 <body>
 
+<h1>THIS IS THE CHAT PAGE PORTAL</h1>
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="#"><font size="3" face="Candara" color="green">Twistter</font>
         <img src="/static/img/swirly.png" height=20% width=20%></a>
@@ -65,23 +67,38 @@
     {% endif %}
 </nav>
 
-<div class="row">
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    Chats
+                </div>
+                <ul class="list-group list-group-flush">
+                    <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
+                    {% for chat in all_chats %}
+                    <li class="list-group-item">{{ chat.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-10">
+            {% for message in chat.message_set.all %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ message.creator.username }}</h5>
+                        <p class="card-text">{{ message.content }}</p>
+                        <p> {{ message.created }} </p>
+                        <a href="#" class="btn btn-primary">Delete</a>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
 </div>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="postinput" name="postinput" placeholder="Add a post here..." maxlength="100" rows="2" style="max-width: 60%"></textarea>
-        </div>
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="taginput" name="taginput" placeholder="Add tags here separated by commas" maxlength="100" rows="2" style="max-width: 60%"></textarea>
-        </div>
-        <input type="file" id="image" name="image">
-        <p>Make post private?</p><br><input type="checkbox" name="private" id="private" value="private">
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
-                   value="Send Post">
-        </div>
-</form>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -96,11 +113,11 @@
 </body>
 </html>
 <script>
-function getTheStrReady() {
+    function getTheStrReady() {
 // Trimmed string
-    var inputVal = document.getElementById("new_bio").value;
-    var finputVal = inputVal.toLowerCase().replace(/\s+/,"");
-    document.getElementById("tags-demo").innerHTML += finputVal + ", ";
-    return finputVal;
-}
+        var inputVal = document.getElementById("new_bio").value;
+        var finputVal = inputVal.toLowerCase().replace(/\s+/, "");
+        document.getElementById("tags-demo").innerHTML += finputVal + ", ";
+        return finputVal;
+    }
 </script>
