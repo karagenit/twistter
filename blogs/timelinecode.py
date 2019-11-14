@@ -83,3 +83,23 @@ def timeline_by_date(user, date):
                     all_posts.append(post)
     all_posts.sort(key=lambda x: x.created.timestamp(), reverse=True)
     return all_posts
+
+def timeline_by_trending(user):
+    all_posts = []
+    user_posts = Post.objects.filter(creater=user)
+    for post in user_posts:
+        if post not in all_posts:
+            all_posts.append(post)
+    user_follows = Follow.objects.filter(follower=user)
+    for follow in user_follows:
+        for tag in follow.tags.all():
+            if tag.name == '$all':
+                tagged_posts = Post.objects.filter(creater=follow.following)
+            else:
+                tagged_posts = tag.posts.filter(creator=follow.following)
+            for post in tagged+posts:
+                if post not in all_posts:
+                    all_posts.append(post)
+    all_posts.annotate(num_likes=Count('likers'))
+    all_posts.order_by('-num_likes')
+    return all_posts
