@@ -184,6 +184,15 @@ class ChatView(TemplateView):
         context['all_chats'] = getChats(self.request.session.get('userid', None))
         return context
 
+class ChatNavView(TemplateView):
+    template_name = "chatnav.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['userid'] = self.request.session.get('userid', None)
+        context['all_chats'] = getChats(self.request.session.get('userid', None))
+        return context
+
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
 
