@@ -2,18 +2,18 @@
 {% load staticfiles %}
 <html>
 <head>
-    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link href="{% static 'css/bootstrap-grid.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#"><font size="3" face="Candara" color="green">Twistter</font>
-        <img src="/static/img/swirly.png" height=20% width=20%></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#"><font color="green" face="Candara" size="3">Twistter</font>
+        <img height=20% src="/static/img/swirly.png" width=20%></a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -52,10 +52,6 @@
                 <a class="nav-link" href="chatNav">Chat</a>
             </li>
         </ul>
-        <!--<form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
     </div>
 
     {% else %}
@@ -67,40 +63,46 @@
 
 <div class="row">
 </div>
-<form method="POST" enctype="multipart/form-data">
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="postinput" name="postinput" placeholder="Add a post here..." maxlength="100" rows="2" style="max-width: 60%"></textarea>
+    <div align="center" class="form-group">
+        <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Add a post here..."
+                  rows="2" style="max-width: 60%"></textarea>
+    </div>
+    <div align="center" class="form-group">
+        <textarea class="form-control" id="taginput" maxlength="100" name="taginput"
+                  placeholder="Add tags here separated by commas" rows="2" style="max-width: 60%"></textarea>
+    </div>
+    <div align="center" class="form-group">
+        <div class="col-3">
+            <input id="image" name="image" type="file">
+            <input id="private" name="private" type="checkbox" value="private">
+            Make post private?
         </div>
-        <div class="form-group" align="center">
-            <textarea class="form-control" id="taginput" name="taginput" placeholder="Add tags here separated by commas" maxlength="100" rows="2" style="max-width: 60%"></textarea>
-        </div>
-        <input type="file" id="image" name="image">
-        <p>Make post private?</p><br><input type="checkbox" name="private" id="private" value="private">
         <div class="text-center">
-            <input type="submit" class="btn btn-primary mb-2 vw-100" style="max-width: 60%"
-                   value="Send Post">
+            <input class="btn btn-primary mb-2 vw-100" style="max-width: 60%" type="submit" value="Send Post">
         </div>
+    </div>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>
 <script>
-function getTheStrReady() {
+    function getTheStrReady() {
 // Trimmed string
-    var inputVal = document.getElementById("new_bio").value;
-    var finputVal = inputVal.toLowerCase().replace(/\s+/,"");
-    document.getElementById("tags-demo").innerHTML += finputVal + ", ";
-    return finputVal;
-}
+        var inputVal = document.getElementById("new_bio").value;
+        var finputVal = inputVal.toLowerCase().replace(/\s+/, "");
+        document.getElementById("tags-demo").innerHTML += finputVal + ", ";
+        return finputVal;
+    }
 </script>
