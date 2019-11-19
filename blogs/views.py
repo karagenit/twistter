@@ -17,7 +17,7 @@ from .getposts import get_posts
 from .deleteuser import delete_user
 from .tagcode import addtag, removetag
 from .followcode import addFollow, removeFollow, getFollowers, getFollowing, deleteFollow
-from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date
+from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date, timeline_by_trending
 from .postrequestcode import post_request_from_post
 from .chatcode import createChat, addUser, createMessage, deleteMessage, getChats
 
@@ -82,8 +82,11 @@ class MainPageView(TemplateView):
             print('context 3')
             print(tag_name)
             context['posts'] = timeline_by_tag(user,tag_name)
-        else:
+        elif 'trending' in self.request.GET:
             print('context 4')
+            context['posts'] = timeline_by_trending(user)
+        else:
+            print('context 5')
             context['posts'] = get_timeline_posts(user)
         return context
 

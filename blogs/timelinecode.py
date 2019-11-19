@@ -1,4 +1,6 @@
 from .models import User, Post, Report, Tag, Follow
+from django.db.models import Count
+from operator import attrgetter
 
 def get_timeline_posts(user):
     all_posts = [];
@@ -86,7 +88,7 @@ def timeline_by_date(user, date):
 
 def timeline_by_trending(user):
     all_posts = []
-    user_posts = Post.objects.filter(creater=user)
+    user_posts = Post.objects.filter(creator=user).annotate(num_likes=Count('likers'))
     for post in user_posts:
         if post not in all_posts:
             all_posts.append(post)
@@ -94,12 +96,11 @@ def timeline_by_trending(user):
     for follow in user_follows:
         for tag in follow.tags.all():
             if tag.name == '$all':
-                tagged_posts = Post.objects.filter(creater=follow.following)
+                tagged_posts = Post.objects.filter(creator=follow.following).annotate(num_likes=Count('likers'))
             else:
-                tagged_posts = tag.posts.filter(creator=follow.following)
-            for post in tagged+posts:
+                tagged_posts = tag.posts.filter(creator=follow.following).annotate(num_likes=Count('likers'))
+            for post in tagged_posts:
                 if post not in all_posts:
                     all_posts.append(post)
-    all_posts.annotate(num_likes=Count('likers'))
-    all_posts.order_by('-num_likes')
+    all_posts.sort(key= attrgetter('num_likes'), reverse = True)
     return all_posts
