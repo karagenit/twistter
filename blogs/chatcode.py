@@ -5,6 +5,7 @@ def createChat(name, creator_id):
     chat = Chat(creator=creator, name=name)
     chat.save()
     chat.members.add(creator)
+    return chat
 
 def deleteChat(chat_id, user_id):
     chat = Chat.objects.get(id=chat_id)

@@ -200,6 +200,12 @@ class ChatNavView(TemplateView):
         context['all_chats'] = getChats(self.request.session.get('userid', None))
         return context
 
+    def post(self, request):
+        if 'create_chat' in request.POST:
+            name = request.POST.get('create_chat', None)
+            chat = createChat(name, self.request.session.get('userid', None))
+            return redirect('chatviewpage', pk=chat.id)
+
 class MakePostView(TemplateView):
     template_name = "makepostpage.html"
 
