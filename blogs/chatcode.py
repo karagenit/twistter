@@ -15,6 +15,11 @@ def deleteChat(chat_id, user_id):
 def addUser(chat_id, user_id):
     chat = Chat.objects.get(id=chat_id)
     user = User.objects.get(id=user_id)
+    for member in chat.members.all():
+        if user in member.blocking.all():
+            return
+        if member in user.blocking.all():
+            return
     chat.members.add(user)
 
 def removeUser(chat_id, user_id):
