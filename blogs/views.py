@@ -201,6 +201,9 @@ class ChatView(TemplateView):
             user = self.request.session.get('userid', None)
             if user_id != user:
                 removeUser(pk,user_id)
+        if 'delete_chat' in request.POST:
+            user_id = User.objects.get(username=request.POST.get('remove_member', None)).id
+            deleteChat(pk,user_id)
         if'postinput' in request.POST:
             user_id = self.request.session.get('userid', None)
             content = username=request.POST.get('postinput', None)
