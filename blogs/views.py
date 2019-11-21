@@ -208,6 +208,7 @@ class ChatView(TemplateView):
         if 'leave_chat' in request.POST:
             user = self.request.session.get('userid', None)
             removeUser(pk, user)
+            return redirect('chatnavpage')
         if 'delete_message' in request.POST:
             message_id = request.POST.get('delete_message', None)
             deleteMessage(message_id)
