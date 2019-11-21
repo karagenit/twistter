@@ -144,6 +144,11 @@
                 <div class="card-header text-center">
                     Chat Options
                 </div>
+                <form id="add_chat_button"
+                name="add_chat_button" action="/chatNav">
+                    {% csrf_token %}
+                    <input style="width: 100%; height: 100%;" type="submit" name="add_chat" value="Add Chat"/>
+                </form>
                 {% if userid == chat.creator.id %}
                   <form id="delete_chat_button"
                   name="remove_chat_button" action="" method="post">
