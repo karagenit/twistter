@@ -19,7 +19,7 @@ from .tagcode import addtag, removetag
 from .followcode import addFollow, removeFollow, getFollowers, getFollowing, deleteFollow
 from .timelinecode import timeline_by_tag, get_timeline_posts, timeline_by_text, timeline_by_date, timeline_by_trending
 from .postrequestcode import post_request_from_post
-from .chatcode import createChat, addUser, createMessage, deleteMessage, getChats
+from .chatcode import createChat, addUser, removeUser, createMessage, deleteMessage, getChats
 
 import hashlib
 import pyotp
@@ -196,6 +196,9 @@ class ChatView(TemplateView):
         if 'add_member' in request.POST:
             user_id = User.objects.get(username=request.POST.get('add_member', None)).id
             addUser(pk,user_id)
+        if 'remove_member' in request.POST:
+            user_id = User.objects.get(username=request.POST.get('remove_member', None)).id
+            removeUser(pk,user_id)
         if'postinput' in request.POST:
             user_id = self.request.session.get('userid', None)
             content = username=request.POST.get('postinput', None)
