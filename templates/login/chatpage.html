@@ -106,14 +106,14 @@
     <div class="row">
         <div class="col-2">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     Chats
                 </div>
                 <ul class="list-group list-group-flush">
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for chat in all_chats %}
                     <form action="/chatPage/{{ chat.id }}">
-                        <button class="list-group-item" type="submit">{{ chat.name }}</button>
+                        <button class="list-group-item btn-block" type="submit">{{ chat.name }}</button>
                     </form>
                     {% endfor %}
                 </ul>
@@ -125,7 +125,7 @@
                 <div class="form-group">
                     <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
                 </div>
-                <button class="btn btn-primary" id="send_message" name='send_message' type="submit">Send
+                <button class="btn btn-primary btn-block" id="send_message" name='send_message' type="submit">Send
                 </button>
             </form>
             <br>
@@ -144,14 +144,14 @@
         </div>
         <div class="col-2">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     Chat Members
                 </div>
                 <ul class="list-group list-group-flush">
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for member in chat.members.all %}
                     <form action=/users/{{ member.id }}>
-                        <button class="list-group-item" type="submit">{{ member.username }}</button>
+                        <button class="list-group-item btn-block" type="submit">{{ member.username }}</button>
                     </form>
                     {% endfor %}
                 </ul>
