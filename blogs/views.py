@@ -194,13 +194,19 @@ class ChatView(TemplateView):
     def post(self, request, pk):
         print(request.POST)
         if 'add_member' in request.POST:
-            user_id = User.objects.get(username=request.POST.get('add_member', None)).id
-            addUser(pk,user_id)
+            try:
+                user_id = User.objects.get(username=request.POST.get('add_member', None)).id
+                addUser(pk,user_id)
+            except:
+                print("Invalid User Request")
         if 'remove_member' in request.POST:
-            user_id = User.objects.get(username=request.POST.get('remove_member', None)).id
-            user = self.request.session.get('userid', None)
-            if user_id != user:
-                removeUser(pk,user_id)
+            try:
+                user_id = User.objects.get(username=request.POST.get('remove_member', None)).id
+                user = self.request.session.get('userid', None)
+                if user_id != user:
+                        removeUser(pk,user_id)
+            except:
+                print("Invalid User Request")
         if 'delete_chat' in request.POST:
             user = self.request.session.get('userid', None)
             deleteChat(pk, user)
