@@ -120,16 +120,15 @@
             </div>
         </div>
         <div class="col-8">
-            <div class="container-fluid">
-                <form method="POST" name="create_message">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
-                    </div>
-                    <button class="btn btn-outline-secondary" id="send_message" name='send_message' type="submit">Send
-                    </button>
-                </form>
-            </div>
+            <form method="POST" name="create_message">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
+                </div>
+                <button class="btn btn-primary" id="send_message" name='send_message' type="submit">Send
+                </button>
+            </form>
+            <br>
 
             {% for message in chat.message_set.all %}
             <div class="card">
