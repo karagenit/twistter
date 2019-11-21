@@ -180,11 +180,18 @@
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for member in chat.members.all %}
                     <form action=/users/{{ member.id }}>
+                        {% if member.id == chat.creator.id %}
+                        <button class="list-group-item btn-block" type="submit">[Admin] {{ member.username }}</button>
+                        {% else %}
                         <button class="list-group-item btn-block" type="submit">{{ member.username }}</button>
+                        {% endif %}
                     </form>
                     {% endfor %}
                 </ul>
                 {% if userid == chat.creator.id %}
+                  <div class="card-header text-center">
+                      Chat Options
+                  </div>
                   <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal2"
                           data-toggle="modal"
                           id="create_chat_button" name="create_chat_button"
@@ -196,6 +203,12 @@
                           id="remove_chat_button" name="remove_chat_button"
                           type="button">
                       Remove Member
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal3"
+                          data-toggle="modal"
+                          id="remove_chat_button" name="remove_chat_button"
+                          type="button">
+                      Delete Chat
                   </button>
                 {% endif %}
             </div>
