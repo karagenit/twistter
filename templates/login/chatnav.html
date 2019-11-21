@@ -106,7 +106,7 @@
                 <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                 {% for chat in all_chats %}
                 <form action="chatPage/{{ chat.id }}">
-                    <button type="submit" class="list-group-item">{{ chat.name }}</button>
+                    <button type="submit" class="list-group-item btn-block">{{ chat.name }}</button>
                 </form>
                 {% endfor %}
                 <button type="button" class="btn btn-sm btn-outline-secondary"
