@@ -177,9 +177,17 @@
                     <p class="card-text">{{ message.content }}</p>
                     <p> {{ message.created }} </p>
                     {% if userid == message.creator.id %}
-                      <a class="btn btn-primary" href="#">Delete</a>
+                      <form id="leave_chat_button"
+                      name="leave_chat_button" action="" method="post">
+                          {% csrf_token %}
+                          <input type="submit" name="delete_message" value="Delete"/>
+                      </form>
                     {% elif userid == chat.creator.id %}
-                      <a class="btn btn-primary" href="#">Delete</a>
+                      <form id="leave_chat_button"
+                      name="leave_chat_button" action="" method="post">
+                          {% csrf_token %}
+                          <input type="submit" name="delete_message" value="Delete"/>
+                      </form>
                     {% endif %}
                 </div>
             </div>

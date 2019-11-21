@@ -204,6 +204,7 @@ class ChatView(TemplateView):
         if 'delete_chat' in request.POST:
             user = self.request.session.get('userid', None)
             deleteChat(pk, user)
+            return redirect('chatnavpage')
         if 'leave_chat' in request.POST:
             user = self.request.session.get('userid', None)
             removeUser(pk, user)
