@@ -15,7 +15,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#"><font color="green" face="Candara" size="3">Twistter</font>
+    <a class="navbar-brand" href="/mainPage"><font color="green" face="Candara" size="3">Twistter</font>
         <img height=20% src="/static/img/swirly.png" width=20%></a>
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler"
@@ -26,36 +26,36 @@
         <ul class="navbar-nav mr-auto">
             {% if userid %}
             <li class="nav-item">
-                <a class="nav-link" href="users/{{ userid }}">My Profile</a><span
+                <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
                     class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="logout">Log Out<span class="sr-only"></span></a>
+                <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a> <span
+                <a class="nav-link" href="/mainPage">Home</a> <span
                     class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="search">Friends</a>
+                <a class="nav-link" href="/search">Friends</a>
                 <span
                         class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="settingsPage">Settings</a> <span
+                <a class="nav-link" href="/settingsPage">Settings</a> <span
                     class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="makePost">Make Post</a>
+                <a class="nav-link" href="/makePost">Make Post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search_page">Search</a>
+                <a class="nav-link" href="/search_page">Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="chatNav">Chat</a>
+                <a class="nav-link" href="/chatNav">Chat</a>
             </li>
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">
