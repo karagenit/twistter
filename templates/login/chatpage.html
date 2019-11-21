@@ -182,16 +182,14 @@
                     <p class="card-text">{{ message.content }}</p>
                     <p> {{ message.created }} </p>
                     {% if userid == message.creator.id %}
-                      <form id="leave_chat_button"
-                      name="leave_chat_button" action="" method="post">
-                          {% csrf_token %}
-                          <input type="submit" name="delete_message" value="Delete"/>
+                      <form action="" method="POST">
+                        {% csrf_token %}
+                          <button name="delete_message" value="{{message.id}}">Delete</button>
                       </form>
                     {% elif userid == chat.creator.id %}
-                      <form id="leave_chat_button"
-                      name="leave_chat_button" action="" method="post">
-                          {% csrf_token %}
-                          <input type="submit" name="delete_message" value="Delete"/>
+                      <form action="" method="POST">
+                        {% csrf_token %}
+                          <button name="delete_message" value="{{message.id}}">Delete</button>
                       </form>
                     {% endif %}
                 </div>
