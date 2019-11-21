@@ -13,111 +13,111 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd; height: 70.5px;">
-      <a class="navbar-brand" href="/mainPage"><font size="3" face="Candara" color="green">Twistter</font></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              {% if userid %}
-              <li class="nav-item">
-                  <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
-                      class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
-              </li>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd; height: 70.5px;">
+    <a class="navbar-brand" href="/mainPage"><font color="green" face="Candara" size="3">Twistter</font></a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if userid %}
+            <li class="nav-item">
+                <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
+                    class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/mainPage">Home</a> <span
-                      class="sr-only">(current)</span></a>
-              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mainPage">Home</a> <span
+                    class="sr-only">(current)</span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/search">Friends</a>
-                  <span
-                          class="sr-only">(current)</span></a>
-              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search">Friends</a>
+                <span
+                        class="sr-only">(current)</span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/settingsPage">Settings</a> <span
-                      class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/makePost">Make Post</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/search_page">Search</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/chatNav">Chat</a>
-              </li>
-          </ul>
-          <!--<form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>-->
-      </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/settingsPage">Settings</a> <span
+                    class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/makePost">Make Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search_page">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/chatNav">Chat</a>
+            </li>
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+    </div>
     {% else %}
     <li class="nav-item">
         <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
     </li>
     {% endif %}
 </nav>
-<form name="add_member_modal" method="POST">
+<form method="POST" name="add_member_modal">
     {% csrf_token %}
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal2"
+         role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel2">Add Member</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control"
-                               placeholder="Username of new member"
-                               name="add_member" id='add_member'></input>
+                               id='add_member'
+                               name="add_member" placeholder="Username of new member"></input>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close
                     </button>
-                    <button type="submit" id="add_member_save" name="add_member_save">Add Member
+                    <button id="add_member_save" name="add_member_save" type="submit">Add Member
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<form name="remove_member_modal" method="POST">
+<form method="POST" name="remove_member_modal">
     {% csrf_token %}
-    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal3"
+         role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel3">Remove Member</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control"
-                               placeholder="Username of member to remove"
-                               name="remove_member" id='remove_member'></input>
+                               id='remove_member'
+                               name="remove_member" placeholder="Username of member to remove"></input>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close
                     </button>
-                    <button type="submit" id="remove_member_save" name="remove_member_save">Remove Member
+                    <button id="remove_member_save" name="remove_member_save" type="submit">Remove Member
                     </button>
                 </div>
             </div>
@@ -148,7 +148,8 @@
             <form method="POST" name="create_message">
                 {% csrf_token %}
                 <div class="form-group">
-                    <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
+                    <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.."
+                              rows="2"></textarea>
                 </div>
                 <button class="btn btn-primary btn-block" id="send_message" name='send_message' type="submit">Send
                 </button>
