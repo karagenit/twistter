@@ -68,26 +68,72 @@
       {% endif %}
   </nav>
 
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
+    </li>
+    {% endif %}
+</nav>
+<form name="add_member_modal" method="POST">
+    {% csrf_token %}
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Add Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control"
+                               placeholder="Username of new member"
+                               name="add_member" id='add_member'></input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" id="add_member_save" name="add_member_save">Add Member
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <br>
 <br>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     Chats
                 </div>
                 <ul class="list-group list-group-flush">
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for chat in all_chats %}
                     <form action="/chatPage/{{ chat.id }}">
-                    <button type="submit" class="list-group-item">{{ chat.name }}</button>
+                        <button class="list-group-item btn-block" type="submit">{{ chat.name }}</button>
                     </form>
                     {% endfor %}
                 </ul>
             </div>
         </div>
         <div class="col-8">
+            <form method="POST" name="create_message">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
+                </div>
+                <button class="btn btn-primary btn-block" id="send_message" name='send_message' type="submit">Send
+                </button>
+            </form>
+            <br>
+
             {% for message in chat.message_set.all %}
             <div class="card">
                 <div class="card-body">
@@ -102,47 +148,36 @@
         </div>
         <div class="col-2">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     Chat Members
                 </div>
                 <ul class="list-group list-group-flush">
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for member in chat.members.all %}
                     <form action=/users/{{ member.id }}>
-                    <button type="submit" class="list-group-item">{{ member.username }}</button>
+                        <button class="list-group-item btn-block" type="submit">{{ member.username }}</button>
                     </form>
                     {% endfor %}
                 </ul>
-                <button type="button" class="btn btn-sm btn-outline-secondary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal2" id="create_chat_button"
-                                            name="create_chat_button">
+                <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal2"
+                        data-toggle="modal"
+                        id="create_chat_button" name="create_chat_button"
+                        type="button">
                     Add Member
                 </button>
             </div>
-        <div class="container-fluid">
-            <form method="POST" name="create_message">
-                {% csrf_token %}
-                <div class="form-group">
-                    <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.."
-                              rows="2" style="max-width: 60%"></textarea>
-                </div>
-                <button class="btn btn-outline-secondary" id="send_message" name='send_message' type="submit">Send
-                </button>
-            </form>
         </div>
-    </div>
 
-    <script crossorigin="anonymous"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script crossorigin="anonymous"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script crossorigin="anonymous"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</div>
+        <script crossorigin="anonymous"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </div>
 
 </body>
 </html>

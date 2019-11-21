@@ -12,7 +12,8 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="/mainPage"><font color="green" face="Candara" size="3">Twistter</font>
         <img height=20% src="/static/img/swirly.png" width=20%></a>
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
             data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,16 +72,17 @@
     </div>
     <div align="center" class="form-group">
         <textarea class="form-control" id="taginput" maxlength="100" name="taginput"
-                  placeholder="Add tags here separated by commas" rows="2" style="max-width: 60%"></textarea>
+                  placeholder="Add tags here separated by commas: apples, bananas, fruit" rows="2"
+                  style="max-width: 60%"></textarea>
     </div>
     <div align="center" class="form-group">
+        <div class="text-center">
+            <input class="btn btn-primary mb-2 vw-100" style="max-width: 60%" type="submit" value="Send Post">
+        </div>
         <div class="col-3">
             <input id="image" name="image" type="file">
             <input id="private" name="private" type="checkbox" value="private">
             Make post private?
-        </div>
-        <div class="text-center">
-            <input class="btn btn-primary mb-2 vw-100" style="max-width: 60%" type="submit" value="Send Post">
         </div>
     </div>
 </form>
