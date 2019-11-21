@@ -161,7 +161,11 @@
                     <h5 class="card-title">{{ message.creator.username }}</h5>
                     <p class="card-text">{{ message.content }}</p>
                     <p> {{ message.created }} </p>
-                    <a class="btn btn-primary" href="#">Delete</a>
+                    {% if userid == message.creator.id %}
+                      <a class="btn btn-primary" href="#">Delete</a>
+                    {% elif userid == chat.creator.id %}
+                      <a class="btn btn-primary" href="#">Delete</a>
+                    {% endif %}
                 </div>
             </div>
             <br>
