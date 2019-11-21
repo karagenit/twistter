@@ -369,6 +369,19 @@
                             </form>
                         </div>
                     </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            Trending
+                        </div>
+                        <div class="col">
+                            <form method="get" action="/mainPage">{% csrf_token %}
+                                
+                                <button class="btn btn-outline-info" name="trending"
+                                        type='submit'>Show Trending
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

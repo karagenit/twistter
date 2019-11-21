@@ -80,12 +80,14 @@
                 <ul class="list-group list-group-flush">
                     <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
                     {% for chat in all_chats %}
-                    <li class="list-group-item">{{ chat.name }}</li>
+                    <form action="/chatPage/{{ chat.id }}">
+                    <button type="submit" class="list-group-item">{{ chat.name }}</button>
+                    </form>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-        <div class="col-10">
+        <div class="col-8">
             {% for message in chat.message_set.all %}
             <div class="card">
                 <div class="card-body">
@@ -98,7 +100,26 @@
             <br>
             {% endfor %}
         </div>
-
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">
+                    Chat Members
+                </div>
+                <ul class="list-group list-group-flush">
+                    <!-- This will need to be some sort of for loop which iterates over all the existing chat objects. -->
+                    {% for member in chat.members.all %}
+                    <form action=/users/{{ member.id }}>
+                    <button type="submit" class="list-group-item">{{ member.username }}</button>
+                    </form>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            data-toggle="modal"
+                                            data-target="#exampleModal2" id="create_chat_button"
+                                            name="create_chat_button">
+                    Add Member
+                </button>
+            </div>
         <div class="container-fluid">
             <form method="POST" name="create_message">
                 {% csrf_token %}
