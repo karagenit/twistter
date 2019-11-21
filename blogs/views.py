@@ -215,7 +215,8 @@ class ChatView(TemplateView):
         if 'postinput' in request.POST:
             user_id = self.request.session.get('userid', None)
             content = username=request.POST.get('postinput', None)
-            createMessage(user_id, content, pk)
+            if len(content) != 0:
+                createMessage(user_id, content, pk)
         return redirect('chatviewpage', pk=pk)
 
 class ChatNavView(TemplateView):
