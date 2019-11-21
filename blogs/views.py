@@ -192,9 +192,14 @@ class ChatView(TemplateView):
         return context
 
     def post(self, request, pk):
+        print(request.POST)
         if 'add_member' in request.POST:
             user_id = User.objects.get(username=request.POST.get('add_member', None)).id
             addUser(pk,user_id)
+        if'postinput' in request.POST:
+            user_id = self.request.session.get('userid', None)
+            content = username=request.POST.get('postinput', None)
+            createMessage(user_id, content, pk)
         return redirect('chatviewpage', pk=pk)
 
 class ChatNavView(TemplateView):
