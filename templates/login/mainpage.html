@@ -208,8 +208,7 @@
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         {% if post.quote %}
-                        <p class="card-text" id="quote_content_{{ post.id }}"><b>"{{ post.quote.content }}"</b> -{{
-                            post.quote.creator.username }}</p>
+                        <p class="card-text" id="quote_content_{{ post.id }}"><b>"{{ post.quote.content }}"</b> -{{ post.quote.creator.username }}</p>
                         {% endif %}
                         {% if post.image %}
                         <div>
