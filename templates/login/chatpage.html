@@ -13,53 +13,53 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd; height: 70.5px;">
-      <a class="navbar-brand" href="/mainPage"><font size="3" face="Candara" color="green">Twistter</font></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              {% if userid %}
-              <li class="nav-item">
-                  <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
-                      class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
-              </li>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd; height: 70.5px;">
+    <a class="navbar-brand" href="/mainPage"><font size="3" face="Candara" color="green">Twistter</font></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if userid %}
+            <li class="nav-item">
+                <a class="nav-link" href="/users/{{ userid }}">My Profile</a><span
+                    class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out<span class="sr-only"></span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/mainPage">Home</a> <span
-                      class="sr-only">(current)</span></a>
-              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mainPage">Home</a> <span
+                    class="sr-only">(current)</span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/search">Friends</a>
-                  <span
-                          class="sr-only">(current)</span></a>
-              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search">Friends</a>
+                <span
+                        class="sr-only">(current)</span></a>
+            </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="/settingsPage">Settings</a> <span
-                      class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/makePost">Make Post</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/search_page">Search</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/chatNav">Chat</a>
-              </li>
-          </ul>
-          <!--<form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>-->
-      </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/settingsPage">Settings</a> <span
+                    class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/makePost">Make Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search_page">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/chatNav">Chat</a>
+            </li>
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+    </div>
     {% else %}
     <li class="nav-item">
         <a class="nav-link" href="/">Log In</a><span class="sr-only">(current)</span></a>
@@ -145,22 +145,22 @@
                     Chat Options
                 </div>
                 <form id="add_chat_button"
-                name="add_chat_button" action="/chatNav">
+                      name="add_chat_button" action="/chatNav">
                     {% csrf_token %}
                     <input style="width: 100%; height: 100%;" type="submit" name="add_chat" value="Add Chat"/>
                 </form>
                 {% if userid == chat.creator.id %}
-                  <form id="delete_chat_button"
-                  name="remove_chat_button" action="" method="post">
-                      {% csrf_token %}
-                      <input style="width: 100%; height: 100%;" type="submit" name="delete_chat" value="Delete Chat"/>
-                  </form>
+                <form id="delete_chat_button"
+                      name="remove_chat_button" action="" method="post">
+                    {% csrf_token %}
+                    <input style="width: 100%; height: 100%;" type="submit" name="delete_chat" value="Delete Chat"/>
+                </form>
                 {%else%}
-                  <form id="leave_chat_button"
-                  name="leave_chat_button" action="" method="post">
-                      {% csrf_token %}
-                      <input style="width: 100%; height: 100%;" type="submit" name="leave_chat" value="Leave Chat"/>
-                  </form>
+                <form id="leave_chat_button"
+                      name="leave_chat_button" action="" method="post">
+                    {% csrf_token %}
+                    <input style="width: 100%; height: 100%;" type="submit" name="leave_chat" value="Leave Chat"/>
+                </form>
                 {%endif%}
             </div>
         </div>
@@ -182,15 +182,15 @@
                     <p class="card-text">{{ message.content }}</p>
                     <p> {{ message.created }} </p>
                     {% if userid == message.creator.id %}
-                      <form action="" method="POST">
+                    <form action="" method="POST">
                         {% csrf_token %}
-                          <button name="delete_message" value="{{message.id}}">Delete</button>
-                      </form>
+                        <button name="delete_message" value="{{message.id}}">Delete</button>
+                    </form>
                     {% elif userid == chat.creator.id %}
-                      <form action="" method="POST">
+                    <form action="" method="POST">
                         {% csrf_token %}
-                          <button name="delete_message" value="{{message.id}}">Delete</button>
-                      </form>
+                        <button name="delete_message" value="{{message.id}}">Delete</button>
+                    </form>
                     {% endif %}
                 </div>
             </div>
@@ -215,21 +215,21 @@
                     {% endfor %}
                 </ul>
                 {% if userid == chat.creator.id %}
-                  <div class="card-header text-center">
-                      Member Options
-                  </div>
-                  <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal2"
-                          data-toggle="modal"
-                          id="create_chat_button" name="create_chat_button"
-                          type="button">
-                      Add Member
-                  </button>
-                  <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal3"
-                          data-toggle="modal"
-                          id="remove_chat_button" name="remove_chat_button"
-                          type="button">
-                      Remove Member
-                  </button>
+                <div class="card-header text-center">
+                    Member Options
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal2"
+                        data-toggle="modal"
+                        id="create_chat_button" name="create_chat_button"
+                        type="button">
+                    Add Member
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" data-target="#exampleModal3"
+                        data-toggle="modal"
+                        id="remove_chat_button" name="remove_chat_button"
+                        type="button">
+                    Remove Member
+                </button>
                 {% endif %}
             </div>
         </div>
