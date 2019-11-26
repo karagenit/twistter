@@ -175,7 +175,7 @@
             </form>
             <br>
 
-            {% for message in chat.message_set.all %}
+            {% for message in chat.message_set.all reversed%}
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ message.creator.username }}</h5>
