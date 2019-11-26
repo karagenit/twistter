@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-	  <link rel="stylesheet" href="/static/css/bootstrap-grid.css">
-	  <link rel="stylesheet" href="/static/css/bootstrap.css">
-	  <link rel="stylesheet" href="/static/css/log-in.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-grid.css">
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+	<link rel="stylesheet" href="/static/css/log-in.css">
 </head>
 <body>
-	<div class="container regcontain">
-		<div class="row">
-			<div class="col">
-				<div class="text-center">
-	    			<br>
-	    		</div>
-	    	</div>
-	    </div>
-	  <div class="row">
-	    <div class="col">
-	      <div class = "register">
+<div class="container regcontain">
+	<div class="row">
+		<div class="col">
+			<div class="text-center">
+				<br>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class = "register">
 
-	      		<div class ="text-center">
-	      			<img src="/static/img/LogoFinal.png">
+				<div class ="text-center">
+					<img src="/static/img/LogoFinal.png">
 					<h2>Login</h2>
 					<hr>
 				</div>
-			<form method="POST" action="/login">
-				{% csrf_token %}
-				<div class="form-group">
-			    <label for="usernameinput">Username</label>
-			    <input type="text" class="form-control" name="usernameinput" id="usernameinput" placeholder="Enter username">
-			  </div>
+				<form method="POST" action="/login">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="usernameinput">Username</label>
+						<input type="text" class="form-control" name="usernameinput" id="usernameinput" placeholder="Enter username">
+					</div>
 
 
-			  <div class="form-group">
-			    <label for="passwordinput">Password</label>
-			    <input type="password" class="form-control" name="passwordinput" id="passwordinput" placeholder="Enter Password">
-			  </div>
-        <div class="form-group">
-          <label for="otpinput">TOTP Code</label>
-          <input type="text" class="form-control" name="otpinput" id="otpinput" placeholder="XXXXXX">
-        </div>
-			  <div class="text-center">
-                  <input type="submit" value="Log in">
-									<input type="button" onclick="window.location.href = 'register';" value="Create an Account">
-			  </div>
-			</form>
-		  </div>
-	    </div>
-	  </div>
+					<div class="form-group">
+						<label for="passwordinput">Password</label>
+						<input type="password" class="form-control" name="passwordinput" id="passwordinput" placeholder="Enter Password">
+					</div>
+					<div class="form-group">
+						<label for="otpinput">TOTP Code</label>
+						<input type="text" class="form-control" name="otpinput" id="otpinput" placeholder="XXXXXX">
+					</div>
+					<div class="text-center">
+						<input type="submit" value="Log in">
+						<input type="button" onclick="window.location.href = 'register';" value="Create an Account">
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+</div>
 
 
 </body>

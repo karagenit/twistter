@@ -120,41 +120,41 @@
         </div>
 
         <div class="row">
-          <div class="col col-lg-7">
-            Request Verification
-          </div>
-          <div class="col">
-            {% if user.verified == 0 %}
-            <form method="post" action="/verify/{{ user.id }}">
-              {% csrf_token %}
-              <button class="btn btn-outline-secondary" type="submit">Request</button>
-            </form>
-            {% elif user.verified == 1 %}
-            <p>Verification pending...</p>
-            {% else %}
-            <p>Already Verified!</p>
-            {% endif %}
-          </div>
+            <div class="col col-lg-7">
+                Request Verification
+            </div>
+            <div class="col">
+                {% if user.verified == 0 %}
+                <form method="post" action="/verify/{{ user.id }}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-secondary" type="submit">Request</button>
+                </form>
+                {% elif user.verified == 1 %}
+                <p>Verification pending...</p>
+                {% else %}
+                <p>Already Verified!</p>
+                {% endif %}
+            </div>
         </div>
 
         <div class="row">
-          <div class="col col-lg-7">
-            Two Factor Auth
-          </div>
-          <div class="col">
-            {% if user.otp_secret %}
-            <p>{{ user.otp_secret }}</p>
-            <form method="post" action="/disable2fa/{{ user.id }}">
-              {% csrf_token %}
-              <button class="btn btn-outline-secondary" type="submit">Disable 2FA</button>
-            </form>
-            {% else %}
-            <form method="post" action="/enable2fa/{{ user.id }}">
-              {% csrf_token %}
-              <button class="btn btn-outline-secondary" type="submit">Enable 2FA</button>
-            </form>
-            {% endif %}
-          </div>
+            <div class="col col-lg-7">
+                Two Factor Auth
+            </div>
+            <div class="col">
+                {% if user.otp_secret %}
+                <p>{{ user.otp_secret }}</p>
+                <form method="post" action="/disable2fa/{{ user.id }}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-secondary" type="submit">Disable 2FA</button>
+                </form>
+                {% else %}
+                <form method="post" action="/enable2fa/{{ user.id }}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-secondary" type="submit">Enable 2FA</button>
+                </form>
+                {% endif %}
+            </div>
         </div>
 
         <div class="row">
