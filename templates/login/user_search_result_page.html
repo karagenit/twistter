@@ -188,7 +188,7 @@
                         </div>
                     </div>
                 </form>
-                 <form name="quote_post" method="POST">
+                <form name="quote_post" method="POST">
                     {% csrf_token %}
                     <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -229,9 +229,9 @@
     </div>
 </div>
 <div class="float-center">
-<div class="container" style="margin:3%3%;">
-    Results:
-    {% for post in object_list %}
+    <div class="container" style="margin:3%3%;">
+        Results:
+        {% for post in object_list %}
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
                 {% if post.quote %}
@@ -248,48 +248,48 @@
                     <div class="btn-group">
                         <!-- Button trigger modal -->
                         {% if userid == post.creator.id %}
-                            <button style="margin-right:3%;" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                    data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
-                                Edit
+                        <button style="margin-right:3%;" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                data-target="#exampleModal2" onclick="hotLatina({{ post.id }})">
+                            Edit
+                        </button>
+                        <form style="margin-right:3%;" id="edit_tags_form" method="post">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                    data-target="#exampleModal3" id = "edit_tag_botton" name = "edit_tag_botton" onclick="editTags({{ post.id }})">
+                                Edit Tags
                             </button>
-                            <form style="margin-right:3%;" id="edit_tags_form" method="post">
-                                {% csrf_token %}
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                        data-target="#exampleModal3" id = "edit_tag_botton" name = "edit_tag_botton" onclick="editTags({{ post.id }})">
-                                    Edit Tags
-                                </button>
-                            </form>
-                            <form style="margin-right:3%;"id="delete" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post"
-                                        name="delete_post" value="{{ post.id }}">
-                                    Delete Post
-                                </button>
-                            </form>
+                        </form>
+                        <form style="margin-right:3%;"id="delete" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-secondary " id="delete_post"
+                                    name="delete_post" value="{{ post.id }}">
+                                Delete Post
+                            </button>
+                        </form>
                         {% else %}
-                            <form style="margin-right:3%;" id="make_comment_form" method="post">
-                                {% csrf_token %}
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                        data-target="#exampleModal4" id="add_comment_button" name="add_comment_button" onclick="addComment({{ post.id }})">
-                                    Add Comment
-                                </button>
-                            </form>
+                        <form style="margin-right:3%;" id="make_comment_form" method="post">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                    data-target="#exampleModal4" id="add_comment_button" name="add_comment_button" onclick="addComment({{ post.id }})">
+                                Add Comment
+                            </button>
+                        </form>
                         <form style="margin-right:3%;"id="like" method="post">
-                                {% csrf_token %}
-                                <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
-                                        type="submit" value="{{ post.id }}">
-                                    Like
-                                </button>
-                            </form>
-                            <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-outline-secondary " id="like_post" name="like_post"
+                                    type="submit" value="{{ post.id }}">
+                                Like
+                            </button>
+                        </form>
+                        <a class="btn btn-sm btn-outline-secondary" href="/report/{{ post.id }}">Report Post</a>
                         {% endif %}
-                            <form style="margin-right:3%;" id="quote_post_form" method="post">
-                              {% csrf_token %}
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                        data-target="#exampleModal5" id="quote_post_button" name="quote_post_button" onclick="quotePost({{ post.id }})">
-                                    Quote
-                                </button>
-                            </form>
+                        <form style="margin-right:3%;" id="quote_post_form" method="post">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                    data-target="#exampleModal5" id="quote_post_button" name="quote_post_button" onclick="quotePost({{ post.id }})">
+                                Quote
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -300,7 +300,7 @@
                     {% for tag in post.tag_set.all %}
                     <br>
                     <li style="margin:0% 1%; margin-bottom: 2%;"class="btn btn-sm btn btn-outline-primary ">{{ tag.name }}
-                    {% endfor %}
+                        {% endfor %}
 
 
                 </ul>
@@ -316,8 +316,8 @@
                 <small class="text-muted">{{ post.created }}</small>
             </div>
         </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 </div>
 
 <script>
