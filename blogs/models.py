@@ -27,7 +27,7 @@ class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="post_creator")
     likers  = models.ManyToManyField(User, related_name="post_liker", blank=True)
     image   = models.ImageField(upload_to='pictures/', blank=True)
-    content = models.TextField(blank=True)
+    content = models.CharField(blank=True, max_length=300)
     created = models.DateTimeField(auto_now_add=True)
     quote   = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     private = models.BooleanField(default=False)
