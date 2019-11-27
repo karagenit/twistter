@@ -368,7 +368,7 @@ def encrypt_string(string):
 
 def my_authenticate(username, password):
     password = encrypt_string(password)
-    query = User.objects.filter(username=username)
+    query = User.objects.filter(username=username) | User.objects.filter(email=username)
     if query.exists() and query[0].password == password:
         return query[0]
     else:
