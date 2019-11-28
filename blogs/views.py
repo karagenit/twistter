@@ -180,10 +180,15 @@ class BannedView(TemplateView):
 class ChatPortalView(TemplateView):
     template_name = "chatpageportal.html"
 
-
 class ChatView(TemplateView):
     template_name = "chatpage.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -228,6 +233,12 @@ class ChatView(TemplateView):
 class ChatNavView(TemplateView):
     template_name = "chatnav.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -298,6 +309,12 @@ class FriendView(TemplateView):
 class UserSearchView(TemplateView):
     template_name = "user_search_page.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
