@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.urls import reverse
 from django.db.models import Count, Q
+from django.utils import timezone
+import pytz
 
 from datetime import date
 
@@ -69,6 +71,8 @@ class MainPageView(TemplateView):
         user = User.objects.get(pk=self.request.session['userid'])
         context = super(MainPageView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
+        context['user'] = user
+        context['follows'] = getFollowing(self.request.session['userid'])
         if 'word_search' in self.request.GET:
             word = self.request.GET.get('word_search',None)
             context['posts'] = timeline_by_text(user,word)
@@ -88,6 +92,9 @@ class MainPageView(TemplateView):
         else:
             print('context 5')
             context['posts'] = get_timeline_posts(user)
+        user.prev_time_line_view = user.curr_time_line_view
+        user.curr_time_line_view = timezone.now()
+        user.save()
         return context
 
     def post(self,request):
@@ -177,9 +184,6 @@ class ProfilePageView(UpdateView):
 class BannedView(TemplateView):
     template_name = "banned.html"
 
-class ChatPortalView(TemplateView):
-    template_name = "chatpageportal.html"
-
 
 class ChatView(TemplateView):
     template_name = "chatpage.html"
@@ -221,8 +225,10 @@ class ChatView(TemplateView):
         if 'postinput' in request.POST:
             user_id = self.request.session.get('userid', None)
             content = username=request.POST.get('postinput', None)
+            image = request.FILES.get('image', None)
+            print(request.FILES)
             if len(content) != 0:
-                createMessage(user_id, content, pk)
+                createMessage(user_id, content, pk, image)
         return redirect('chatviewpage', pk=pk)
 
 class ChatNavView(TemplateView):

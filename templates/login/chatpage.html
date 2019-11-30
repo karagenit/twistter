@@ -165,19 +165,27 @@
             </div>
         </div>
         <div class="col-8">
-            <form method="POST" name="create_message">
+            <form enctype="multipart/form-data" method="POST" name="create_message">
                 {% csrf_token %}
                 <div class="form-group">
                     <textarea class="form-control" id="postinput" maxlength="100" name="postinput" placeholder="Talk.." rows="2"></textarea>
                 </div>
                 <button class="btn btn-primary btn-block" id="send_message" name='send_message' type="submit">Send
                 </button>
+                <div>
+                    <input id="image" name="image" type="file">
+                </div>
             </form>
             <br>
-
             {% for message in chat.message_set.all reversed%}
             <div class="card">
                 <div class="card-body">
+                    {% if message.pic %}
+                    <div>
+                        {{ message.pic }}
+                        <img src="{{ message.pic.url }}">
+                    </div>
+                    {% endif %}
                     <h5 class="card-title">{{ message.creator.username }}</h5>
                     <p class="card-text">{{ message.content }}</p>
                     <p> {{ message.created }} </p>

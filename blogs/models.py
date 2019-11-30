@@ -19,6 +19,10 @@ class User(models.Model):
     private      = models.BooleanField(default=False)
     verified     = models.IntegerField(default=0)
     otp_secret   = models.CharField(max_length=16, blank=True, default="")
+    prev_time_line_view = models.DateTimeField(auto_now_add=True)
+    curr_time_line_view = models.DateTimeField(auto_now_add=True)
+    chat_privacy = models.CharField(max_length=50)
+
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
@@ -55,6 +59,7 @@ class Follow(models.Model):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followings")
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")
     tags = models.ManyToManyField(Tag)
+    all = models.BooleanField(default=False)
 
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -75,3 +80,4 @@ class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="message_creator")
     created = models.DateTimeField(auto_now_add=True)
+    pic = models.ImageField(upload_to='pics/', blank=True)

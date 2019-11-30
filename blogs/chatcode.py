@@ -27,10 +27,10 @@ def removeUser(chat_id, user_id):
     user = User.objects.get(id=user_id)
     chat.members.remove(user)
 
-def createMessage(creator_id, content, chat_id):
+def createMessage(creator_id, content, chat_id, image):
     creator = User.objects.get(id=creator_id)
     chat = Chat.objects.get(id=chat_id)
-    message = Message(creator=creator,content=content,chat=chat)
+    message = Message(creator=creator, content=content, chat=chat, pic=image)
     message.save()
 
 def deleteMessage(message_id):

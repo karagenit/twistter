@@ -11,10 +11,14 @@ def get_timeline_posts(user):
     user_follows = Follow.objects.filter(follower=user)
     for follow in user_follows:
         for tag in follow.tags.all():
-            if tag.name == '$all':
-                tagged_posts = Post.objects.filter(creator=follow.following)
+            following_posts = Post.objects.filter(creator=follow.following)
+            if follow.all:
+                tagged_posts = following_posts
             else:
                 tagged_posts = tag.posts.filter(creator=follow.following)
+            for post in following_posts:
+                if post.created > user.curr_time_line_view and post not in all_posts:
+                    all_posts.append(post)
             for post in tagged_posts:
                 if post not in all_posts:
                     all_posts.append(post)
@@ -32,7 +36,7 @@ def timeline_by_tag(user,tag_name):
     user_follows = Follow.objects.filter(follower=user)
     for follow in user_follows:
         for tag in follow.tags.all():
-            if tag.name == '$all':
+            if follow.all:
                 tagged_posts = Post.objects.filter(creator=follow.following)
             else:
                 tagged_posts = tag.posts.filter(creator=follow.following)
@@ -53,7 +57,7 @@ def timeline_by_text(user, text):
     user_follows = Follow.objects.filter(follower=user)
     for follow in user_follows:
         for tag in follow.tags.all():
-            if tag.name == '$all':
+            if follow.all:
                 tagged_posts = Post.objects.filter(creator=follow.following)
             else:
                 tagged_posts = tag.posts.filter(creator=follow.following)
@@ -73,7 +77,7 @@ def timeline_by_date(user, date):
     user_follows = Follow.objects.filter(follower=user)
     for follow in user_follows:
         for tag in follow.tags.all():
-            if tag.name == '$all':
+            if follow.all:
                 tagged_posts = Post.objects.filter(creator=follow.following,created=date)
             else:
                 tagged_posts = tag.posts.filter(creator=follow.following,created=date)
@@ -95,7 +99,7 @@ def timeline_by_trending(user):
     user_follows = Follow.objects.filter(follower=user)
     for follow in user_follows:
         for tag in follow.tags.all():
-            if tag.name == '$all':
+            if follow.all:
                 tagged_posts = Post.objects.filter(creator=follow.following).annotate(num_likes=Count('likers'))
             else:
                 tagged_posts = tag.posts.filter(creator=follow.following).annotate(num_likes=Count('likers'))

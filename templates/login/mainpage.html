@@ -284,16 +284,26 @@
                                     <h6 style="margin-top: 2%;"><img alt="" src="/static/img/thumb-up-button.png" style="width: 25px; height:25px; margin-right: 2%;">{{ post.likers.count }}</h6>
                                     <ul style="margin: 2% 1%; padding-top:2%;background:rgb(1, 47, 175, .2);">
                                         <h6>Tags:</h6>
-                                        {% for tag in post.tag_set.all %}
                                         <br>
+                                        {% for tag in post.tag_set.all %}
+                                        {% if post.created > user.prev_time_line_view %}
+                                        {% for follow in follows %}
+                                        {% if post.creator.username == follow.following.username and tag not in follow.tags.all %}
+                                        new ->
+                                        {% endif %}
+                                        {% endfor %}
                                         <li class="btn btn-sm btn btn-outline-primary "
                                             style="margin:0% 1%; margin-bottom: 2%;">
                                             {{ tag.name }}
-                                            {% endfor %}
-
-
+                                        </li>
+                                        {% else %}
+                                        <li class="btn btn-sm btn btn-outline-primary "
+                                            style="margin:0% 1%; margin-bottom: 2%;">
+                                            {{ tag.name }}
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
                                     </ul>
-
                                     <ul style="margin: 2% 1%; padding-bottom:2%; padding-top:2%; background:rgb(1, 47, 175, .2);">
                                         <h6>Comments:</h6>
                                         {% for comment in post.comment_set.all %}
