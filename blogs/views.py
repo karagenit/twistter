@@ -127,6 +127,7 @@ class SettingsPageView(UpdateView):
         return context
 
     def post(self, request):
+        print(request.POST)
         if 'delete_user' in request.POST:
             delete_user(self.request.session.get('userid'))
             return redirect('login')
@@ -146,12 +147,15 @@ class SettingsPageView(UpdateView):
             user.save()
             return redirect('settingspage')
         if 'private_change' in request.POST:
-            print(request.POST)
             user = User.objects.get(pk=self.request.session['userid'])
             user.private = 'private' in request.POST
             user.save()
             return redirect('settingspage')
-        return HttpResponse(response)
+        if 'chat_privacy' in request.POST:
+            user = User.objects.get(pk=self.request.session['userid'])
+            user.chat_privacy = request.POST.get("chat_privacy")
+            user.save()
+        return redirect('settingspage')
 
 
 class ProfilePageView(UpdateView):

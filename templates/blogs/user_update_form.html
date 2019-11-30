@@ -156,7 +156,29 @@
                 {% endif %}
             </div>
         </div>
-
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                Chat Privacy
+            </div>
+            <div class="col">
+                <form method="post">{% csrf_token %}
+                    <select name="chat_privacy" >
+                        <option value="Everyone">Everyone can chat</option>
+                        {% if user.chat_privacy == 'Follow' %}
+                        <option value="Follow" selected="selected">Following/followers can chat</option>
+                        {% else %}
+                        <option value="Follow">Following/followers can chat</option>
+                        {% endif %}
+                        {% if user.chat_privacy == 'None' %}
+                        <option value="None" selected="selected">No one can chat</option>
+                        {% else %}
+                        <option value="None">No one can chat</option>
+                        {% endif %}
+                    </select>
+                    <button class="btn btn-outline-secondary" name="submit" type='submit'>Update</button>
+                </form>
+            </div>
+        </div>
         <div class="row">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>

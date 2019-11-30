@@ -1,4 +1,5 @@
 from .models import User, Post, Report, Tag, Follow, Chat, Message
+from .followcode import getFollowing, getFollowers
 
 def createChat(name, creator_id):
     creator = User.objects.get(id=creator_id)
@@ -15,6 +16,22 @@ def deleteChat(chat_id, user_id):
 def addUser(chat_id, user_id):
     chat = Chat.objects.get(id=chat_id)
     user = User.objects.get(id=user_id)
+    if user.chat_privacy == 'Follow':
+        creator = chat.creator
+        following = getFollowing(user.id)
+        followers = getFollowers(user.id)
+        follow_users = []
+        for follow in following:
+            follow_users.append(follow.following)
+        for follow in followers:
+            follow_users.append(follow.follower)
+        if creator not in follow_users:
+            print("no follow")
+            return
+        print("follow")
+    if user.chat_privacy == 'None':
+        print('None')
+        return
     for member in chat.members.all():
         if user in member.blocking.all():
             return
