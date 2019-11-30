@@ -184,10 +184,15 @@ class ProfilePageView(UpdateView):
 class BannedView(TemplateView):
     template_name = "banned.html"
 
-
 class ChatView(TemplateView):
     template_name = "chatpage.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -234,6 +239,12 @@ class ChatView(TemplateView):
 class ChatNavView(TemplateView):
     template_name = "chatnav.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -304,6 +315,12 @@ class FriendView(TemplateView):
 class UserSearchView(TemplateView):
     template_name = "user_search_page.html"
 
+    def dispatch(self, *args, **kwargs):
+        if self.request.session['userid'] is None:
+            return redirect('login')
+        else:
+            return super().dispatch(*args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context['userid'] = self.request.session.get('userid', None)
@@ -374,7 +391,7 @@ def encrypt_string(string):
 
 def my_authenticate(username, password):
     password = encrypt_string(password)
-    query = User.objects.filter(username=username)
+    query = User.objects.filter(username=username) | User.objects.filter(email=username)
     if query.exists() and query[0].password == password:
         return query[0]
     else:
