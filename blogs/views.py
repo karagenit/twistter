@@ -352,7 +352,10 @@ class UserSearchResultView(ListView):
 
         if 'user_search' in self.request.GET:
             post_user = self.request.GET.get('user_search')
-            user_id = User.objects.get(username=post_user).id
+            try:
+                user_id = User.objects.get(username=post_user).id
+            except:
+                return None
             return Post.objects.filter(creator=user_id)
 
         if 'name_search' in self.request.GET:
