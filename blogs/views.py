@@ -79,9 +79,13 @@ class MainPageView(TemplateView):
             context['posts'] = timeline_by_text(user,word)
         elif 'date_search' in self.request.GET:
             date = self.request.GET.get('date_search',None)
+            print(date)
+            if date is None:
+                context['posts'] = None;
+            else:
             #date_array = given.split('/')
             #date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
-            context['posts'] = timeline_by_date(user,date)
+                context['posts'] = timeline_by_date(user,date)
         elif 'tag_search' in self.request.GET:
             tag_name = self.request.GET.get('tag_search',None)
             print('context 3')

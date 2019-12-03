@@ -71,7 +71,10 @@ def timeline_by_text(user, text):
 
 def timeline_by_date(user, date):
     all_posts = []
-    date_array = date.split('/')
+    try:
+        date_array = date.split('/')
+    except:
+        return None
     user_posts = Post.objects.filter(creator=user,created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
     for post in user_posts:
         if post not in all_posts:
