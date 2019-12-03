@@ -78,9 +78,9 @@ class MainPageView(TemplateView):
             word = self.request.GET.get('word_search',None)
             context['posts'] = timeline_by_text(user,word)
         elif 'date_search' in self.request.GET:
-            given = self.request.GET.get('date_search',None)
-            date_array = given.split('/')
-            date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
+            date = self.request.GET.get('date_search',None)
+            #date_array = given.split('/')
+            #date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             context['posts'] = timeline_by_date(user,date)
         elif 'tag_search' in self.request.GET:
             tag_name = self.request.GET.get('tag_search',None)
@@ -372,7 +372,7 @@ class UserSearchResultView(ListView):
         if 'date_search' in self.request.GET:
             given = self.request.GET.get('date_search')
             date_array = given.split('/')
-            date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
+            #date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
             return Post.objects.filter(created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
 
         if 'top_tag_search' in self.request.GET:

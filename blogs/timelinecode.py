@@ -1,6 +1,7 @@
 from .models import User, Post, Report, Tag, Follow
 from django.db.models import Count
 from operator import attrgetter
+import datetime
 
 def get_timeline_posts(user):
     all_posts = [];
@@ -70,7 +71,8 @@ def timeline_by_text(user, text):
 
 def timeline_by_date(user, date):
     all_posts = []
-    user_posts = Post.objects.filter(creator=user,created=date)
+    date_array = date.split('/')
+    user_posts = Post.objects.filter(creator=user,created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
     for post in user_posts:
         if post not in all_posts:
             all_posts.append(post)
@@ -78,9 +80,9 @@ def timeline_by_date(user, date):
     for follow in user_follows:
         for tag in follow.tags.all():
             if follow.all:
-                tagged_posts = Post.objects.filter(creator=follow.following,created=date)
+                tagged_posts = Post.objects.filter(creator=follow.following,created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
             else:
-                tagged_posts = tag.posts.filter(creator=follow.following,created=date)
+                tagged_posts = tag.posts.filter(creator=follow.following,created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
             for post in tagged_posts:
                 print (post.created)
                 print (date)
