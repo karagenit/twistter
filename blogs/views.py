@@ -11,8 +11,8 @@ from django.db.models import Count, Q
 from django.utils import timezone
 import datetime
 import pytz
-
-from datetime import date
+from django.db.models import Count
+from operator import attrgetter
 
 from .models import User, Post, Report, Tag, Follow, Chat, Message, Comment
 from .commentcode import add_comment
@@ -379,6 +379,9 @@ class UserSearchResultView(ListView):
             tag = self.request.GET.get('top_tag_search')
             top_posts = Post.objects.filter(tag__name=tag).annotate(t_count=Count('likers')).order_by('-t_count')
             return top_posts
+
+        if 'trending' in self.request.GET:
+            return Post.objects.all().annotate(num_likes=Count('likers')).order_by('-num_likes')
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
