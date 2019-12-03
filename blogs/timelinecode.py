@@ -27,7 +27,10 @@ def get_timeline_posts(user):
     return all_posts
 
 def timeline_by_tag(user,tag_name):
-    tag = Tag.objects.get(name=tag_name)
+    try:
+        tag = Tag.objects.get(name=tag_name)
+    except:
+        return None
     all_posts = [];
     user_posts = Post.objects.filter(creator=user)
     for post in user_posts:
@@ -75,7 +78,7 @@ def timeline_by_date(user, date):
         date_array = date.split('/')
         user_posts = Post.objects.filter(creator=user,created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
     except:
-        return None
+        return get_timeline_posts(user)
     for post in user_posts:
         if post not in all_posts:
             all_posts.append(post)
