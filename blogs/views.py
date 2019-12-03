@@ -378,8 +378,11 @@ class UserSearchResultView(ListView):
             given = self.request.GET.get('date_search')
             date_array = given.split('/')
             #date = date_array[2] + "-" + date_array[0] + "-" + date_array[1]
-            return Post.objects.filter(created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
-
+            try:
+                return Post.objects.filter(created__contains=datetime.date(int(date_array[2]), int(date_array[0]), int(date_array[1])))
+            except:
+                return None
+                
         if 'top_tag_search' in self.request.GET:
             tag = self.request.GET.get('top_tag_search')
             top_posts = Post.objects.filter(tag__name=tag).annotate(t_count=Count('likers')).order_by('-t_count')
