@@ -371,10 +371,9 @@ class UserSearchResultView(ListView):
             split_combo = post_combo.split('/')
             try:
                 user_id = User.objects.get(username=split_combo[1]).id
+                return Post.objects.filter(tag__name=split_combo[0],creator=user_id)
             except:
                 return None
-            return Post.objects.filter(tag__name=split_combo[0],creator=user_id)
-
         if 'date_search' in self.request.GET:
             given = self.request.GET.get('date_search')
             date_array = given.split('/')
