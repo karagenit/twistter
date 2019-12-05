@@ -139,6 +139,13 @@
                 height: 100%;">
 
               <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </div>
 
           </div>
@@ -165,6 +172,13 @@
                 height: 100%;">
 
               <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </div>
 
           </div>
@@ -198,6 +212,13 @@
                 height: 100%;">
 
               <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </div>
 
           </div>
@@ -1024,6 +1045,13 @@
                     height: 100%;">
 
                   <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
                 </div>
 
               </div>
@@ -1050,6 +1078,13 @@
                     height: 100%;">
 
                   <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
                 </div>
 
               </div>
@@ -1083,6 +1118,13 @@
                     height: 100%;">
 
                   <p>{{ user.biography }}</p>
+              {% if user.interests.all %}
+              <ul>
+                {% for interest in user.interests.all %}
+                <li>{{ interest.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
                 </div>
 
               </div>
