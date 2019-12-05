@@ -147,7 +147,13 @@
               </ul>
               {% endif %}
             </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+                {% endif %}
           </div>
           {% else %}
           {% if user.private == False %}
@@ -180,7 +186,13 @@
               </ul>
               {% endif %}
             </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+                {% endif %}
           </div>
           <!-- END SIDEBAR USER TITLE -->
           <!-- SIDEBAR BUTTONS -->
@@ -220,7 +232,13 @@
               </ul>
               {% endif %}
             </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+                {% endif %}
           </div>
           {% endif %}
 
@@ -1053,7 +1071,13 @@
               </ul>
               {% endif %}
                 </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+    {% endif %}
               </div>
               {% else %}
               {% if user.private == False %}
@@ -1086,7 +1110,13 @@
               </ul>
               {% endif %}
                 </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+                {% endif %}
               </div>
               <!-- END SIDEBAR USER TITLE -->
               <!-- SIDEBAR BUTTONS -->
@@ -1126,7 +1156,13 @@
               </ul>
               {% endif %}
                 </div>
-
+                {% if userid == user.id %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <input type="text" name="add_interest">
+                  <button type="submit" value="Add Interest">
+                </form>
+                {% endif %}
               </div>
               {% endif %}
 

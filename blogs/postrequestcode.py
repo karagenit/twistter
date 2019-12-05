@@ -9,7 +9,7 @@ from django.urls import reverse
 
 from datetime import date
 
-from .models import User, Post, Report, Tag, Follow
+from .models import User, Post, Report, Tag, Follow, Topic
 from .commentcode import add_comment
 from .getposts import get_posts
 from .deleteuser import delete_user
@@ -89,3 +89,13 @@ def post_request_from_post(self,request):
         post.save()
         for tag in tags:
             addtag(tag, post)
+    if 'add_interest' in request.POST:
+        user_id = self.request.session.get('userid')
+        name = request.POST.get('add_interest')
+        if not name:
+            return
+        topic = Topic(name=name)
+        topic.save()
+        user = User.objects.get(id=user_id)
+        user.interests.add(topic)
+        user.save()
