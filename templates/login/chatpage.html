@@ -177,7 +177,7 @@
                 </div>
             </form>
             <br>
-            {% for message in chat.message_set.all reversed%}
+            {% for message in chat.message_set.all %}
             <div class="card">
                 <div class="card-body">
                     {% if message.pic %}
@@ -214,9 +214,17 @@
                     {% for member in chat.members.all %}
                     <form action=/users/{{ member.id }}>
                         {% if member.id == chat.creator.id %}
-                        <button class="list-group-item btn-block" type="submit">[Admin] {{ member.username }}</button>
+                          {% if userid == chat.creator.id %}
+                          <button class="list-group-item btn-block" type="submit"><b>[Admin] {{ member.username }}</b></button>
+                          {% else %}
+                          <button class="list-group-item btn-block" type="submit">[Admin] {{ member.username }}</button>
+                          {% endif %}
                         {% else %}
-                        <button class="list-group-item btn-block" type="submit">{{ member.username }}</button>
+                          {% if userid == member.id %}
+                          <button class="list-group-item btn-block" type="submit"><b>{{ member.username }}</b></button>
+                          {% else %}
+                          <button class="list-group-item btn-block" type="submit">{{ member.username }}</button>
+                          {% endif %}
                         {% endif %}
                     </form>
                     {% endfor %}
