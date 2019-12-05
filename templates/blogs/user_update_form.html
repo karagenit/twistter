@@ -80,7 +80,9 @@
             <div class="col">
                 <form method="post">{% csrf_token %}
                     {{ form.username }}
+                    <div class="float-right">
                     <button class="btn btn-outline-secondary" name="username_change" type='submit'>Update</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -91,7 +93,9 @@
             <div class="col">
                 <form method="post">{% csrf_token %}
                     {{ form.email }}
+                    <div class="float-right">
                     <button class="btn btn-outline-secondary" name="email_change" type='submit'>Update</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -102,7 +106,9 @@
             <div class="col">
                 <form method="post">{% csrf_token %}
                     {{ form.password }}
+                    <div class="float-right">
                     <button class="btn btn-outline-secondary" name="password_change" type='submit'>Update</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -114,16 +120,21 @@
             <div class="col">
                 <form method="post">{% csrf_token %}
                     {{ form.private }}
+                    <div class="float-right">
                     <button class="btn btn-outline-secondary" name="private_change" type='submit'>Update</button>
+                    </div>
                 </form>
             </div>
         </div>
 
         <div class="row">
-            <div class="col col-lg-7">
+            <div class="col col-lg-2">
                 Request Verification
             </div>
+            <div class="col col-lg-6">
+            </div>
             <div class="col">
+                <div class="float-right">
                 {% if user.verified == 0 %}
                 <form method="post" action="/verify/{{ user.id }}">
                     {% csrf_token %}
@@ -135,13 +146,16 @@
                 <p>Already Verified!</p>
                 {% endif %}
             </div>
+            </div>
         </div>
 
-        <div class="row">
+
+        <div class="row justify-content-md-center">
             <div class="col col-lg-7">
                 Two Factor Auth
             </div>
             <div class="col">
+                <div class="float-right">
                 {% if user.otp_secret %}
                 <p>{{ user.otp_secret }}</p>
                 <form method="post" action="/disable2fa/{{ user.id }}">
@@ -154,6 +168,7 @@
                     <button class="btn btn-outline-secondary" type="submit">Enable 2FA</button>
                 </form>
                 {% endif %}
+            </div>
             </div>
         </div>
         <div class="row justify-content-md-center">
@@ -175,16 +190,20 @@
                         <option value="None">No one can chat</option>
                         {% endif %}
                     </select>
+                    <div class="float-right">
                     <button class="btn btn-outline-secondary" name="submit" type='submit'>Update</button>
+                    </div>
                 </form>
             </div>
         </div>
         <div class="row">
+            <div class="float-right">
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <form method='post'>
                 {% csrf_token %}
                 <button class="btn btn-danger" name="delete_user" type='submit'>Delete Account</button>
             </form>
+        </div>
         </div>
     </div>
     <script>
