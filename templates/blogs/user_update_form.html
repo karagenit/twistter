@@ -187,5 +187,9 @@
             </form>
         </div>
     </div>
+  <script>
+    <!-- Hacky fix to avoid autofilling password hash -->
+    document.getElementById("id_password").value = "";
+  </script>
 </body>
 </html>
