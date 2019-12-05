@@ -142,7 +142,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}
@@ -181,7 +187,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}
@@ -227,7 +239,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}
@@ -1066,7 +1084,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}
@@ -1105,7 +1129,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}
@@ -1151,7 +1181,13 @@
               {% if user.interests.all %}
               <ul>
                 {% for interest in user.interests.all %}
-                <li>{{ interest.name }}</li>
+                <li>{{ interest.name }}
+                  <form method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ interest.name }}" name="topic" id="topic">
+                    <button type="submit" value="&saltire;">
+                  </form>
+                </li>
                 {% endfor %}
               </ul>
               {% endif %}

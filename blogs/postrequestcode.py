@@ -99,3 +99,8 @@ def post_request_from_post(self,request):
         user = User.objects.get(id=user_id)
         user.interests.add(topic)
         user.save()
+    if 'topic' in request.POST:
+        name = request.POST.get('topic')
+        user = User.objects.get(id=request.session.get('userid'))
+        for topic in Topic.objects.filter(name=name):
+            user.interests.remove(topic)
