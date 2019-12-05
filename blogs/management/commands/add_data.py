@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from blogs.models import User, Post, Report
+from blogs.models import User, Post, Report, Topic
 from blogs.views import encrypt_string
 
 class Command(BaseCommand):
@@ -24,5 +24,10 @@ class Command(BaseCommand):
         Post(creator=u1, content='Second Post').save()
         p3 = Post(creator=u2, content="John's Post")
         p3.save()
+
+        t = Topic(name="Example Topic")
+        t.save()
+        u1.interests.add(t)
+        u1.save()
 
         Report(reporter=u1, post=p3).save()
