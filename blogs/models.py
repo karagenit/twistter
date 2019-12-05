@@ -1,5 +1,8 @@
 from django.db import models
 
+class Topic(models.Model):
+    name = models.CharField(max_length=50)
+
 ###
 # Verified Codes:
 # 0: Unverified
@@ -22,7 +25,7 @@ class User(models.Model):
     prev_time_line_view = models.DateTimeField(auto_now_add=True)
     curr_time_line_view = models.DateTimeField(auto_now_add=True)
     chat_privacy = models.CharField(max_length=50)
-
+    interests    = models.ManyToManyField(Topic, related_name="interest", blank=True)
 
 ###
 # TODO: assert that every post has 1+ tags (includes empty tag)
